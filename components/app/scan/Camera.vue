@@ -2,13 +2,13 @@
 	import { Html5Qrcode } from "html5-qrcode";
 
 	const html5QrCode = ref();
-	
+
 	const startCamera = () => {
 		html5QrCode.value = new Html5Qrcode("reader", /* verbose= */ false);
 		html5QrCode.value
 			.start(
 				{ facingMode: "environment" },
-				{},
+				{ fps: 10, qrbox: { width: 250, height: 250 } },
 				(text: any, result: any) => {
 					console.log(text, result);
 				},
@@ -26,20 +26,20 @@
 	};
 
 	const stopCamera = () => {
-		html5QrCode.value
-			.stop()
-			.then((ignore: any) => {
-				// QR Code scanning is stopped.
-				html5QrCode.value = null;
-			})
-			.catch((err: any) => {
-				// Stop failed, handle it.
-			});
+		if (html5QrCode.value)
+			html5QrCode.value
+				.stop()
+				.then((ignore: any) => {
+					// QR Code scanning is stopped.
+					html5QrCode.value = null;
+				})
+				.catch((err: any) => {
+					// Stop failed, handle it.
+				});
 	};
 
-	onMounted(() => {
-		// If you want to prefer back camera
-		// startCamera();
+	onBeforeUnmount(() => {
+		stopCamera();
 	});
 </script>
 
@@ -47,16 +47,13 @@
 	<div
 		class="d-flex flex-column align-items-center justify-content-center w-100"
 	>
-		<video id="qr-video" playsinline></video>
-		<canvas id="qr-canvas" style="display: none"></canvas>
-		<div id="qr-result"></div>
 		<div
-			class="bg-light mb-4 border border-secondary position-relative rounded-3 h-150px w-200px"
+			class="bg-light overflow-hidden mb-5 border border-secondary position-relative rounded-3 min-h-200px min-w-300px"
 		>
-			<div id="reader" class="w-100 h-100"></div>
+			<div id="reader" class="wh-200px w-300px"></div>
 			<div v-if="html5QrCode" class="scanner position-absolute"></div>
 		</div>
-		<div class="d-flex flex-row justify-content-center">
+		<div class="d-flex flex-row justify-content-center mt-6">
 			<button
 				@click="stopCamera"
 				v-if="html5QrCode"
@@ -77,7 +74,9 @@
 	}
 	#reader video {
 		border-radius: 1.5rem !important;
-		width: 100%;
+		/* width: 250px;
+		height: 250px; */
+		position: relative;
 	}
 	.scanner {
 		z-index: 20;
