@@ -1,6 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	devtools: { enabled: false },
+	devServer: {
+		https: {
+			key: "./server.key", 
+			cert: "./server.crt",
+		},
+	},
 	app: {
 		head: {
 			meta: [
@@ -13,7 +19,7 @@ export default defineNuxtConfig({
 			script: [
 				// <script src="https://myawesome-lib.js"></script>
 				{ src: "/assets/plugins/global/plugins.bundle.js" },
-        { src: "/assets/js/scripts.bundle.js" },
+				{ src: "/assets/js/scripts.bundle.js" },
 			],
 			link: [
 				// <link rel="stylesheet" href="https://myawesome-lib.css">

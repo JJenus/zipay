@@ -45,15 +45,16 @@
 			</a>
 
 			<!--begin::Action-->
-			<a
-				href="#!"
+			<NuxtLink
+				to="transfer"
 				class="btn btn-sm btn-primary fw-semibold me-2"
-				data-bs-toggle="modal"
-				data-bs-target="#kt_modal_upgrade_plan"
 			>
-				Send
-			</a>
+				Transfer
+			</NuxtLink>
 		</div>
+
+		<!-- data-bs-toggle="modal"
+				data-bs-target="#kt_modal_upgrade_plan" -->
 		<!--end::Action-->
 	</div>
 </template>

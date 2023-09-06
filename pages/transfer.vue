@@ -114,14 +114,15 @@
 					/>
 				</div>
 
-				<div class="d-flex flex-row mb-8 justify-content-end w-100 ">
+				<div class="d-flex flex-row mb-8 justify-content-end w-100">
 					<button
 						class="btn btn-sm btn-light-primary fw-semibold me-2"
 					>
 						<i class="ki-solid ki-dollar"></i>
 						Request payment
 					</button>
-					<button
+					<NuxtLink
+						to="/scan"
 						class="btn btn-sm btn-light-warning fw-semibold me-2"
 					>
 						<i class="ki-duotone ki-scan-barcode">
@@ -135,7 +136,7 @@
 							<i class="path8"></i>
 						</i>
 						Scan
-					</button>
+					</NuxtLink>
 				</div>
 
 				<div class="row flex-row row-cols-3 justify-content-end">
