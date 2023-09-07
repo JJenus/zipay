@@ -4,7 +4,7 @@
 		<div
 			class="card-header border-0 text-center d-flex flex-column fs-6 justify-content-center p-4"
 		>
-			<h1 class="text-center fs-2x pt-4 fw-bold">Scan</h1>
+			<h1 class="text-center h2 pt-4 fw-bold">Scan</h1>
 			<div>
 				Scan QR code to make payment
 			</div>

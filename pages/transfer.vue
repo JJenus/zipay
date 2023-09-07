@@ -99,7 +99,7 @@
 	<!--begin::Chart widget 36-->
 	<div class="card card-flush card-custom border-0 h-md-100 mb-5 mb-lg-10">
 		<div class="card-header text-center d-flex justify-content-center p-4">
-			<h1 class="text-center fs-2x pt-4 fw-bold">Transfer</h1>
+			<h1 class="text-center h2 pt-4 fw-bold">Transfer</h1>
 		</div>
 		<!--begin::Card body-->
 		<div class="card-body">

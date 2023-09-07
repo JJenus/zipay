@@ -19,14 +19,15 @@
 			<!--begin::Settings-->
 			<div class="app-navbar-item ms-n3">
 				<!--begin::Menu- wrapper-->
-				<div
+				<NuxtLink
+					to="/settings"
 					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"
 					data-kt-menu-placement="bottom-end"
 				>
 					<i class="ki-outline ki-gear fs-2x"></i>
-				</div>
+				</NuxtLink>
 
 				<!--end::Menu wrapper-->
 			</div>

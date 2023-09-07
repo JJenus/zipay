@@ -3,7 +3,7 @@
 	<div class="card card-custom border-0 min-h-500px h-md-100 mb-5 mb-lg-10">
 		<!--begin::Body-->
 		<div class="card-body ps-xl-15">
-			<h1 class="text-center fs-2x pt-4 fw-bold mb-8">Transactions</h1>
+			<h1 class="text-center h1 pt-4 fw-bold mb-8">Transactions</h1>
 			<div class="d-flex flex-row justify-content-between mb-5">
 				<div>
 					<!--begin::Title-->

@@ -59,8 +59,8 @@
 	</div>
 	<!--end::Item-->
 
-	<div v-if="show" class="mb-10 px-8 px-md-15 px-lg-20">
-		<div class="table-responsive border-bottom w-100">
+	<div v-if="show" class="mb-10 px-8  rounded-2 border-dashed pt-4 border-2 border-gray-500 px-md-15 px-lg-20">
+		<div class="table-responsive w-100">
 			<table class="table fs-6">
 				<tbody>
 					<tr>
