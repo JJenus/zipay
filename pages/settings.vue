@@ -19,12 +19,15 @@
 				<!--begin::Title-->
 				<div class="d-flex flex-column">
 					<h2 class="mb-1">Settings</h2>
-					<div v-if="showPreference" class="text-muted fw-bold d-noine">
+					<div
+						v-if="showPreference"
+						class="text-muted fw-bold d-noine"
+					>
 						<span class="text-info">Email</span>
 						<span class="mx-3">|</span>
 						<span href="#">Notifications</span>
 					</div>
-                    <div v-else class="text-muted fw-bold">
+					<div v-else class="text-muted fw-bold">
 						<span class="text-primary">Session Logs</span>
 						<span class="mx-3">|</span>
 						<span class="text-danger">Deactivate</span>
@@ -44,27 +47,29 @@
 				>
 					<!--begin::Nav item-->
 					<li class="nav-item">
-						<a
+						<NuxtLink
+						to="/settings"
 							@click="showPreference = true"
 							:class="showPreference ? 'active' : ''"
 							class="nav-link text-active-primary me-6"
 							role="button"
 						>
 							Preferences
-						</a>
+						</NuxtLink>
 					</li>
 					<!--end::Nav item-->
 
 					<!--begin::Nav item-->
 					<li class="nav-item">
-						<a
+						<NuxtLink
 							@click="showPreference = false"
+							to="/settings/security"
 							:class="showPreference ? '' : 'active'"
 							class="nav-link text-active-primary me-6"
 							role="button"
 						>
 							Security
-						</a>
+						</NuxtLink>
 					</li>
 					<!--end::Nav item-->
 				</ul>
@@ -75,13 +80,5 @@
 	</div>
 
 	<!-- PREFERENCES -->
-	<div v-if="showPreference">
-		<AppSettingsEmail />
-		<AppSettingsNotification />
-	</div>
-
-	<div v-else>
-		<AppSettingsLoginSessions />
-		<AppSettingsDeactivate />
-	</div>
+	<NuxtPage />
 </template>

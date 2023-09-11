@@ -1,5 +1,11 @@
 <script setup lang="ts">
-	const route = ref("overview");
+	const route = useRoute();
+	console.log();
+	const currentRoute = ref("overview");
+	onMounted(() => {
+		if (route.path.split("/")[2])
+			currentRoute.value = route.path.split("/")[2];
+	});
 </script>
 
 <template>
@@ -32,8 +38,8 @@
 					<!--begin::Stats-->
 					<NuxtLink
 						to="/profile"
-						@click="route = 'overview'"
-						:class="route == 'overview' ? 'active' : ''"
+						@click="currentRoute = 'overview'"
+						:class="currentRoute == 'overview' ? 'active' : ''"
 						class="btn btn-active-light-primary border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
 					>
 						<i class="ki-duotone ki-note-2 fs-3 me-1">
@@ -49,8 +55,8 @@
 					<!--begin::Stats-->
 					<NuxtLink
 						to="/profile/edit"
-						@click="route = 'edit'"
-						:class="route == 'edit' ? 'active' : ''"
+						@click="currentRoute = 'edit'"
+						:class="currentRoute == 'edit' ? 'active' : ''"
 						class="btn btn-active-light-primary border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3"
 					>
 						<i class="ki-outline ki-notepad-edit fs-3 me-1"></i>
@@ -61,8 +67,8 @@
 					<!--begin::Stats-->
 					<NuxtLink
 						to="/profile/settings"
-						@click="route = 'settings'"
-						:class="route == 'settings' ? 'active' : ''"
+						@click="currentRoute = 'settings'"
+						:class="currentRoute == 'settings' ? 'active' : ''"
 						class="btn btn-active-light-primary border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
 					>
 						<i class="ki-outline ki-gear fs-3 me-1"></i>

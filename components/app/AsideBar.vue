@@ -56,14 +56,15 @@
 				data-bs-toggle="#kt_modal_upgrade_plan"
 			>
 				<!--begin::Menu wrapper-->
-				<div
+				<NuxtLink
+					to="/profile/edit"
 					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"
 					data-kt-menu-placement="bottom-end"
 				>
 					<i class="ki-outline ki-notepad-edit fs-2x"></i>
-				</div>
+				</NuxtLink>
 				<!--end::Menu wrapper-->
 			</div>
 			<!--end::Edit profile-->

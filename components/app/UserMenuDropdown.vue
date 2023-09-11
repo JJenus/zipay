@@ -264,7 +264,7 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<a href="/" class="menu-link px-5"> Sign Out </a>
+			<NuxtLink to="/sign-up" class="menu-link px-5"> Sign Out </NuxtLink>
 		</div>
 		<!--end::Menu item-->
 	</div>
