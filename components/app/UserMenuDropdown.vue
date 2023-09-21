@@ -27,8 +27,10 @@
 				<div class="d-flex flex-column">
 					<div class="fw-bold d-flex align-items-center fs-5">
 						Max Smith
-						
-                        <i class="fa-solid fa-circle text-success ms-2 fs-67"></i>
+
+						<i
+							class="fa-solid fa-circle text-success ms-2 fs-67"
+						></i>
 					</div>
 
 					<a
@@ -236,10 +238,7 @@
 
 				<!--begin::Menu item-->
 				<div class="menu-item px-3">
-					<a
-						href="account/settings.html"
-						class="menu-link d-flex px-5"
-					>
+					<a role="button" class="menu-link d-flex px-5">
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
@@ -258,13 +257,19 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5 my-1">
-			<a href="settings" class="menu-link px-5"> Account Settings </a>
+			<NuxLink to="/app/settings" class="menu-link px-5"> Account Settings </NuxLink>
 		</div>
 		<!--end::Menu item-->
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<NuxtLink to="/sign-up" class="menu-link px-5"> Sign Out </NuxtLink>
+			<NuxtLink
+				@click="useAuth().logout()"
+				to="/sign-in"
+				class="menu-link px-5"
+			>
+				Sign Out
+			</NuxtLink>
 		</div>
 		<!--end::Menu item-->
 	</div>

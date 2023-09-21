@@ -1,6 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	devtools: { enabled: false },
+	runtimeConfig:{
+		BE_API: process.env.BE_API,
+		public: {
+			BE_API: process.env.BE_API,
+		}
+	},
 	devServer: {
 		https: {
 			key: "./server.key", 

@@ -11,13 +11,18 @@
 </template>
 
 <style>
-	@import url("https://fonts.googleapis.com/css2?family=Truculenta:opsz,wght@12..72,800&display=swap");
+	@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Truculenta:opsz,wght@12..72,800&display=swap");
+	
+	/* 
+	font-family: 'Lobster', cursive;
+font-family: 'Truculenta', sans-serif;
+	 */
 	.zipay-logo {
-		font-family: "Truculenta", sans-serif;
-		color: #2178f3;
+		font-family: 'Lobster', cursive;
+		color: rgb(75, 91, 166); /*#2178f3;*/
 	}
 	.zipay-logo-dark {
-		color: #fff !important;
+		color: rgb(255, 93, 83);
 	}
 
 	@media (max-width: 765px) {

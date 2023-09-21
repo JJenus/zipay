@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	const appConfig = useRuntimeConfig();
+	const auth = useAuth().userData;
+
+	console.log(auth.value);
+</script>
 
 <template>
 	<!--begin::App-->

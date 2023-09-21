@@ -1,19 +1,19 @@
 export const navs = ref([
 	{
 		name: "Home",
-		dir: "/",
+		dir: "/app/",
 		icon: "ki-outline ki-home-3",
 		paths: [],
 	},
 	{
 		name: "Transfer",
-		dir: "/transfer",
+		dir: "/app/transfer",
 		icon: "ki-solid ki-send",
 		paths: [],
 	},
 	{
 		name: "Scan",
-		dir: "/scan",
+		dir: "/app/scan",
 		icon: "ki-duotone ki-scan-barcode",
 		paths: [
 			"path1",
@@ -28,14 +28,14 @@ export const navs = ref([
 	},
 	{
 		name: "Transactions",
-		dir: "/transactions",
+		dir: "/app/transactions",
 		icon: "ki-solid ki-chart-line",
 		paths: [],
 	},
 	{
 		name: "Settings",
-		dir: "/settings",
-		icon: "ki-outline ki-gear", //ki-outline
+		dir: "/app/settings",
+		icon: "ki-outline ki-gear", //app/ki-outline
 		paths: [],
 	},
 ]);
