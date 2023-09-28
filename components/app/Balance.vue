@@ -46,7 +46,7 @@
 
 			<!--begin::Action-->
 			<NuxtLink
-				to="transfer"
+				to="/app/transfer"
 				class="btn btn-sm btn-primary fw-semibold me-2"
 			>
 				Transfer

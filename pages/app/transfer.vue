@@ -122,7 +122,7 @@
 						Request payment
 					</button>
 					<NuxtLink
-						to="/scan"
+						to="/app/scan"
 						class="btn btn-sm btn-light-warning fw-semibold me-2"
 					>
 						<i class="ki-duotone ki-scan-barcode">

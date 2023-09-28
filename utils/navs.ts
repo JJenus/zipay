@@ -1,7 +1,7 @@
 export const navs = ref([
 	{
 		name: "Home",
-		dir: "/app/",
+		dir: "/app",
 		icon: "ki-outline ki-home-3",
 		paths: [],
 	},

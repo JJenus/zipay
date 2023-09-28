@@ -55,11 +55,12 @@ var KTSigninGeneral = (function () {
 					submitButton.setAttribute("data-kt-indicator", "on");
 
 					// Disable button to avoid multiple click
-					submitButton.disabled = true;
+					// submitButton.disabled = true;
 
 					// Check axios library docs: https://axios-http.com/docs/intro
 				} else {
-					// e.preventDefault();
+					e.preventDefault();
+					submitButton.disabled = false;
 
 					// Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
 					Swal.fire({

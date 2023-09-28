@@ -25,19 +25,22 @@
 		method: "post",
 		data: {},
 		url: `${appConfig.public.BE_API}/auth/login`,
+		timeout: 5000,
 	});
 	const form = ref({
-		email: "",
-		password: "",
+		email: null,
+		password: null,
 	});
 
-	const submitForm = (event: Event) => {
-		console.log("logging...")
+	const submitForm = () => {
+		console.log("logging...");
 		isInvalidCredentials.value;
 		if (!form.value.email || !form.value.password) {
 			errorAlert(null);
 			return;
 		}
+
+		console.log("Passed");
 
 		const { email, password } = form.value;
 

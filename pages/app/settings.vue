@@ -48,7 +48,7 @@
 					<!--begin::Nav item-->
 					<li class="nav-item">
 						<NuxtLink
-						to="/settings"
+						to="/app/settings"
 							@click="showPreference = true"
 							:class="showPreference ? 'active' : ''"
 							class="nav-link text-active-primary me-6"
@@ -63,7 +63,7 @@
 					<li class="nav-item">
 						<NuxtLink
 							@click="showPreference = false"
-							to="/settings/security"
+							to="/app/settings/security"
 							:class="showPreference ? '' : 'active'"
 							class="nav-link text-active-primary me-6"
 							role="button"

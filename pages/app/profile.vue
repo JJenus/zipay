@@ -37,7 +37,7 @@
 				<div class="d-flex flex-wriap flex-center d-noine">
 					<!--begin::Stats-->
 					<NuxtLink
-						to="/profile"
+						to="/app/profile"
 						@click="currentRoute = 'overview'"
 						:class="currentRoute == 'overview' ? 'active' : ''"
 						class="btn btn-active-light-primary border border-gray-300 border-dashed rounded py-3 px-3 mb-3"
@@ -54,7 +54,7 @@
 
 					<!--begin::Stats-->
 					<NuxtLink
-						to="/profile/edit"
+						to="/app/profile/edit"
 						@click="currentRoute = 'edit'"
 						:class="currentRoute == 'edit' ? 'active' : ''"
 						class="btn btn-active-light-primary border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3"
@@ -66,7 +66,7 @@
 
 					<!--begin::Stats-->
 					<NuxtLink
-						to="/profile/settings"
+						to="/app/profile/settings"
 						@click="currentRoute = 'settings'"
 						:class="currentRoute == 'settings' ? 'active' : ''"
 						class="btn btn-active-light-primary border border-gray-300 border-dashed rounded py-3 px-3 mb-3"

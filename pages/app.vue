@@ -1,6 +1,9 @@
 <script setup lang="ts">
 	definePageMeta({
-        layout: "app",
+		layout: "app",
 		middleware: ["auth"],
 	});
 </script>
+<template>
+	<NuxtPage />
+</template>

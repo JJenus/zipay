@@ -24,7 +24,7 @@
 					>
 						<option
 							value="1"
-							selected=""
+							selected
 							data-select2-id="select2-data-3-dbvs"
 						>
 							1 Hours

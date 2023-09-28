@@ -62,7 +62,7 @@
 							class="form-check-input me-3"
 							type="checkbox"
 							name="email-preferences[]"
-							checked="checked"
+							checked
 							value="1"
 						/>
 						<!--end::Input-->
@@ -125,7 +125,7 @@
 							class="form-check-input me-3"
 							type="checkbox"
 							name="email-preferences[]"
-							checked="checked"
+							checked
 							value="1"
 						/>
 						<!--end::Input-->
@@ -188,7 +188,7 @@
 							class="form-check-input me-3"
 							type="checkbox"
 							name="email-preferences[]"
-							checked="checked"
+							checked
 							value="1"
 						/>
 						<!--end::Input-->

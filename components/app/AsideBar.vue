@@ -20,7 +20,7 @@
 			<div class="app-navbar-item ms-n3">
 				<!--begin::Menu- wrapper-->
 				<NuxtLink
-					to="/settings"
+					to="/app/settings"
 					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"
@@ -57,7 +57,7 @@
 			>
 				<!--begin::Menu wrapper-->
 				<NuxtLink
-					to="/profile/edit"
+					to="/app/profile/edit"
 					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"

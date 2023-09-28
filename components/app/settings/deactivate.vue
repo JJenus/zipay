@@ -21,7 +21,7 @@
 			<form
 				id="kt_account_deactivate_form"
 				class="form fv-plugins-bootstrap5 fv-plugins-framework"
-				novalidate="novalidate"
+				novalidate
 			>
 				<!--begin::Card body-->
 				<div class="card-body border-top p-9">
