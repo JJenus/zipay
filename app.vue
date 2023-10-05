@@ -18,8 +18,8 @@
 font-family: 'Truculenta', sans-serif;
 	 */
 	.zipay-logo {
-		font-family: 'Lobster', cursive;
-		color: rgb(75, 91, 166); /*#2178f3;*/
+		/* font-family: 'Lobster', cursive; */
+		/* color: rgb(75, 91, 166); #2178f3; */
 	}
 	.zipay-logo-dark {
 		color: rgb(255, 93, 83);

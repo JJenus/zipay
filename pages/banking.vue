@@ -1,3 +1,11 @@
+<script setup>
+	const config = useRuntimeConfig().public;
+	const currentPage = "Our Banking";
+	useSeoMeta({
+		title: `${currentPage} - ${config.APP}`,
+	});
+</script>
+
 <template>
 	<!--begin::Content-->
 	<div id="kt_app_content" class="app-content flex-column-fluid">

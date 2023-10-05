@@ -2,7 +2,6 @@
 	import axios from "axios";
 	import currency from "currency.js";
 
-
 	const appConfig = useRuntimeConfig();
 
 	const balance = ref({

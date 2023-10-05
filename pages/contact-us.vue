@@ -1,4 +1,9 @@
 <script setup>
+	const config = useRuntimeConfig().public;
+	const currentPage = "Contact Us";
+	useSeoMeta({
+		title: `${currentPage} - ${config.APP}`,
+	});
 </script>
 
 <template>
@@ -27,10 +32,7 @@
 				>
 					<!--begin::Item-->
 					<li class="breadcrumb-item text-muted">
-						<a
-							href="/"
-							class="text-muted text-hover-primary"
-						>
+						<a href="/" class="text-muted text-hover-primary">
 							Home
 						</a>
 					</li>
@@ -79,9 +81,8 @@
 								<span
 									class="fs-4 fw-semibold text-gray-600 d-block"
 								>
-									First, a disclaimer – the entire process of
-									writing a blog post often takes more <br />
-									than a couple of hours, even if you can type
+									Have a question about your account? Looking
+									for a specific product?
 								</span>
 							</div>
 							<!--end::Title-->

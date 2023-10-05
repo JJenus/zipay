@@ -18,18 +18,8 @@
 			id="kt_app_sidebar_logo"
 		>
 			<!--begin::Logo image-->
-			<a href="/">
-				<img
-					alt="Logo"
-					src="/assets/media/logos/zipay-logo.png"
-					class="h-70px"
-				/>
-			</a>
-			<div class="mt-5 ms-n3 m-0 p-0 fs-3x">
-				<span class="zipay-logo theme-light-show">pay</span>
-				<span class="zipay-logo-dark zipay-logo theme-dark-show"
-					>pay</span
-				>
+			<div class="d-flex align-items-center me-auto position-relative">
+				<ZipayLogo app-class-dark="d-none" app-class="d-none" :classes="'h-60px'" />
 			</div>
 			<!--end::Logo image-->
 		</div>

@@ -1,3 +1,11 @@
+<script setup>
+	const config = useRuntimeConfig().public;
+	const currentPage = "About";
+	useSeoMeta({
+		title: `${currentPage} - ${config.APP}`,
+	});
+</script>
+
 <template>
 	<div class="d-flex flex-column flex-column-fluid">
 		<!--begin::Content-->
@@ -9,7 +17,7 @@
 			>
 				<div class="mb-6">
 					<div
-						class="card border-0 h-md-100 bgi-no-repeat bgi-size-contain bgi-position-x-end h-225px bg-primary"
+						class="card border-0 h-100 bgi-no-repeat bgi-size-cover bgi-position-x-end bg-primary"
 						data-bs-theme="light"
 						style="
 							background-image: url('https://www.citigroup.com/rcs/v1/siteIds/citigpa/asset/64bec2480517e6725120d613.jpg');
@@ -41,7 +49,7 @@
 										<span
 											class="fs-3qx d-none d-lg-inline fw-bold display-3"
 										>
-											Premium Trust Group
+											{{ config.APP }}
 										</span>
 
 										<span
@@ -186,7 +194,7 @@
 				<!--begin::About main-->
 				<div class="d-flex flex-column flex-xl-row">
 					<!--begin::Content-->
-					<div class="card bg-body me-9 pb-lg-18">
+					<div class="card bg-body mb-8 mb-lg-0 pb-lg-18">
 						<div class="card-body pb-lg-20">
 							<!--begin::Blog-->
 							<div class="mb-13">

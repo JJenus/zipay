@@ -1,4 +1,6 @@
 <script setup>
+	const config = useRuntimeConfig().public;
+
 	const mainNavs = [
 		{
 			name: "About Us",
@@ -88,6 +90,9 @@
 									class="theme-dark-show h-25px"
 								/>
 							</a>
+							<span class="fs-3 mt-1 text-primary ms-3 fw-bold">
+								{{ config.APP }}
+							</span>
 						</div>
 						<!--end::Logo-->
 
@@ -96,21 +101,21 @@
 							data-kt-swapper="true"
 							data-kt-swapper-mode="{default: 'prepend', lg: 'prepend'}"
 							data-kt-swapper-parent="{default: '#kt_app_content_container', lg: '#kt_app_header_container'}"
-							class="page-title d-flex flex-row justify-content-center me-3 mb-6 mb-lg-0"
+							class="page-title d-none d-lg-flex flex-row justify-content-center me-3 mb-6 mb-lg-0"
 						>
-							<div class="d-flex align-items-center me-auto">
+							<div
+								class="d-flex justify-content-center align-items-center me-auto"
+							>
 								<a href="/">
 									<img
 										alt="Logo"
 										src="/assets/media/logos/zipay-logo.png"
-										class="theme-light-show h-60px"
-									/>
-									<img
-										alt="Logo"
-										src="/assets/media/logos/zipay-logo.png"
-										class="theme-dark-show h-60px"
+										class="h-50px"
 									/>
 								</a>
+								<span class="fs-1 text-primary ms-3 fw-bold">
+									{{ config.APP }}
+								</span>
 							</div>
 						</div>
 						<!--end::Page title-->
@@ -135,6 +140,7 @@
 						data-kt-drawer-width="250px"
 						data-kt-drawer-direction="start"
 						data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle"
+						data-kt-drawer-close="#kt_drawer_nav_dismiss_close"
 					>
 						<!--begin::sidebar menu-->
 						<div
@@ -194,9 +200,9 @@
 					<!--end::Sidebar-->
 
 					<!--begin::Main-->
-					<div class="container pt-15 pt-md-0">
+					<div class="container mt-18 mt-md-3">
 						<!--begin::Content wrapper-->
-						<slot />
+						<slot class="mt-10" />
 						<!--end::Content wrapper-->
 
 						<!--begin::Footer-->

@@ -4,7 +4,21 @@
 			type: String,
 			required: false,
 		},
+		appClass: {
+			type: String,
+			required: false,
+		},
+		appClassDark: {
+			type: String,
+			required: false,
+		},
 	});
+
+	const config = useRuntimeConfig().public;
+	// const currentPage = "App";
+	// useSeoMeta({
+	// 	title: `${currentPage} - ${config.APP}`,
+	// });
 </script>
 
 <template>
@@ -13,10 +27,15 @@
 			alt="Logo"
 			src="/assets/media/logos/zipay-logo.png"
 			:class="classes"
+			class="me-4"
 		/>
-		<div class="mt-5 ms-n1 h1">
-			<span class="zipay-logo theme-light-show">pay</span>
-			<span class="zipay-logo zipay-logo-dark theme-dark-show">pay</span>
+		<div class="mt-5 ms-n1 h1 ms-3">
+			<span class="zipay-logo theme-light-show" :class="appClass">{{
+				config.APP
+			}}</span>
+			<span :class="appClassDark" class="text-warning zipay-logo theme-dark-show">{{
+				config.APP
+			}}</span>
 		</div>
 	</NuxtLink>
 </template>

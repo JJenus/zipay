@@ -6,6 +6,12 @@
 	} from "axios";
 	import { AuthToken } from "utils/interfaces/AuthToken";
 
+	const config = useRuntimeConfig().public;
+	const currentPage = "Sign in";
+	useSeoMeta({
+		title: `${currentPage} - ${config.APP}`,
+	});
+
 	const appConfig = useRuntimeConfig();
 	const auth = useAuth();
 
@@ -59,6 +65,7 @@
 				if (
 					errRes?.status !== null &&
 					(errRes?.status === 401 || errRes?.status === 404)
+					&& !errRes.data.message.includes("page")
 				) {
 					isInvalidCredentials.value = errRes.data.message;
 					console.log(err.message);
@@ -77,13 +84,13 @@
 		<div class="d-flex flex-column flex-lg-row flex-column-fluid">
 			<!--begin::Aside-->
 			<div
-				class="d-flex bg-info flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center"
-				style="background-image: url('/assets/media/misc/auth-bg.png')"
+				class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center"
+				style="background-image: url(/assets/media/misc/auth-bg.png)"
 			>
 				<!--begin::Content-->
 				<div class="d-flex flex-column flex-center p-6 p-lg-10 w-100">
 					<!--begin::Logo-->
-					<ZipayLogo :classes="'h-40px h-lg-50px'" />
+					<ZipayLogo :app-class="'text-light'" :classes="'h-40px h-lg-50px'" />
 					<!--end::Logo-->
 
 					<!--begin::Image-->

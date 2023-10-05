@@ -6,6 +6,12 @@
 	} from "axios";
 	import { AuthToken } from "utils/interfaces/AuthToken";
 
+	const config = useRuntimeConfig().public;
+	const currentPage = "Sign Up";
+	useSeoMeta({
+		title: `${currentPage} - ${config.APP}`,
+	});
+
 	const appConfig = useRuntimeConfig();
 	const auth = useAuth();
 
@@ -92,7 +98,8 @@
 
 				<ZipayLogo
 					class="mb-0 mb-lg-10 d-block"
-					:classes="'h-60px h-lg-80px'"
+					:classes="'h-40px h-lg-80px'"
+					:app-class="'text-light'"
 				/>
 				<!--end::Logo-->
 
@@ -108,7 +115,7 @@
 				<h1
 					class="d-none d-lg-block text-white fs-2qx fw-bold text-center mb-7"
 				>
-					Welcome To Zipay!
+					Welcome To {{ config.APP }}!
 				</h1>
 				<!--end::Title-->
 
