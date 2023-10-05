@@ -1,3 +1,6 @@
+<script setup lang="ts">
+	const user = await userData().getUser();
+</script>
 <template>
 	<div>
 		<!--begin::Details content-->
@@ -13,9 +16,9 @@
 
 					<!--begin::Col-->
 					<div class="col-sm-8">
-						<span class="fw-bold fs-6 text-gray-800"
-							>Max Smith</span
-						>
+						<span class="fw-bold fs-6 text-gray-800">
+							{{ user?.name }}
+						</span>
 					</div>
 					<!--end::Col-->
 				</div>
@@ -61,8 +64,9 @@
 						<a
 							href="#"
 							class="fw-semibold fs-6 text-gray-800 text-hover-primary"
-							>kth@soft.com</a
 						>
+						{{ user?.email }}
+						</a>
 					</div>
 					<!--end::Col-->
 				</div>

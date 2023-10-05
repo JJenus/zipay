@@ -1,3 +1,57 @@
+<script setup>
+	import axios from "axios";
+	import currency from "currency.js";
+
+
+	const appConfig = useRuntimeConfig();
+
+	const balance = ref({
+		id: "3bb5339b-c548-467e-91ea-a205d0c0a61b",
+		userId: "49d5ce8e-5273-44b9-b449-7a3ce278efb5",
+		currencyId: "USD",
+		amount: 0,
+		status: "active",
+		createdAt: "2023-10-04T15:56:16.000Z",
+		updatedAt: "2023-10-04T15:56:16.000Z",
+		deletedAt: null,
+	});
+	const userId = useAuth().userData.value?.userId;
+
+	const fetchBalance = () => {
+		const axiosConfig = {
+			method: "get",
+			url: `${appConfig.public.BE_API}/account/${userId}`,
+			timeout: 5000,
+			headers: {
+				Authorization: "Bearer " + useAuth().userData.value?.token,
+			},
+		};
+
+		axios
+			.request(axiosConfig)
+			.then((response) => {
+				const data = response.data;
+				balance.value = data;
+				console.log(data);
+			})
+			.catch((error) => {
+				console.log(error);
+				useAuth().logout();
+			});
+	};
+
+	const getBalance = () => {
+		const amount = currency(balance.value.amount, {
+			symbol: "",
+		}).format();
+		return amount;
+	};
+
+	onMounted(() => {
+		fetchBalance();
+	});
+</script>
+
 <template>
 	<div>
 		<!--begin::Title-->
@@ -18,9 +72,9 @@
 			<!--end::Currency-->
 
 			<!--begin::Amount-->
-			<span class="page-title fs-2tx fw-bold me-2 lh-1 ls-n2"
-				>4,684.00</span
-			>
+			<span class="page-title fs-2tx fw-bold me-2 lh-1 ls-n2">{{
+				getBalance()
+			}}</span>
 			<!--end::Amount-->
 		</div>
 		<!--end::Info-->

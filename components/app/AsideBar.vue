@@ -1,3 +1,48 @@
+<script setup lang="ts">
+	import axios from "axios";
+
+	const appConfig = useRuntimeConfig();
+
+	const transactions = ref<any[]>([]);
+	const userId = useAuth().userData.value?.userId;
+
+	const fetchTransactions = () => {
+		const axiosConfig = {
+			method: "get",
+			url: `${appConfig.public.BE_API}/transactions/${userId}`,
+			timeout: 5000,
+			headers: {
+				Authorization: "Bearer " + useAuth().userData.value?.token,
+			},
+		};
+
+		axios
+			.request(axiosConfig)
+			.then((response) => {
+				const data = response.data;
+				transactions.value = data;
+				console.log(data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
+	const getPreview = () => {
+		if (transactions.value.length <= 5) {
+			return transactions.value;
+		}
+		const list = [];
+		for (let i = 0; i < 5; i++) {
+			list.push(transactions.value[i]);
+		}
+		return list;
+	};
+
+	onMounted(() => {
+		fetchTransactions();
+	});
+</script>
 <template>
 	<div
 		id="kt_app_aside"
@@ -17,7 +62,7 @@
 			id="kt_app_aside_navbar"
 		>
 			<!--begin::Settings-->
-			<div class="app-navbar-item ms-n3">
+			<div @click="closeDrawer" class="app-navbar-item ms-n3">
 				<!--begin::Menu- wrapper-->
 				<NuxtLink
 					to="/app/settings"
@@ -51,10 +96,7 @@
 			<!--end::Notifications-->
 
 			<!--begin::Edit profile-->
-			<div
-				class="app-navbar-item ms-1 ms-lg-3"
-				data-bs-toggle="#kt_modal_upgrade_plan"
-			>
+			<div class="app-navbar-item ms-1 ms-lg-3" @click="closeDrawer">
 				<!--begin::Menu wrapper-->
 				<NuxtLink
 					to="/app/profile/edit"
@@ -196,7 +238,10 @@
 
 				<!--begin::Body-->
 				<div class="card-body pt-6">
-					<AppTransactionEntry />
+					<AppTransactionEntry
+						v-for="transact in getPreview()"
+						:transaction="transact"
+					/>
 				</div>
 				<!--end::Body-->
 			</div>

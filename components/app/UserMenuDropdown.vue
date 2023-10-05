@@ -6,7 +6,7 @@
 		data-kt-menu-attach="parent"
 		data-kt-menu-placement="bottom-end"
 	>
-		<img src="~assets/media/avatars/300-9.jpg" alt="user" />
+		<img src="/assets/media/avatars/300-9.jpg" alt="user" />
 	</div>
 
 	<!--begin::User account menu-->
@@ -19,7 +19,7 @@
 			<div class="menu-content d-flex align-items-center px-3">
 				<!--begin::Avatar-->
 				<div class="symbol symbol-50px me-5">
-					<img alt="Logo" src="~assets/media/avatars/300-9.jpg" />
+					<img alt="Logo" src="/assets/media/avatars/300-9.jpg" />
 				</div>
 				<!--end::Avatar-->
 
@@ -50,7 +50,7 @@
 		<!--end::Menu separator-->
 
 		<!--begin::Menu item-->
-		<div class="menu-item px-5">
+		<div @click="closeDrawer()" class="menu-item px-5">
 			<NuxtLink to="/app/profile" class="menu-link px-5">
 				My Profile
 			</NuxtLink>
@@ -158,7 +158,7 @@
 						English
 						<img
 							class="w-15px h-15px rounded-1 ms-2"
-							src="~assets/media/flags/united-states.svg"
+							src="/assets/media/flags/united-states.svg"
 							alt=""
 						/>
 					</span>
@@ -176,7 +176,7 @@
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
-								src="~assets/media/flags/united-states.svg"
+								src="/assets/media/flags/united-states.svg"
 								alt=""
 							/>
 						</span>
@@ -194,7 +194,7 @@
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
-								src="~assets/media/flags/spain.svg"
+								src="/assets/media/flags/spain.svg"
 								alt=""
 							/>
 						</span>
@@ -212,7 +212,7 @@
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
-								src="~assets/media/flags/germany.svg"
+								src="/assets/media/flags/germany.svg"
 								alt=""
 							/>
 						</span>
@@ -227,7 +227,7 @@
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
-								src="~assets/media/flags/japan.svg"
+								src="/assets/media/flags/japan.svg"
 								alt=""
 							/>
 						</span>
@@ -242,7 +242,7 @@
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
-								src="~assets/media/flags/france.svg"
+								src="/assets/media/flags/france.svg"
 								alt=""
 							/>
 						</span>
@@ -257,19 +257,21 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5 my-1">
-			<NuxLink to="/app/settings" class="menu-link px-5"> Account Settings </NuxLink>
+			<NuxLink to="/app/settings" class="menu-link px-5">
+				Account Settings
+			</NuxLink>
 		</div>
 		<!--end::Menu item-->
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<NuxtLink
+			<a
 				@click="useAuth().logout()"
-				to="/sign-in"
+				role="button"
 				class="menu-link px-5"
 			>
 				Sign Out
-			</NuxtLink>
+			</a>
 		</div>
 		<!--end::Menu item-->
 	</div>

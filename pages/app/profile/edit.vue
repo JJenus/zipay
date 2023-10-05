@@ -1,3 +1,7 @@
+<script setup lang="ts">
+	const user = await userData().getUser();
+</script>
+
 <template>
 	<!--begin::Content-->
 	<div id="kt_account_settings_profile_details" class="collapse show">

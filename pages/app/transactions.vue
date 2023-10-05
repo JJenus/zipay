@@ -1,3 +1,49 @@
+<script setup lang="ts">
+	import axios from "axios";
+
+	const appConfig = useRuntimeConfig();
+
+	const transactions = ref<any[]>([]);
+	const userId = useAuth().userData.value?.userId;
+
+	const fetchTransactions = () => {
+		const axiosConfig = {
+			method: "get",
+			url: `${appConfig.public.BE_API}/transactions/${userId}`,
+			timeout: 5000,
+			headers: {
+				Authorization: "Bearer " + useAuth().userData.value?.token,
+			},
+		};
+
+		axios
+			.request(axiosConfig)
+			.then((response) => {
+				const data = response.data;
+				transactions.value = data;
+				console.log(data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
+	const getPreview = () => {
+		// if (props.showDetails) {
+		return transactions.value;
+		// }
+		// const list = [];
+		// for(let i = 0; i< 5; i++){
+		// 	list.push(transactions.value[i])
+		// }
+		// return list;
+	};
+
+	onMounted(() => {
+		fetchTransactions();
+	});
+</script>
+
 <template>
 	<!--begin::Engage widget 12-->
 	<div class="card card-custom border-0 min-h-500px h-md-100 mb-5 mb-lg-10">
@@ -75,7 +121,11 @@
 			</div>
 
 			<div class="d-nonie">
-				<AppTransactionEntry :showDetails="true" v-for="i in 5" />
+				<AppTransactionEntry
+					:showDetails="true"
+					v-for="transact in transactions"
+					:transaction="transact"
+				/>
 			</div>
 		</div>
 		<!--end::Body-->

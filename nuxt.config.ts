@@ -1,15 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	devtools: { enabled: false },
-	runtimeConfig:{
+	devtools: { enabled: true },
+	routeRules: {
+		"/": { redirect: "/about-us" },
+	},
+	runtimeConfig: {
 		BE_API: process.env.BE_API,
 		public: {
 			BE_API: process.env.BE_API,
-		}
+		},
 	},
 	devServer: {
 		https: {
-			key: "./server.key", 
+			key: "./server.key",
 			cert: "./server.crt",
 		},
 	},
@@ -26,6 +29,12 @@ export default defineNuxtConfig({
 				// <script src="https://myawesome-lib.js"></script>
 				{ src: "/assets/plugins/global/plugins.bundle.js" },
 				{ src: "/assets/js/scripts.bundle.js" },
+				{
+					src: "/assets/plugins/custom/fslightbox/fslightbox.bundle.js",
+				},
+				{
+					src: "/assets/plugins/custom/datatables/datatables.bundle.js",
+				},
 			],
 			link: [
 				// <link rel="stylesheet" href="https://myawesome-lib.css">

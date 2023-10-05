@@ -5,6 +5,8 @@
 		class="position-fixed bg-light bottom-0 start-0 w-100 d-lg-none"
 	>
 		<div
+			@click="closeDrawer()"
+			data-kt-drawer-dismiss="true"
 			class="w-100 d-flex align-items-center justify-content-between p-3"
 		>
 			<NuxtLink

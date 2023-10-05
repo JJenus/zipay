@@ -21,7 +21,7 @@
 			<a href="/">
 				<img
 					alt="Logo"
-					src="~assets/media/logos/zipay-logo.png"
+					src="/assets/media/logos/zipay-logo.png"
 					class="h-70px"
 				/>
 			</a>

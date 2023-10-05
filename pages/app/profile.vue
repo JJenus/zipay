@@ -16,7 +16,7 @@
 			<div class="d-flex flex-center flex-column mb-5">
 				<!--begin::Avatar-->
 				<div class="symbol symbol-100px symbol-circle mb-7">
-					<img src="~assets/media/avatars/300-9.jpg" alt="image" />
+					<img src="/assets/media/avatars/300-9.jpg" alt="image" />
 				</div>
 				<!--end::Avatar-->
 
@@ -215,14 +215,14 @@
 											class="image-input image-input-outline"
 											data-kt-image-input="true"
 											style="
-												background-image: url('../../assets/media/svg/avatars/blank.svg');
+												background-image: url('/assets/media/svg/avatars/blank.svg');
 											"
 										>
 											<!--begin::Preview existing avatar-->
 											<div
 												class="image-input-wrapper w-125px h-125px"
 												style="
-													background-image: url(../../assets/media/avatars/300-1.jpg);
+													background-image: url(/assets/media/avatars/300-1.jpg);
 												"
 											></div>
 											<!--end::Preview existing avatar-->

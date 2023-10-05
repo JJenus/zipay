@@ -1,3 +1,5 @@
+import { off } from "process";
+
 export const navs = ref([
 	{
 		name: "Home",
@@ -39,3 +41,14 @@ export const navs = ref([
 		paths: [],
 	},
 ]);
+
+export const closeDrawer = () => {
+	// console.log("Clicked");
+	const body = document.querySelector(".drawer-overlay") as HTMLElement;
+	if (body !== null) body.click();
+	// console.log(body);
+
+	// body?.removeAttribute("data-kt-drawer");
+	// body?.removeAttribute("data-kt-drawer-app-aside");
+	// body?.removeAttribute("data-kt-drawer-activities");
+};

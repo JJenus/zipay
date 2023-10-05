@@ -1,4 +1,4 @@
-import { AuthToken } from "utils/interfaces/AuthToken";
+import { AuthToken } from "../utils/interfaces/AuthToken";
 
 export const useAuth = () => {
 	const userData = useState<AuthToken | null>("user", () => null);
@@ -17,6 +17,7 @@ export const useAuth = () => {
 		userData.value = null;
 		authenticated.value = false;
 		storage().remove();
+		navigateTo("/sign-in");
 	};
 
 	const isAuthenticated = async () => {

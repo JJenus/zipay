@@ -25,7 +25,7 @@
 
 			<!--begin::Illustration-->
 			<img
-				src="~assets/media/illustrations/misc/credit-card.png"
+				src="/assets/media/illustrations/misc/credit-card.png"
 				class="h-175px me-15"
 				alt=""
 			/>

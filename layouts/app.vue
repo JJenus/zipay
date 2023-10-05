@@ -1,4 +1,8 @@
 <script setup lang="ts">
+	definePageMeta({
+		layout: "app",
+		middleware: ["auth"],
+	});
 	const appConfig = useRuntimeConfig();
 	const auth = useAuth().userData;
 
@@ -212,17 +216,17 @@
 										class="position-absolute translate-middle-y top-50 end-0 me-5"
 									>
 										<img
-											src="../assets/media/svg/card-logos/visa.svg"
+											src="/assets/media/svg/card-logos/visa.svg"
 											alt=""
 											class="h-25px"
 										/>
 										<img
-											src="../assets/media/svg/card-logos/mastercard.svg"
+											src="/assets/media/svg/card-logos/mastercard.svg"
 											alt=""
 											class="h-25px"
 										/>
 										<img
-											src="../assets/media/svg/card-logos/american-express.svg"
+											src="/assets/media/svg/card-logos/american-express.svg"
 											alt=""
 											class="h-25px"
 										/>

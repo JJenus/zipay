@@ -11,7 +11,7 @@
 	<NuxtLink to="/" class="d-flex align-items-center position-relative">
 		<img
 			alt="Logo"
-			src="~assets/media/logos/zipay-logo.png"
+			src="/assets/media/logos/zipay-logo.png"
 			:class="classes"
 		/>
 		<div class="mt-5 ms-n1 h1">

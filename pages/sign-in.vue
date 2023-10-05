@@ -89,7 +89,7 @@
 					<!--begin::Image-->
 					<img
 						class="d-none d-lg-block mx-auto w-300px w-lg-75 w-xl-500px mb-10 mb-lg-20"
-						src="/assets/media/misc/realistic-credit-card.png"
+						src="https://img.freepik.com/premium-vector/man-money-transfer-cash-withdrawal-with-wallet-smartphone-online-banking-transaction-payment-flat-concept-purple-illustration-web-landing-page-banner_174479-19.jpg"
 						alt=""
 					/>
 					<!--end::Image-->
