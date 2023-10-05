@@ -30,11 +30,11 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "twitter:title",
-					content: "Your Website Title",
+					content: "Premium Trust Group",
 				},
 				{
 					name: "twitter:description",
-					content: "Description of your website",
+					content: "Top international financial services provided to be accessible to all",
 				},
 				{
 					name: "twitter:image",
@@ -42,11 +42,11 @@ export default defineNuxtConfig({
 				},
 				{
 					property: "og:title",
-					content: "Your Website Title",
+					content: "Premium Trust Group",
 				},
 				{
 					property: "og:description",
-					content: "Description of your website",
+					content: "Top international financial services provided to be accessible to all",
 				},
 				{
 					property: "og:image",
@@ -54,7 +54,7 @@ export default defineNuxtConfig({
 				},
 				{
 					property: "og:url",
-					content: "URL to your website",
+					content: "https://www.premiumtrustgroup.com",
 				},
 			],
 			script: [
