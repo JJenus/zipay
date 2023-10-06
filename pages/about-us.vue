@@ -47,7 +47,7 @@
 										>
 
 										<span
-											class="fs-3qx d-none d-lg-inline fw-bold display-3"
+											class="fs-3qx d-none text-info d-lg-inline fw-bold display-3"
 										>
 											{{ config.APP }}
 										</span>
@@ -55,7 +55,7 @@
 										<span
 											class="fs-3qx d-lg-none text-dark fw-bold display-3"
 										>
-											Premium Trust Group
+											{{ config.APP }}
 										</span>
 									</div>
 									<!--end::Title-->
@@ -194,7 +194,7 @@
 				<!--begin::About main-->
 				<div class="d-flex flex-column flex-xl-row">
 					<!--begin::Content-->
-					<div class="card bg-body mb-8 mb-lg-0 pb-lg-18">
+					<div class="card bg-body mb-8 mb-xl-0 pb-lg-18">
 						<div class="card-body pb-lg-20">
 							<!--begin::Blog-->
 							<div class="mb-13">
@@ -692,7 +692,7 @@
 					<!--end::Content-->
 
 					<!--begin::Sidebar-->
-					<div class="flex-column flex-lg-row-auto w-100 w-xl-350px">
+					<div class="flex-column flex-lg-row-auto w-100 w-xl-350px ms-xl-5">
 						<div class="card card-flush mb-6" bis_skin_checked="1">
 							<!--begin::Body-->
 							<div class="card-body" bis_skin_checked="1">

@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	const active = ref("Home");
+</script>
 <template>
 	<div
 		style="z-index: 1049"
@@ -10,8 +12,10 @@
 			class="w-100 d-flex align-items-center justify-content-between p-3"
 		>
 			<NuxtLink
+				@click="active = nav.name"
 				v-for="nav in navs"
 				:to="nav.dir"
+				:class="active == nav.name ? 'active' : ''"
 				class="btn btn-icon w-35px btn-active-primary btn-outline-dashed hover-scale btn-icon-primary btn-text-primary h-40px w-40px h-md-40px"
 			>
 				<!-- <NuxtLink ></NuxtLink> -->

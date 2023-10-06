@@ -24,6 +24,11 @@
 		},
 	];
 
+	function myClick() {
+		// d-none d-lg-flex
+		console.log("click");
+	}
+
 	// onMounted(()=>{
 	//     KTThemeMode.setMode("light");
 	// })
@@ -57,6 +62,7 @@
 				>
 					<!--begin::Header container-->
 					<div
+						@click="closeDrawer()"
 						class="app-container container-fluid d-flex align-items-stretch justify-content-between"
 						id="kt_app_header_container"
 					>
@@ -67,7 +73,7 @@
 						>
 							<div
 								class="btn btn-icon btn-active-color-primary w-35px h-35px"
-								id="kt_app_sidebar_mobile_toggle"
+								id="kt_activities_toggle"
 							>
 								<i class="ki-outline ki-abstract-14 fs-2"></i>
 							</div>
@@ -94,13 +100,9 @@
 								{{ config.APP }}
 							</span>
 						</div>
-						<!--end::Logo-->
 
 						<!--begin::Page title-->
 						<div
-							data-kt-swapper="true"
-							data-kt-swapper-mode="{default: 'prepend', lg: 'prepend'}"
-							data-kt-swapper-parent="{default: '#kt_app_content_container', lg: '#kt_app_header_container'}"
 							class="page-title d-none d-lg-flex flex-row justify-content-center me-3 mb-6 mb-lg-0"
 						>
 							<div
@@ -121,7 +123,7 @@
 						<!--end::Page title-->
 
 						<!--begin::Navbar-->
-						<Navbar />
+						<Navbar :main-navs="mainNavs" />
 						<!--end::Navbar-->
 					</div>
 					<!--end::Header container-->
@@ -130,74 +132,6 @@
 				<!--begin::Wrapper-->
 				<div class="flex-column flex-row-fluid" id="kt_app_wrapper">
 					<!--begin::Sidebar-->
-					<div
-						id="kt_app_sidebar"
-						class="app-sidebar flex-column d-lg-none"
-						data-kt-drawer="true"
-						data-kt-drawer-name="app-sidebar"
-						data-kt-drawer-activate="{default: true, lg: true}"
-						data-kt-drawer-overlay="true"
-						data-kt-drawer-width="250px"
-						data-kt-drawer-direction="start"
-						data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle"
-						data-kt-drawer-close="#kt_drawer_nav_dismiss_close"
-					>
-						<!--begin::sidebar menu-->
-						<div
-							class="app-sidebar-menu overflow-hidden flex-column-fluid"
-						>
-							<div
-								class="d-flex d-lg-none mt-5 justify-content-center align-items-center"
-							>
-								<a href="/">
-									<img
-										alt="Logo"
-										src="/assets/media/logos/zipay-logo.png"
-										class="h-50px"
-									/>
-								</a>
-							</div>
-							<!--begin::Menu wrapper-->
-							<div
-								id="kt_app_sidebar_menu_wrapper"
-								class="app-sidebar-wrapper hover-scroll-y my-5 mx-3 mx-xl-11"
-								data-kt-scroll="true"
-								data-kt-scroll-activate="true"
-								data-kt-scroll-height="auto"
-								data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
-								data-kt-scroll-wrappers="#kt_app_sidebar_menu"
-								data-kt-scroll-offset="5px"
-							>
-								<!--begin::Menu-->
-								<div
-									class="menu menu-column menu-rounded menu-sub-indention menu-active-bg menu- px-3"
-									id="#kt_app_sidebar_menu"
-									data-kt-menu="true"
-									data-kt-menu-expand="false"
-								>
-									<NuxtLink
-										v-for="nav in mainNavs"
-										:to="nav.path"
-										data-kt-menu-trigger="click"
-										class="menu-item"
-									>
-										<!--begin:Menu link--><span
-											class="menu-link"
-										>
-											<span class="menu-title">
-												{{ nav.name }}
-											</span>
-										</span>
-										<!--end:Menu link-->
-									</NuxtLink>
-								</div>
-								<!--end::Menu-->
-							</div>
-							<!--end::Menu wrapper-->
-						</div>
-						<!--end::sidebar menu-->
-					</div>
-					<!--end::Sidebar-->
 
 					<!--begin::Main-->
 					<div class="container mt-18 mt-md-3">
@@ -207,58 +141,7 @@
 
 						<!--begin::Footer-->
 						<div id="kt_app_footer" class="app-footer">
-							<!--begin::Footer container-->
-							<div
-								class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3"
-							>
-								<!--begin::Copyright-->
-								<div class="text-dark order-2 order-md-1">
-									<span class="text-muted fw-semibold me-1"
-										>2023&copy;</span
-									>
-									<a
-										href="https://keenthemes.com/"
-										target="_blank"
-										class="text-gray-800 text-hover-primary"
-										>Keenthemes</a
-									>
-								</div>
-								<!--end::Copyright-->
-
-								<!--begin::Menu-->
-								<ul
-									class="menu menu-gray-600 menu-hover-primary fw-semibold order-1"
-								>
-									<li class="menu-item">
-										<a
-											href="https://keenthemes.com/"
-											target="_blank"
-											class="menu-link px-2"
-											>About</a
-										>
-									</li>
-
-									<li class="menu-item">
-										<a
-											href="https://devs.keenthemes.com/"
-											target="_blank"
-											class="menu-link px-2"
-											>Support</a
-										>
-									</li>
-
-									<li class="menu-item">
-										<a
-											href="https://themes.getbootstrap.com/product/keen-the-ultimate-bootstrap-admin-theme/"
-											target="_blank"
-											class="menu-link px-2"
-											>Purchase</a
-										>
-									</li>
-								</ul>
-								<!--end::Menu-->
-							</div>
-							<!--end::Footer container-->
+							<Footer />
 						</div>
 						<!--end::Footer-->
 					</div>
@@ -271,6 +154,7 @@
 		<!--end::App-->
 
 		<!--end::Drawers-->
+		<MobileNav :main-navs="mainNavs" />
 		<!--begin::Engage drawers-->
 
 		<!--begin::Scrolltop-->

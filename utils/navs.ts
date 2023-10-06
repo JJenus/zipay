@@ -45,7 +45,7 @@ export const closeDrawer = () => {
 	// console.log("Clicked");
 	const body = document.querySelector(".drawer-overlay") as HTMLElement;
 	if (body !== null) body.click();
-	console.log(body); 
+	// console.log(body); 
 
 	// body?.removeAttribute("data-kt-drawer");
 	// body?.removeAttribute("data-kt-drawer-app-aside");

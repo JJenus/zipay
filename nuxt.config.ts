@@ -34,7 +34,8 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "twitter:description",
-					content: "Top international financial services provided to be accessible to all",
+					content:
+						"Top international financial services provided to be accessible to all",
 				},
 				{
 					name: "twitter:image",
@@ -46,7 +47,8 @@ export default defineNuxtConfig({
 				},
 				{
 					property: "og:description",
-					content: "Top international financial services provided to be accessible to all",
+					content:
+						"Top international financial services provided to be accessible to all",
 				},
 				{
 					property: "og:image",
@@ -70,10 +72,6 @@ export default defineNuxtConfig({
 			],
 
 			link: [
-				{
-					rel: "stylesheet",
-					href: "https://myawesome-lib.css",
-				},
 				{
 					rel: "stylesheet",
 					href: "/assets/plugins/global/plugins.bundle.css",

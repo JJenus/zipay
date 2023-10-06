@@ -3,8 +3,6 @@ import { Account, AccountStatus } from "../utils/interfaces/Account";
 import { IUser } from "../utils/interfaces/IUser";
 
 const appConfig = useRuntimeConfig();
-const headers = useRequestHeaders([`authorization`]);
-headers.authorization = "Bearer " + useAuth().userData.value?.token;
 
 export const userData = () => {
 	const userId = useAuth().userData.value?.userId;
@@ -34,7 +32,7 @@ export const userData = () => {
 				},
 			};
 
-			axios
+			await axios
 				.request<IUser>(axiosConfig)
 				.then((response: AxiosResponse<IUser, any>) => {
 					data.value = response.data;
@@ -45,7 +43,6 @@ export const userData = () => {
 					useAuth().logout();
 				});
 
-			console.log("response: ");
 		}
 		return data;
 	};
