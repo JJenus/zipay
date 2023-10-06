@@ -65,7 +65,7 @@
 				if (
 					errRes?.status !== null &&
 					(errRes?.status === 401 || errRes?.status === 404)
-					&& !errRes.data.message.includes("page")
+					&& !errRes.data.message.includes("Page")
 				) {
 					isInvalidCredentials.value = errRes.data.message;
 					console.log(err.message);

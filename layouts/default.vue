@@ -136,16 +136,17 @@
 					<!--begin::Main-->
 					<div class="container mt-18 mt-md-3">
 						<!--begin::Content wrapper-->
-						<slot class="mt-10" />
-						<!--end::Content wrapper-->
-
-						<!--begin::Footer-->
-						<div id="kt_app_footer" class="app-footer">
-							<Footer />
+						<div class="over-flow-hidden">
+							<slot class="mt-10" />
 						</div>
-						<!--end::Footer-->
+						<!--end::Content wrapper-->
 					</div>
 					<!--end:::Main-->
+					<!--begin::Footer-->
+					<div>
+						<Footer />
+					</div>
+					<!--end::Footer-->
 				</div>
 				<!--end::Wrapper-->
 			</div>
