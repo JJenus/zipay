@@ -31,7 +31,7 @@
 		method: "post",
 		data: {},
 		url: `${appConfig.public.BE_API}/auth/login`,
-		timeout: 5000,
+		timeout: 15000,
 	});
 	const form = ref({
 		email: null,

@@ -20,7 +20,7 @@
 		const axiosConfig = {
 			method: "get",
 			url: `${appConfig.public.BE_API}/account/${userId}`,
-			timeout: 5000,
+			timeout: 15000,
 			headers: {
 				Authorization: "Bearer " + useAuth().userData.value?.token,
 			},

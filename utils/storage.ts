@@ -19,7 +19,7 @@ export const storage = () => {
 
 	const remove = () => {
 		try {
-			localStorage.removeItem(authKey);
+			if (process.client) localStorage.removeItem(authKey);
 		} catch (error) {
 			// console.log(error);
 		}
@@ -96,9 +96,15 @@ async function encryptAndStore(
 			data: Array.from(new Uint8Array(encryptedData)),
 		};
 
-		localStorage.setItem(key, JSON.stringify(encryptedObject));
+		// this.$cookies.set('thing', data, {
+		// 	path: '/',
+		// 	maxAge: 60 * 60 * 24 * 7
+		// });
+		if (process.client) {
+			localStorage.setItem(key, JSON.stringify(encryptedObject));
+		}
 	} catch (error) {
-		// console.log(error);
+		console.log(error);
 	}
 }
 
@@ -106,7 +112,7 @@ async function encryptAndStore(
 async function retrieveAndDecrypt(key: string, passphrase: string) {
 	let encryptedData;
 	try {
-		encryptedData = localStorage.getItem(key);
+		if (process.client) encryptedData = localStorage.getItem(key);
 	} catch (error) {
 		// console.log(error);
 	}
@@ -114,6 +120,8 @@ async function retrieveAndDecrypt(key: string, passphrase: string) {
 	if (!encryptedData) {
 		return null;
 	}
+
+	console.log("Yes")
 
 	const encryptedObject = JSON.parse(encryptedData);
 

@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+	modules: [],
+	ssr: true,
 	devtools: { enabled: true },
 	routeRules: {
 		"/": { redirect: "/about-us" },
@@ -26,7 +28,8 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "twitter:card",
-					content: "Top international financial services provided to be accessible to all",
+					content:
+						"Top international financial services provided to be accessible to all",
 				},
 				{
 					name: "twitter:title",
@@ -39,7 +42,8 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "twitter:image",
-					content: "https://www.elisafinance.com/assets/media/elisa-logo.png",
+					content:
+						"https://www.elisafinance.com/assets/media/elisa-logo.png",
 				},
 				{
 					property: "og:title",
@@ -52,7 +56,8 @@ export default defineNuxtConfig({
 				},
 				{
 					property: "og:image",
-					content: "https://www.elisafinance.com/assets/media/elisa-logo.png",
+					content:
+						"https://www.elisafinance.com/assets/media/elisa-logo.png",
 				},
 				{
 					property: "og:url",
