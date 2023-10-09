@@ -5,9 +5,9 @@ export default defineNuxtConfig({
 		"/": { redirect: "/about-us" },
 	},
 	runtimeConfig: {
-		BE_API: process.env.BE_API || "https://fibre.alwaysdata.net",
+		BE_API: process.env.BE_API || "https://fibre.alwaysdata.net/api",
 		public: {
-			BE_API: process.env.BE_API || "https://fibre.alwaysdata.net",
+			BE_API: process.env.BE_API || "https://fibre.alwaysdata.net/api",
 			APP: "Elisa Finance",
 		},
 	},
