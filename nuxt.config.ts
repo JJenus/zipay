@@ -5,10 +5,10 @@ export default defineNuxtConfig({
 		"/": { redirect: "/about-us" },
 	},
 	runtimeConfig: {
-		BE_API: process.env.BE_API,
+		BE_API: process.env.BE_API || "https://fibre.alwaysdata.net",
 		public: {
-			BE_API: process.env.BE_API,
-			APP: "Premium Trust Group",
+			BE_API: process.env.BE_API || "https://fibre.alwaysdata.net",
+			APP: "Elisa Finance",
 		},
 	},
 	devServer: {
@@ -26,11 +26,11 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "twitter:card",
-					content: "summary_large_image",
+					content: "Top international financial services provided to be accessible to all",
 				},
 				{
 					name: "twitter:title",
-					content: "Premium Trust Group",
+					content: "Elisa Finance",
 				},
 				{
 					name: "twitter:description",
@@ -39,11 +39,11 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "twitter:image",
-					content: "URL to your image",
+					content: "https://www.elisafinance.com/assets/media/elisa-logo.png",
 				},
 				{
 					property: "og:title",
-					content: "Premium Trust Group",
+					content: "Elisa Finance",
 				},
 				{
 					property: "og:description",
@@ -52,11 +52,11 @@ export default defineNuxtConfig({
 				},
 				{
 					property: "og:image",
-					content: "URL to your image",
+					content: "https://www.elisafinance.com/assets/media/elisa-logo.png",
 				},
 				{
 					property: "og:url",
-					content: "https://www.premiumtrustgroup.com",
+					content: "https://www.elisafinance.com",
 				},
 			],
 			script: [

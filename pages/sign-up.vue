@@ -36,19 +36,32 @@
 	const form = ref({
 		name: null,
 		email: null,
+		imgUrl: null,
+		phone: null,
+		address: null,
+		city: null,
+		country: null,
+		dob: null,
 		password: null,
 		confirmPassword: null,
 	});
 
 	const submitForm = (event: Event) => {
 		emailExists.value = false;
-		console.log("API Url: ", appConfig.public.BE_API);
+		const { confirmPassword, dob, imgUrl, ...data } = form.value;
+		console.log(data);
+		// console.log("API Url: ", appConfig.public.BE_API);
 		if (
+			!form.value.address ||
+			!form.value.city ||
+			!form.value.phone ||
+			!form.value.country ||
 			!form.value.email ||
 			!form.value.name ||
 			!form.value.password ||
 			form.value.confirmPassword !== form.value.password
 		) {
+			// console.log(form.value);
 			errorAlert(null);
 			// submitButton.value.removeAttribute("data-kt-indicator");
 			return;
@@ -56,9 +69,8 @@
 		// submitButton.setAttribute("data-kt-indicator", "on");
 		// submitButton.value.disabled = true;
 
-		const { name, email, password } = form.value;
-		console.log(name);
-		axiosConfig.value.data = { name, email, password };
+		
+		axiosConfig.value.data = data;
 
 		axios
 			.request(axiosConfig.value)
@@ -90,8 +102,9 @@
 		<!--begin::Aside-->
 		<div
 			class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center"
-			style="background-image: url(/assets/media/misc/auth-bg.png)"
 		>
+			<!-- style="background-image: url(/assets/media/misc/auth-bg.png)" -->
+
 			<!--begin::Content-->
 			<div class="d-flex flex-column flex-center p-6 p-lg-10 w-100">
 				<!--begin::Logo-->
@@ -99,7 +112,7 @@
 				<ZipayLogo
 					class="mb-0 mb-lg-10 d-block"
 					:classes="'h-40px h-lg-80px'"
-					:app-class="'text-light'"
+					:app-class="'text-primary'"
 				/>
 				<!--end::Logo-->
 
@@ -130,202 +143,269 @@
 			<!--begin::Form-->
 			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
 				<!--begin::Wrapper-->
-				<div class="w-lg-500px p-10">
-					<!--begin::Form-->
-					<form
-						autocomplete="on"
-						@submit.prevent="submitForm"
-						class="form w-100"
-						novalidate
-						id="kt_sign_up_form"
-					>
-						<!--begin::Heading-->
-						<div class="text-center mb-11">
-							<!--begin::Title-->
-							<h1 class="text-dark fw-bolder mb-3">Sign Up</h1>
-							<!--end::Title-->
+				<div class="card w-lg-500px p-md-10">
+					<div class="card-body">
+						<!--begin::Form-->
+						<form
+							autocomplete="on"
+							@submit.prevent="submitForm"
+							class="form w-100"
+							novalidate
+							id="kt_sign_up_form"
+						>
+							<!--begin::Heading-->
+							<div class="text-center mb-11">
+								<!--begin::Title-->
+								<h1 class="text-dark fw-bolder mb-3">
+									Sign Up
+								</h1>
+								<!--end::Title-->
 
-							<!--begin::Subtitle-->
-							<div class="text-gray-500 fw-semibold fs-6 d-none">
-								Your Social Campaigns
-							</div>
-							<!--end::Subtitle--->
-						</div>
-						<!--begin::Heading-->
-
-						<!--begin::Separator-->
-						<div class="separator separator-content my-14"></div>
-						<!--end::Separator-->
-						<div class="fv-row mb-8">
-							<!--begin::Email-->
-							<input
-								type="text"
-								placeholder="Full name"
-								name="name"
-								class="form-control bg-transparent"
-								v-model="form.name"
-								required
-							/>
-							<!--end::Email-->
-						</div>
-						<!--begin::Input group--->
-						<div class="fv-row mb-8">
-							<!--begin::Email-->
-							<input
-								type="email"
-								placeholder="Email"
-								name="email"
-								autocomplete="on"
-								class="form-control bg-transparent"
-								v-model="form.email"
-								required
-							/>
-							<!--end::Email-->
-							<div
-								v-if="emailExists"
-								class="text-danger fs-sm mt-3"
-							>
-								{{ emailExists }}
-							</div>
-						</div>
-
-						<!--begin::Input group-->
-						<div class="fv-row mb-8" data-kt-password-meter="true">
-							<!--begin::Wrapper-->
-							<div class="mb-1">
-								<!--begin::Input wrapper-->
-								<div class="position-relative mb-3">
-									<input
-										class="form-control bg-transparent"
-										type="password"
-										placeholder="Password"
-										name="password"
-										autocomplete="off"
-										v-model="form.password"
-										required
-									/>
-
-									<span
-										class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
-										data-kt-password-meter-control="visibility"
-									>
-										<i
-											class="ki-outline ki-eye-slash fs-2"
-										></i>
-										<i
-											class="ki-outline ki-eye fs-2 d-none"
-										></i>
-									</span>
-								</div>
-								<!--end::Input wrapper-->
-
-								<!--begin::Meter-->
+								<!--begin::Subtitle-->
 								<div
-									class="d-flex align-items-center mb-3"
-									data-kt-password-meter-control="highlight"
+									class="text-gray-500 fw-semibold fs-6 d-none"
 								>
-									<div
-										class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"
-									></div>
-									<div
-										class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"
-									></div>
-									<div
-										class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"
-									></div>
-									<div
-										class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"
-									></div>
+									Your Social Campaigns
 								</div>
-								<!--end::Meter-->
+								<!--end::Subtitle--->
 							</div>
-							<!--end::Wrapper-->
+							<!--begin::Heading-->
 
-							<!--begin::Hint-->
-							<div class="text-muted">
-								Use 8 or more characters with a mix of letters,
-								numbers & symbols.
-							</div>
-							<!--end::Hint-->
-						</div>
-						<!--end::Input group--->
-
-						<!--end::Input group--->
-						<div class="fv-row mb-8">
-							<!--begin::Repeat Password-->
-							<input
-								required
-								placeholder="Repeat Password"
-								name="confirm-password"
-								type="password"
-								autocomplete="off"
-								class="form-control bg-transparent"
-								v-model="form.confirmPassword"
-							/>
-							<!--end::Repeat Password-->
-						</div>
-						<!--end::Input group--->
-
-						<!--begin::Accept-->
-						<div class="fv-row mb-8">
-							<label class="form-check form-check-inline">
+							<!--begin::Separator-->
+							<div
+								class="separator separator-content my-14"
+							></div>
+							<!--end::Separator-->
+							<div class="fv-row mb-8">
+								<!--begin::Email-->
 								<input
-									class="form-check-input"
-									type="checkbox"
-									name="toc"
-									value="1"
+									type="text"
+									placeholder="Full name"
+									name="name"
+									class="form-control bg-transparent"
+									v-model="form.name"
 									required
 								/>
-								<span
-									class="form-check-label fw-semibold text-gray-700 fs-base ms-1"
+								<!--end::Email-->
+							</div>
+							<!--begin::Input group--->
+							<div class="fv-row mb-8">
+								<!--begin::Email-->
+								<input
+									type="email"
+									placeholder="Email"
+									name="email"
+									autocomplete="on"
+									class="form-control bg-transparent"
+									v-model="form.email"
+									required
+								/>
+								<!--end::Email-->
+								<div
+									v-if="emailExists"
+									class="text-danger fs-sm mt-3"
 								>
-									I Accept the
-									<a href="#" class="ms-1 link-primary"
-										>Terms</a
+									{{ emailExists }}
+								</div>
+							</div>
+
+							<div class="fv-row mb-8">
+								<!--begin::Email-->
+								<input
+									type="text"
+									placeholder="Phone"
+									name="phone"
+									class="form-control bg-transparent"
+									required
+									v-model="form.phone"
+								/>
+								<!--end::Email-->
+							</div>
+
+							<div class="fv-row mb-8">
+								<!--begin::Email-->
+								<input
+									type="text"
+									placeholder="Address"
+									name="address"
+									class="form-control bg-transparent"
+									required
+									v-model="form.address"
+								/>
+								<!--end::Email-->
+							</div>
+
+							<div class="fv-row mb-8">
+								<!--begin::Email-->
+								<input
+									type="text"
+									placeholder="City"
+									name="city"
+									class="form-control bg-transparent"
+									required
+									v-model="form.city"
+								/>
+								<!--end::Email-->
+							</div>
+
+							<div class="fv-row mb-8">
+								<!--begin::Email-->
+								<input
+									type="text"
+									placeholder="Country"
+									name="country"
+									class="form-control bg-transparent"
+									required
+									v-model="form.country"
+								/>
+								<!--end::Email-->
+							</div>
+
+							<!--begin::Input group-->
+							<div
+								class="fv-row mb-8"
+								data-kt-password-meter="true"
+							>
+								<!--begin::Wrapper-->
+								<div class="mb-1">
+									<!--begin::Input wrapper-->
+									<div class="position-relative mb-3">
+										<input
+											class="form-control bg-transparent"
+											type="password"
+											placeholder="Password"
+											name="password"
+											autocomplete="off"
+											v-model="form.password"
+											required
+										/>
+
+										<span
+											class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
+											data-kt-password-meter-control="visibility"
+										>
+											<i
+												class="ki-outline ki-eye-slash fs-2"
+											></i>
+											<i
+												class="ki-outline ki-eye fs-2 d-none"
+											></i>
+										</span>
+									</div>
+									<!--end::Input wrapper-->
+
+									<!--begin::Meter-->
+									<div
+										class="d-flex align-items-center mb-3"
+										data-kt-password-meter-control="highlight"
 									>
-								</span>
-							</label>
-						</div>
-						<!--end::Accept-->
+										<div
+											class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"
+										></div>
+										<div
+											class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"
+										></div>
+										<div
+											class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"
+										></div>
+										<div
+											class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"
+										></div>
+									</div>
+									<!--end::Meter-->
+								</div>
+								<!--end::Wrapper-->
 
-						<!--begin::Submit button-->
-						<div class="d-grid mb-10">
-							<button
-								ref="submitButton"
-								type="submit"
-								id="kt_sign_up_submit"
-								class="btn btn-primary"
-							>
-								<!--begin::Indicator label-->
-								<span class="indicator-label"> Sign up</span>
-								<!--end::Indicator label-->
+								<!--begin::Hint-->
+								<div class="text-muted">
+									Use 8 or more characters with a mix of
+									letters, numbers & symbols.
+								</div>
+								<!--end::Hint-->
+							</div>
+							<!--end::Input group--->
 
-								<!--begin::Indicator progress-->
-								<span class="indicator-progress">
-									Please wait...
+							<!--end::Input group--->
+							<div class="fv-row mb-8">
+								<!--begin::Repeat Password-->
+								<input
+									required
+									placeholder="Repeat Password"
+									name="confirm-password"
+									type="password"
+									autocomplete="off"
+									class="form-control bg-transparent"
+									v-model="form.confirmPassword"
+								/>
+								<!--end::Repeat Password-->
+							</div>
+							<!--end::Input group--->
+
+							<!--begin::Accept-->
+							<div class="fv-row mb-8">
+								<label class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="checkbox"
+										name="toc"
+										value="1"
+										required
+									/>
 									<span
-										class="spinner-border spinner-border-sm align-middle ms-2"
-									></span>
-								</span>
-								<!--end::Indicator progress-->
-							</button>
-						</div>
-						<!--end::Submit button-->
+										class="form-check-label fw-semibold text-gray-700 fs-base ms-1"
+									>
+										I Accept the
+										<a href="#" class="ms-1 link-primary"
+											>Terms</a
+										>
+									</span>
+								</label>
+							</div>
+							<!--end::Accept-->
 
-						<!--begin::Sign up-->
-						<div class="text-gray-500 text-center fw-semibold fs-6">
-							Already have an Account?
+							<!--begin::Submit button-->
+							<div class="d-grid mb-10">
+								<button
+									ref="submitButton"
+									type="submit"
+									id="kt_sign_up_submit"
+									class="btn btn-primary"
+								>
+									<!--begin::Indicator label-->
+									<span class="indicator-label">
+										Sign up</span
+									>
+									<!--end::Indicator label-->
 
-							<NuxtLink
-								to="sign-in"
-								class="link-primary fw-semibold"
+									<!--begin::Indicator progress-->
+									<span class="indicator-progress">
+										Please wait...
+										<span
+											class="spinner-border spinner-border-sm align-middle ms-2"
+										></span>
+									</span>
+									<!--end::Indicator progress-->
+								</button>
+							</div>
+							<!--end::Submit button-->
+
+							<!--begin::Sign up-->
+							<div
+								class="text-gray-500 text-center fw-semibold fs-6"
 							>
-								Sign in
-							</NuxtLink>
-						</div>
-						<!--end::Sign up-->
-					</form>
-					<!--end::Form-->
+								Already have an Account?
+
+								<NuxtLink
+									to="sign-in"
+									class="link-primary fw-semibold"
+								>
+									Sign in
+								</NuxtLink>
+							</div>
+							<!--end::Sign up-->
+						</form>
+						<!--end::Form-->
+					</div>
 				</div>
 				<!--end::Wrapper-->
 			</div>

@@ -264,8 +264,8 @@
 							<span
 								class="text-gray-800 fs-6 fw-semibold d-block mb-9"
 							>
-								First, a disclaimer – the entire process of
-								writing a blog post often takes. <br />
+								We're available anytime you need us. <br />
+								Contact us on any of these channels.
 							</span>
 							<!--end::Text-->
 

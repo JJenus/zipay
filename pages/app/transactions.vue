@@ -79,9 +79,9 @@
 						<!--end::Currency-->
 
 						<!--begin::Amount-->
-						<span class="page-title fs-2 fw-bold me-2 lh-1 ls-n2"
-							>4,684.00</span
-						>
+						<span class="page-title fs-2 fw-bold me-2 lh-1 ls-n2">{{
+							"0.00"
+						}}</span>
 						<!--end::Amount-->
 					</div>
 				</div>
@@ -112,9 +112,9 @@
 						<!--end::Currency-->
 
 						<!--begin::Amount-->
-						<span class="page-title fs-2 fw-bold me-2 lh-1 ls-n2"
-							>14,684.00</span
-						>
+						<span class="page-title fs-2 fw-bold me-2 lh-1 ls-n2">{{
+							"0.00"
+						}}</span>
 						<!--end::Amount-->
 					</div>
 				</div>

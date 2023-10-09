@@ -1,7 +1,10 @@
-<script setup lang="ts">
+<script setup>
+	// /assets/media/svg/avatars/blank.svg
 	const route = useRoute();
 	console.log();
 	const currentRoute = ref("overview");
+	const user = userData().data;
+
 	onMounted(() => {
 		if (route.path.split("/")[2])
 			currentRoute.value = route.path.split("/")[2];
@@ -16,7 +19,7 @@
 			<div class="d-flex flex-center flex-column mb-5">
 				<!--begin::Avatar-->
 				<div class="symbol symbol-100px symbol-circle mb-7">
-					<img src="/assets/media/avatars/300-9.jpg" alt="image" />
+					<img :src="user.imgUrl" alt="image" />
 				</div>
 				<!--end::Avatar-->
 
@@ -25,7 +28,7 @@
 					href="#"
 					class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1"
 				>
-					Max Smith
+					{{ user.name }}
 				</a>
 				<!--end::Name-->
 
@@ -65,7 +68,7 @@
 					<!--end::Stats-->
 
 					<!--begin::Stats-->
-					<NuxtLink
+					<!-- <NuxtLink
 						to="/app/profile/settings"
 						@click="currentRoute = 'settings'"
 						:class="currentRoute == 'settings' ? 'active' : ''"
@@ -73,7 +76,7 @@
 					>
 						<i class="ki-outline ki-gear fs-3 me-1"></i>
 						<span class="w-50px">Settings</span>
-					</NuxtLink>
+					</NuxtLink> -->
 					<!--end::Stats-->
 				</div>
 				<!--end::Info-->

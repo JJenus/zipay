@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	const user = await userData().getUser();
+	const user = userData().data;
 </script>
 <template>
 	<div>
@@ -44,10 +44,9 @@
 
 					<!--begin::Col-->
 					<div class="col-sm-8 d-flex align-items-center">
-						<span class="fw-bold fs-6 text-gray-800 me-2"
-							>044 3276 454 935</span
-						>
-						<span class="badge badge-success">Verified</span>
+						<span class="fw-bold fs-6 text-gray-800 me-2">{{
+							user.phone
+						}}</span>
 					</div>
 					<!--end::Col-->
 				</div>
@@ -60,13 +59,15 @@
 					<!--end::Label-->
 
 					<!--begin::Col-->
-					<div class="col-sm-8">
+					<div class="col-sm-8 d-flex align-items-center">
 						<a
 							href="#"
-							class="fw-semibold fs-6 text-gray-800 text-hover-primary"
+							class="fw-semibold fs-6 text-gray-800 text-hover-primary me-3"
 						>
-						{{ user?.email }}
+							{{ user.email }}
 						</a>
+						<span v-if="user.emailVerified" class="badge badge-success">Verified</span>
+						<span v-else class="badge badge-danger">Not verified</span>
 					</div>
 					<!--end::Col-->
 				</div>
@@ -92,7 +93,7 @@
 
 					<!--begin::Col-->
 					<div class="col-sm-8">
-						<span class="fw-bold fs-6 text-gray-800">Germany</span>
+						<span class="fw-bold fs-6 text-gray-800">{{user.country}}</span>
 					</div>
 					<!--end::Col-->
 				</div>

@@ -8,9 +8,8 @@ export const useAuth = () => {
 		userData.value = user;
 		authenticated.value = true;
 		await storage().remember(user);
-		setTimeout(() => {
-			navigateTo("/app");
-		}, 3000);
+
+		navigateTo("/app");
 	};
 
 	const logout = () => {

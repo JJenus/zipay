@@ -6,6 +6,10 @@
 	}
 </style>
 
+<script setup>
+	const notifications = ref([]);
+</script>
+
 <template>
 	<!--begin::Activities drawer-->
 	<div
@@ -49,20 +53,23 @@
 					data-kt-scroll-dependencies="#kt_activities_header, #kt_activities_footer"
 					data-kt-scroll-offset="5px"
 				>
-					<AppNotificationEntry />
-                    <AppNotificationEntry />
-                    <AppNotificationEntry />
-                    <AppNotificationEntry />
-                    <AppNotificationEntry />
-                    <AppNotificationEntry />
+					<div
+						v-if="notifications.length === 0"
+						class="text-center text-muted fw-bold"
+					>
+						No notification
+					</div>
 				</div>
 				<!--end::Content-->
 			</div>
 			<!--end::Body-->
 
 			<!--begin::Footer-->
-			<div class="card-footer py-0 py-lg-5 text-center mt-n8 mt-lg-0" id="kt_activities_footer">
-				<a role="button" class="btn btn-bg-body text-primary ">
+			<div
+				class="card-footer py-0 py-lg-5 text-center mt-n8 mt-lg-0"
+				id="kt_activities_footer"
+			>
+				<a role="button" class="btn btn-bg-body text-primary">
 					<i
 						class="ki-outline ki-arrows-circle fs-5 text-primary"
 					></i>

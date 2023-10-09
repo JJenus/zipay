@@ -5,7 +5,8 @@
 			required: true,
 		},
 	});
-    const active = ref("About Us")
+	const route = useRoute();
+	const active = ref(route.path);
 	const config = useRuntimeConfig().public;
 </script>
 <template>
@@ -48,14 +49,18 @@
 			<!--begin::Body-->
 			<div class="card-body position-relative" id="kt_activities_body">
 				<!--begin::Menu-->
-				<div class="menu menu-column ">
+				<div class="menu menu-column">
 					<!--begin::Menu item-->
 					<div @click="closeDrawer()" class="menu-item">
 						<NuxtLink
-							@click="active = nav.name"
+							@click="active = nav.path"
 							:to="nav.path"
 							v-for="nav in mainNavs"
-                            :class="nav.name == active? 'text-primary': 'text-dark'"
+							:class="
+								nav.path == active
+									? 'text-primary'
+									: 'text-dark'
+							"
 							class="menu-link position-relative"
 						>
 							<!-- <span class="menu-icon">
@@ -66,10 +71,10 @@
 							</span>
 							<!--begin::Line-->
 							<span
-                            v-if="nav.name == active"
+								v-if="nav.path == active"
 								class="d-inline-block position-absolute h-3px bottom-0 end-0 start-0 bg-danger translate rounded"
 							></span>
-							<!--end::Line--> 
+							<!--end::Line-->
 						</NuxtLink>
 					</div>
 					<!--end::Menu item-->

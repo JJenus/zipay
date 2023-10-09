@@ -163,8 +163,8 @@
 				</div>
 
 				<div class="mt-4">
-					<button class="btn btn-primary btn-icon fw-bold fs-2 w-100">
-						Send
+					<button type="button" class="btn btn-primary btn-icon fw-bold fs-2 w-100">
+						Next
 					</button>
 				</div>
 			</form>

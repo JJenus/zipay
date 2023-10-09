@@ -1,3 +1,13 @@
+<script setup>
+	const user = userData().data;
+	const image = user.value.imgUrl || "/assets/media/svg/avatars/blank.svg";
+
+	// onMounted(() => {
+	// 	user.value.imgUrl =
+	// 		user.value.imgUrl || "image";
+	// });
+</script>
+
 <template>
 	<!--begin::Menu wrapper-->
 	<div
@@ -6,7 +16,7 @@
 		data-kt-menu-attach="parent"
 		data-kt-menu-placement="bottom-end"
 	>
-		<img src="/assets/media/avatars/300-9.jpg" alt="user" />
+		<img :src="image" alt="user" />
 	</div>
 
 	<!--begin::User account menu-->
@@ -19,14 +29,15 @@
 			<div class="menu-content d-flex align-items-center px-3">
 				<!--begin::Avatar-->
 				<div class="symbol symbol-50px me-5">
-					<img alt="Logo" src="/assets/media/avatars/300-9.jpg" />
+					<img alt="Logo" :src="image" />
 				</div>
 				<!--end::Avatar-->
 
 				<!--begin::Username-->
 				<div class="d-flex flex-column">
 					<div class="fw-bold d-flex align-items-center fs-5">
-						Max Smith
+						<span v-if="user.name">{{ user.name }}</span>
+						<span v-else class="spinner-border spinner-border-sm"></span>
 
 						<i
 							class="fa-solid fa-circle text-success ms-2 fs-67"
@@ -35,7 +46,7 @@
 
 					<a
 						href="#"
-						class="fw-semibold text-muted text-hover-primary fs-7"
+						class="fw-semibold d-none text-muted text-hover-primary fs-7"
 					>
 						max@kt.com
 					</a>
@@ -169,10 +180,7 @@
 			<div class="menu-sub menu-sub-dropdown w-175px py-4">
 				<!--begin::Menu item-->
 				<div class="menu-item px-3">
-					<a
-						href="account/settings.html"
-						class="menu-link d-flex px-5 active"
-					>
+					<a role="button" class="menu-link d-flex px-5 active">
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
@@ -187,10 +195,7 @@
 
 				<!--begin::Menu item-->
 				<div class="menu-item px-3">
-					<a
-						href="account/settings.html"
-						class="menu-link d-flex px-5"
-					>
+					<a role="button" class="menu-link d-flex px-5">
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
@@ -205,10 +210,7 @@
 
 				<!--begin::Menu item-->
 				<div class="menu-item px-3">
-					<a
-						href="account/settings.html"
-						class="menu-link d-flex px-5"
-					>
+					<a role="button" class="menu-link d-flex px-5">
 						<span class="symbol symbol-20px me-4">
 							<img
 								class="rounded-1"
@@ -265,11 +267,7 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5">
-			<a
-				@click="useAuth().logout()"
-				role="button"
-				class="menu-link px-5"
-			>
+			<a @click="useAuth().logout()" role="button" class="menu-link px-5">
 				Sign Out
 			</a>
 		</div>

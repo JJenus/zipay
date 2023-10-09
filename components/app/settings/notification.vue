@@ -1,3 +1,8 @@
+<script setup>
+	const save = () => {
+		successAlert("Saved");
+	};
+</script>
 <template>
 	<div class="card mb-5 mb-xl-10">
 		<!--begin::Card header-->
@@ -18,7 +23,7 @@
 		<!--begin::Content-->
 		<div id="kt_account_settings_notifications" class="collapse show">
 			<!--begin::Form-->
-			<form class="form">
+			<form class="form" @submit.prevent="save()">
 				<!--begin::Card body-->
 				<div class="card-body border-top px-9 pt-3 pb-4">
 					<!--begin::Table-->
@@ -113,88 +118,6 @@
 											<label
 												class="form-check-label ps-2"
 												for="billing2"
-											></label>
-										</div>
-									</td>
-								</tr>
-								<!--begin::Table row-->
-
-								<!--begin::Table row-->
-								<tr>
-									<td>New Team Members</td>
-									<td>
-										<div
-											class="form-check form-check-custom form-check-solid"
-										>
-											<input
-												class="form-check-input"
-												type="checkbox"
-												value=""
-												id="team1"
-												checked
-												data-kt-settings-notification="email"
-											/>
-											<label
-												class="form-check-label ps-2"
-												for="team1"
-											></label>
-										</div>
-									</td>
-									<td>
-										<div
-											class="form-check form-check-custom form-check-solid"
-										>
-											<input
-												class="form-check-input"
-												type="checkbox"
-												value=""
-												id="team2"
-												data-kt-settings-notification="phone"
-											/>
-											<label
-												class="form-check-label ps-2"
-												for="team2"
-											></label>
-										</div>
-									</td>
-								</tr>
-								<!--begin::Table row-->
-
-								<!--begin::Table row-->
-								<tr>
-									<td>Completed Projects</td>
-									<td>
-										<div
-											class="form-check form-check-custom form-check-solid"
-										>
-											<input
-												class="form-check-input"
-												type="checkbox"
-												value=""
-												id="project1"
-												data-kt-settings-notification="email"
-											/>
-											<label
-												class="form-check-label ps-2"
-												for="project1"
-											></label>
-										</div>
-									</td>
-									<td>
-										<div
-											class="form-check form-check-custom form-check-solid"
-										>
-											<input
-												class="form-check-input"
-												type="checkbox"
-												value=""
-												id="project2"
-												checked
-												data-kt-settings-notification="phone"
-											/>
-											<label
-												class="form-check-label ps-2"
-												for="project2"
 											></label>
 										</div>
 									</td>

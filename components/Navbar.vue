@@ -5,7 +5,9 @@
 			required: true,
 		},
 	});
-	const active = ref("About Us");
+	const route = useRoute();
+	console.log("Route Name: ", route.path)
+	const active = ref(route.path);
 </script>
 
 <template>
@@ -18,8 +20,8 @@
 		>
 			<!--begin::Menu wrapper-->
 			<button
-				@click="active = nav.name"
-				:class="nav.name == active? 'active': ''"
+				@click="active = nav.path"
+				:class="nav.path == active? 'active': ''"
 				role="button"
 				class="btn btn-custom py-1 btn-active-primary btn-active-color-primaryi"
 			>

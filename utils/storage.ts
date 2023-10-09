@@ -18,7 +18,11 @@ export const storage = () => {
 	};
 
 	const remove = () => {
-		localStorage.removeItem(authKey);
+		try {
+			localStorage.removeItem(authKey);
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	return {
@@ -74,29 +78,38 @@ async function encryptAndStore(
 	data: string,
 	passphrase: string
 ): Promise<void> {
-	const salt = generateSalt();
-	const encryptionKey = await deriveKey(passphrase, salt);
-	const iv = crypto.getRandomValues(new Uint8Array(12));
-	const encodedData = new TextEncoder().encode(data);
+	try {
+		const salt = generateSalt();
+		const encryptionKey = await deriveKey(passphrase, salt);
+		const iv = crypto.getRandomValues(new Uint8Array(12));
+		const encodedData = new TextEncoder().encode(data);
 
-	const encryptedData = await crypto.subtle.encrypt(
-		{ name: "AES-GCM", iv: iv },
-		encryptionKey,
-		encodedData
-	);
+		const encryptedData = await crypto.subtle.encrypt(
+			{ name: "AES-GCM", iv: iv },
+			encryptionKey,
+			encodedData
+		);
 
-	const encryptedObject = {
-		alts: Array.from(salt),
-		_s4: Array.from(iv),
-		data: Array.from(new Uint8Array(encryptedData)),
-	};
+		const encryptedObject = {
+			alts: Array.from(salt),
+			_s4: Array.from(iv),
+			data: Array.from(new Uint8Array(encryptedData)),
+		};
 
-	localStorage.setItem(key, JSON.stringify(encryptedObject));
+		localStorage.setItem(key, JSON.stringify(encryptedObject));
+	} catch (error) {
+		// console.log(error);
+	}
 }
 
 // Function to retrieve and decrypt data
 async function retrieveAndDecrypt(key: string, passphrase: string) {
-	const encryptedData = localStorage.getItem(key);
+	let encryptedData;
+	try {
+		encryptedData = localStorage.getItem(key);
+	} catch (error) {
+		// console.log(error);
+	}
 
 	if (!encryptedData) {
 		return null;

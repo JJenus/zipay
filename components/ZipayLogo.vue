@@ -30,7 +30,7 @@
 			class="me-4"
 		/>
 		<div class="mt-5 ms-n1 h1 ms-3">
-			<span class="zipay-logo theme-light-show" :class="appClass">{{
+			<span class="zipay-logo logo-color theme-light-show" :class="appClass">{{
 				config.APP
 			}}</span>
 			<span :class="appClassDark" class="text-warning zipay-logo theme-dark-show">{{

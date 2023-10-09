@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 	const appLayout = "applayout";
 </script>
 
@@ -12,14 +12,13 @@
 
 <style>
 	@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Truculenta:opsz,wght@12..72,800&display=swap");
-	
+
 	/* 
 	font-family: 'Lobster', cursive;
 font-family: 'Truculenta', sans-serif;
 	 */
-	.zipay-logo {
-		/* font-family: 'Lobster', cursive; */
-		/* color: rgb(75, 91, 166); #2178f3; */
+	.logo-color {
+		columns: #43b1c8;
 	}
 	.zipay-logo-dark {
 		color: rgb(255, 93, 83);

@@ -5,10 +5,10 @@
 	const appConfig = useRuntimeConfig();
 
 	const balance = ref({
-		id: "3bb5339b-c548-467e-91ea-a205d0c0a61b",
+		id: null,
 		userId: "49d5ce8e-5273-44b9-b449-7a3ce278efb5",
 		currencyId: "USD",
-		amount: 0,
+		amount: null,
 		status: "active",
 		createdAt: "2023-10-04T15:56:16.000Z",
 		updatedAt: "2023-10-04T15:56:16.000Z",
@@ -35,12 +35,15 @@
 			})
 			.catch((error) => {
 				console.log(error);
-				useAuth().logout();
 			});
 	};
 
 	const getBalance = () => {
-		const amount = currency(balance.value.amount, {
+		let cAmount = 0;
+		if (!balance.value.amount) {
+			cAmount = 0;
+		}
+		const amount = currency(cAmount, {
 			symbol: "",
 		}).format();
 		return amount;
@@ -71,9 +74,16 @@
 			<!--end::Currency-->
 
 			<!--begin::Amount-->
-			<span class="page-title fs-2tx fw-bold me-2 lh-1 ls-n2">{{
-				getBalance()
-			}}</span>
+			<span
+				v-if="balance.amount !== null"
+				class="page-title fs-2tx fw-bold me-2 lh-1 ls-n2"
+				>{{ getBalance() }}</span
+			>
+			<span
+				v-else
+				class="spinner-border spinner-border-sm text-muted"
+			></span>
+
 			<!--end::Amount-->
 		</div>
 		<!--end::Info-->

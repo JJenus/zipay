@@ -29,9 +29,9 @@
 		console.log("click");
 	}
 
-	// onMounted(()=>{
-	//     KTThemeMode.setMode("light");
-	// })
+	onMounted(()=>{
+	    KTThemeMode.setMode("light");
+	})
 </script>
 
 <template>
@@ -96,7 +96,7 @@
 									class="theme-dark-show h-25px"
 								/>
 							</a>
-							<span class="fs-3 mt-1 text-primary ms-3 fw-bold">
+							<span class="fs-3 mt-1 logo-color ms-3 fw-bold">
 								{{ config.APP }}
 							</span>
 						</div>
