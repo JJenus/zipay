@@ -31,10 +31,10 @@
 			.then((response) => {
 				const data = response.data;
 				balance.value = data;
-				console.log(data);
+				// console.log(data);
 			})
 			.catch((error) => {
-				console.log(error);
+				// console.log(error);
 			});
 	};
 
@@ -104,7 +104,7 @@
 				data-bs-toggle="modal"
 				data-bs-target="#kt_modal_upgrade_plan"
 			>
-				Topup Balance
+				Top Up Balance
 			</a>
 
 			<!--begin::Action-->

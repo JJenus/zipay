@@ -13,7 +13,7 @@
 		>
 			<!--begin::Logo-->
 			<div class="d-flex align-items-center me-auto position-relative">
-				<ZipayLogo app-class="text-primary" :classes="'h-35px'" />
+				<ZipayLogo app-class="logo-color" :classes="'h-35px'" />
 			</div>
 			<!--end::Logo-->
 

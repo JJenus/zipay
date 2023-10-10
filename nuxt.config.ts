@@ -69,9 +69,6 @@ export default defineNuxtConfig({
 				{
 					src: "/assets/plugins/custom/fslightbox/fslightbox.bundle.js",
 				},
-				{
-					src: "/assets/plugins/custom/datatables/datatables.bundle.js",
-				},
 			],
 
 			link: [
@@ -120,10 +117,6 @@ export default defineNuxtConfig({
 			style: [
 				// <style type="text/css">:root { color: red }</style>
 				// { children: ":root { color: red }" },
-			],
-			noscript: [
-				// <noscript>JavaScript is required</noscript>
-				{ children: "JavaScript is required" },
 			],
 		},
 	},

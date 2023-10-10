@@ -23,15 +23,16 @@
 			path: "/contact-us",
 		},
 	];
-
+	const loaded = useCookie("reload", { maxAge: 60 * 60 * 24 });
+	loaded.value = false;
 	function myClick() {
 		// d-none d-lg-flex
 		console.log("click");
 	}
 
-	onMounted(()=>{
-	    KTThemeMode.setMode("light");
-	})
+	onMounted(() => {
+		KTThemeMode.setMode("light");
+	});
 </script>
 
 <template>

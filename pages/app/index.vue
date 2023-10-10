@@ -1,3 +1,33 @@
+<script setup lang="ts">
+	import moment from "moment";
+	const user = userData().data;
+	let userName = user.value.name.split(" ")[0];
+	userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+
+	const greet = computed(() => {
+		const now = moment();
+		const hour = now.hour();
+
+		let timeOfDay;
+
+		if (!user.value.emailVerified) {
+			return "Welcome " + userName;
+		}
+
+		if (hour >= 5 && hour < 12) {
+			timeOfDay = "Good morning " + userName;
+		} else if (hour >= 12 && hour < 17) {
+			timeOfDay = "Good afternoon " + userName;
+		} else if (hour >= 17 && hour < 20) {
+			timeOfDay = "Good evening " + userName;
+		} else {
+			timeOfDay = `Hi ${userName}, working late`;
+		}
+
+		return timeOfDay + "!";
+	});
+</script>
+
 <template>
 	<!--begin::Engage widget 12-->
 	<div
@@ -13,7 +43,7 @@
 				<div
 					class="position-relative text-gray-800 fs-1 z-index-2 fw-bold mb-5"
 				>
-					Welcome Turner
+					{{ greet }}
 				</div>
 				<!--end::Title-->
 

@@ -8,7 +8,6 @@ export const useAuth = () => {
 		userData.value = user;
 		authenticated.value = true;
 		// await storage().remember(user);
-
 		navigateTo("/app");
 	};
 

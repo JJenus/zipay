@@ -18,7 +18,7 @@
 font-family: 'Truculenta', sans-serif;
 	 */
 	.logo-color {
-		columns: #43b1c8;
+		columns: #226B8D;
 	}
 	.zipay-logo-dark {
 		color: rgb(255, 93, 83);

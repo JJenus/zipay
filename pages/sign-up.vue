@@ -114,7 +114,7 @@
 				<ZipayLogo
 					class="mb-0 mb-lg-10 d-block"
 					:classes="'h-40px h-lg-80px'"
-					:app-class="'text-primary'"
+					:app-class="'logo-color'"
 				/>
 				<!--end::Logo-->
 

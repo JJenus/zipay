@@ -11,7 +11,7 @@
 	});
 
 	useSeoMeta({
-		title: `"Sign in" - ${useRuntimeConfig().public.APP}`,
+		title: `Sign in - ${useRuntimeConfig().public.APP}`,
 	});
 	
 	useHead({
@@ -19,12 +19,9 @@
 			{ src: "/assets/js/custom/authentication/sign-in/general.js" },
 		],
 	});
-	
 
 	const appConfig = useRuntimeConfig();
 	const auth = useAuth();
-
-	
 
 	const submitButton = ref();
 	const isInvalidCredentials = ref();
@@ -104,7 +101,7 @@
 					<!--begin::Logo-->
 					<ZipayLogo
 						:classes="'h-40px h-lg-80px'"
-						:app-class="'text-primary d-block'"
+						:app-class="'logo-color d-block'"
 					/>
 					<!--end::Logo-->
 

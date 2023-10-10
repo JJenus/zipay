@@ -22,20 +22,27 @@
 </script>
 
 <template>
-	<NuxtLink to="/" class="d-flex align-items-center position-relative">
+	<NuxtLink
+		to="/"
+		class="d-flex align-items-center justify-content-center position-relative"
+	>
 		<img
 			alt="Logo"
 			src="/assets/media/logos/zipay-logo.png"
 			:class="classes"
 			class="me-4"
 		/>
-		<div class="mt-5 ms-n1 h1 ms-3">
-			<span class="zipay-logo logo-color theme-light-show" :class="appClass">{{
-				config.APP
-			}}</span>
-			<span :class="appClassDark" class="text-warning zipay-logo theme-dark-show">{{
-				config.APP
-			}}</span>
+		<div class="mt-3 h1">
+			<span
+				class="zipay-logo logo-color theme-light-show"
+				:class="appClass"
+				>{{ config.APP }}</span
+			>
+			<span
+				:class="appClassDark"
+				class="text-warning zipay-logo theme-dark-show"
+				>{{ config.APP }}</span
+			>
 		</div>
 	</NuxtLink>
 </template>

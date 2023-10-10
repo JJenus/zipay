@@ -6,16 +6,22 @@
 		layout: "app",
 		middleware: ["auth"],
 	});
-	
+
+	const loaded = useCookie<boolean>("reload", { maxAge: 60 * 60 * 24 });
+
+	if (process.client) {
+		if (!loaded.value) {
+			window.location.reload();
+			loaded.value = true;
+		}
+	}
 	const appConfig = useRuntimeConfig();
 	const userId = useAuth().userData.value?.userId;
 	const data = userData().data;
 
-	
-
 	const config = useRuntimeConfig().public;
 	const currentPage = "App";
-	
+
 	useSeoMeta({
 		title: `${currentPage} - ${config.APP}`,
 	});
