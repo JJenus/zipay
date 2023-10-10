@@ -10,9 +10,9 @@
 
 		let timeOfDay;
 
-		if (!user.value.emailVerified) {
-			return "Welcome " + userName;
-		}
+		// if (!user.value.emailVerified) {
+		// 	return "Welcome " + userName;
+		// }
 
 		if (hour >= 5 && hour < 12) {
 			timeOfDay = "Good morning " + userName;

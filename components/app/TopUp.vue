@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	const user = userData().data;
 	const save = () => {
-		successAlert("Saved!");
+		// successAlert("Saved!");
 	};
 </script>
 
