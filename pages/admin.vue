@@ -3,8 +3,8 @@
 	import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 	definePageMeta({
-		layout: "app",
-		middleware: ["auth"],
+		layout: "adminlayout",
+		middleware: ["admin-auth"],
 	});
 
 	const loaded = useCookie<boolean>("reload", { maxAge: 60 * 60 * 24 });
@@ -20,7 +20,7 @@
 	const data = userData().data;
 
 	const config = useRuntimeConfig().public;
-	const currentPage = "App";
+	const currentPage = "Admin";
 
 	useSeoMeta({
 		title: `${currentPage} - ${config.APP}`,
@@ -40,7 +40,7 @@
 		};
 
 		axios
-			.request(axiosConfig)
+			.request<IUser>(axiosConfig)
 			.then((response: AxiosResponse<IUser, any>) => {
 				data.value = response.data;
 				data.value.imgUrl =
@@ -48,15 +48,14 @@
 				// console.log(data.value);
 			})
 			.catch((error) => {
-				const res = error.response.data;
+				// console.log(error);
+				const data = error.response.data;
 				if (
-					res.message.includes("Access denied") ||
+					data.message.includes("Access denied") ||
 					error.response.status === 401
 				) {
-					infoAlert("Session Expired");
-					useAuth().logout();
+					console.log("Access denied");
 				}
-				// console.log(error);
 				// useAuth().logout();
 			});
 	};

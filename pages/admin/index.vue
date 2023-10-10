@@ -1,11 +1,10 @@
 <script setup lang="ts">
 	import moment from "moment";
 	const user = userData().data;
+	let userName = user.value.name.split(" ")[0];
+	userName = userName.charAt(0).toUpperCase() + userName.slice(1);
 
 	const greet = computed(() => {
-		let userName = user.value.name.split(" ")[0];
-		userName = userName.charAt(0).toUpperCase() + userName.slice(1);
-		
 		const now = moment();
 		const hour = now.hour();
 

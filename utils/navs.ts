@@ -41,6 +41,34 @@ export const navs = ref([
 	},
 ]);
 
+export const adminNavs = ref([
+	{
+		name: "Dashboard",
+		dir: "/admin",
+		icon: "ki-duotone ki-element-equal",
+		paths: ["path1", "path2", "path3", "path4", ],
+	},
+	{
+		name: "Users",
+		dir: "/admin/users",
+		icon: "ki-duotone ki-profile-user",
+		paths: ["path1", "path2", "path3", "path4"],
+	},
+	
+	// {
+	// 	name: "Transfer",
+	// 	dir: "/admin/transfer",
+	// 	icon: "ki-solid ki-send",
+	// 	paths: [],
+	// },
+	{
+		name: "Settings",
+		dir: "/admin/settings",
+		icon: "ki-outline ki-gear", //app/ki-outline
+		paths: [],
+	},
+]);
+
 export const closeDrawer = () => {
 	// console.log("Clicked");
 	const body = document.querySelector(".drawer-overlay") as HTMLElement;
