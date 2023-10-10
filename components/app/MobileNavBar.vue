@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	const route = useRoute();
-	const path = "/" + route.path.split("/")[1];
+	const path = route.path;
+	console.log(path)
 	const active = ref(path);
 </script>
 <template>

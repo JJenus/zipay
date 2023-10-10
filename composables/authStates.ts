@@ -4,10 +4,10 @@ export const useAuth = () => {
 	const userData = useState<AuthToken | null>("user", () => null);
 	const authenticated = useState<boolean>("isAuthenticated", () => false);
 
-	const login = async (user: AuthToken) => {
+	const login = (user: AuthToken) => {
 		userData.value = user;
 		authenticated.value = true;
-		await storage().remember(user);
+		// await storage().remember(user);
 
 		navigateTo("/app");
 	};
@@ -15,23 +15,25 @@ export const useAuth = () => {
 	const logout = () => {
 		userData.value = null;
 		authenticated.value = false;
-		storage().remove();
+		// storage().remove();
+		useCookie("auth").value = null;
 		navigateTo("/sign-in");
 	};
 
-	const isAuthenticated = async () => {
+	const isAuthenticated = () => {
 		if (authenticated.value) {
 			return true;
 		}
 
-		const auth = await storage().getAuth();
-		if (auth == false) {
+		const auth = useCookie<AuthToken>("auth");
+		// console.log(auth);
+		if (auth.value == null || auth.value == undefined) {
+			// console.log("Empty")
 			return false;
 		}
 
 		authenticated.value = true;
-		userData.value = auth;
-
+		userData.value = auth.value;
 		return true;
 	};
 

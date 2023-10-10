@@ -31,6 +31,34 @@ var KTSignupGeneral = (function () {
 						},
 					},
 				},
+				address: {
+					validators: {
+						notEmpty: {
+							message: "Address is required",
+						},
+					},
+				},
+				phone: {
+					validators: {
+						notEmpty: {
+							message: "Phone is required",
+						},
+					},
+				},
+				city: {
+					validators: {
+						notEmpty: {
+							message: "City is required",
+						},
+					},
+				},
+				country: {
+					validators: {
+						notEmpty: {
+							message: "Country is required",
+						},
+					},
+				},
 				password: {
 					validators: {
 						notEmpty: {

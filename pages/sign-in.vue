@@ -5,24 +5,26 @@
 		AxiosResponse,
 	} from "axios";
 	import { AuthToken } from "utils/interfaces/AuthToken";
-
-	const config = useRuntimeConfig().public;
-	const currentPage = "Sign in";
-	useSeoMeta({
-		title: `${currentPage} - ${config.APP}`,
+	
+	definePageMeta({
+		layout: "auth",
 	});
 
-	const appConfig = useRuntimeConfig();
-	const auth = useAuth();
-
+	useSeoMeta({
+		title: `"Sign in" - ${useRuntimeConfig().public.APP}`,
+	});
+	
 	useHead({
 		script: [
 			{ src: "/assets/js/custom/authentication/sign-in/general.js" },
 		],
 	});
-	definePageMeta({
-		layout: "auth",
-	});
+	
+
+	const appConfig = useRuntimeConfig();
+	const auth = useAuth();
+
+	
 
 	const submitButton = ref();
 	const isInvalidCredentials = ref();
@@ -56,8 +58,12 @@
 			.request(axiosConfig.value)
 			.then((response: AxiosResponse<AuthToken, any>) => {
 				console.log("status: ", response.data);
-				successAlert("Signing in...");
-				auth.login(response.data);
+				// successAlert("Signing in...");
+				const userAuth = useCookie<AuthToken>("auth", {
+					maxAge: 60 * 60 * 24,
+				});
+				userAuth.value = response.data;
+				auth.login(userAuth.value);
 			})
 			.catch((err: AxiosError<any, any>) => {
 				const errRes = err.response;
@@ -76,6 +82,12 @@
 				submitButton.value.removeAttribute("data-kt-indicator");
 			});
 	};
+
+	onMounted(() => {
+		if (auth.isAuthenticated()) {
+			navigateTo("/app");
+		}
+	});
 </script>
 <template>
 	<!--begin::Root-->

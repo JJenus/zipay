@@ -49,7 +49,7 @@
 		return amount;
 	};
 
-	onMounted(() => {
+	onBeforeMount(() => {
 		fetchBalance();
 	});
 </script>

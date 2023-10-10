@@ -2,19 +2,20 @@
 	import { IUser } from "utils/interfaces/IUser";
 	import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-	if (!useAuth().userData.value?.userId) {
-		navigateTo("/sign-in");
-	}
-	const appConfig = useRuntimeConfig();
-	const userId = useAuth().userData.value?.userId;
-	const data = userData().data;
-
 	definePageMeta({
 		layout: "app",
 		middleware: ["auth"],
 	});
+	
+	const appConfig = useRuntimeConfig();
+	const userId = useAuth().userData.value?.userId;
+	const data = userData().data;
+
+	
+
 	const config = useRuntimeConfig().public;
 	const currentPage = "App";
+	
 	useSeoMeta({
 		title: `${currentPage} - ${config.APP}`,
 	});
@@ -38,16 +39,18 @@
 				data.value = response.data;
 				data.value.imgUrl =
 					data.value.imgUrl || "/assets/media/svg/avatars/blank.svg";
-				console.log(data.value);
+				// console.log(data.value);
 			})
 			.catch((error) => {
-				console.log(error);
+				// console.log(error);
 				// useAuth().logout();
 			});
 	};
 
-	onMounted(() => {
-		getUserData();
+	getUserData();
+
+	onBeforeMount(() => {
+		// getUserData();
 	});
 </script>
 <template>

@@ -90,12 +90,12 @@
 
 					<!--begin::Action-->
 					<a
-						href="#"
-						class="btn btn-sm btn-primary"
+						role="button"
+						class="btn btn-sm btn-primary btn"
 						data-bs-toggle="modal"
 						data-bs-target="#kt_modal_upgrade_plan"
 					>
-						Devs Forum
+						Chat
 					</a>
 					<!--begin::Action-->
 				</div>

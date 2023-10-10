@@ -6,23 +6,22 @@
 	} from "axios";
 	import { AuthToken } from "utils/interfaces/AuthToken";
 
-	const config = useRuntimeConfig().public;
-	const currentPage = "Sign Up";
-	useSeoMeta({
-		title: `${currentPage} - ${config.APP}`,
+	definePageMeta({
+		layout: "auth",
 	});
-
-	const appConfig = useRuntimeConfig();
-	const auth = useAuth();
 
 	useHead({
 		script: [
 			{ src: "/assets/js/custom/authentication/sign-up/general.js" },
 		],
 	});
-	definePageMeta({
-		layout: "auth",
+
+	useSeoMeta({
+		title: `Sign Up - ${useRuntimeConfig().public.APP}`,
 	});
+
+	const appConfig = useRuntimeConfig();
+	const auth = useAuth();
 
 	const submitButton = ref();
 	const emailExists = ref();
@@ -69,15 +68,17 @@
 		// submitButton.setAttribute("data-kt-indicator", "on");
 		// submitButton.value.disabled = true;
 
-		
 		axiosConfig.value.data = data;
 
 		axios
 			.request(axiosConfig.value)
 			.then((response: AxiosResponse<AuthToken, any>) => {
 				console.log("status: ", response.data);
-				successAlert("Sign up successful");
-				auth.login(response.data);
+				const userAuth = useCookie<AuthToken>("auth", {
+					maxAge: 60 * 60 * 24,
+				});
+				userAuth.value = response.data;
+				auth.login(userAuth.value);
 			})
 			.catch((err: AxiosError<any, any>) => {
 				const errRes = err.response;
@@ -85,6 +86,7 @@
 				if (errRes?.status !== null && errRes?.status === 409) {
 					emailExists.value = errRes.data.message;
 					console.log(err.message);
+					errorAlert(emailExists.value);
 				} else errorAlert(null);
 				console.log(errRes);
 			})
@@ -128,7 +130,7 @@
 				<h1
 					class="d-none d-lg-block text-white fs-2qx fw-bold text-center mb-7"
 				>
-					Welcome To {{ config.APP }}!
+					Welcome To {{ $config.public.APP }}!
 				</h1>
 				<!--end::Title-->
 

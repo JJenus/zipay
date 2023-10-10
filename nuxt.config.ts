@@ -1,7 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	modules: [],
-	ssr: true,
 	devtools: { enabled: true },
 	routeRules: {
 		"/": { redirect: "/about-us" },
