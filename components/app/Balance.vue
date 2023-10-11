@@ -39,8 +39,8 @@
 	};
 
 	const getBalance = () => {
-		let cAmount = 0;
-		if (!balance.value.amount) {
+		let cAmount = balance.value.amount;
+		if (!cAmount) {
 			cAmount = 0;
 		}
 		const amount = currency(cAmount, {

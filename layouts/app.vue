@@ -60,7 +60,7 @@
 								<!--begin::Content container-->
 								<div
 									id="kt_app_content_container"
-									class="app-container container-fluid"
+									class="app-container container-fluid pb-20 pb-lg-10"
 								>
 									<slot />
 								</div>

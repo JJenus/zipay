@@ -18,6 +18,7 @@
 	const appConfig = useRuntimeConfig();
 	const userId = useAuth().userData.value?.userId;
 	const data = userData().data;
+	const users = userData().users;
 
 	const config = useRuntimeConfig().public;
 	const currentPage = "Admin";
@@ -25,7 +26,7 @@
 	useSeoMeta({
 		title: `${currentPage} - ${config.APP}`,
 	});
-
+		
 	const getUserData = () => {
 		if (!useAuth().userData) {
 			navigateTo("/sign-in");
@@ -60,10 +61,42 @@
 			});
 	};
 
-	getUserData();
+	const getUsers = () => {
+		if (!useAuth().userData) {
+			navigateTo("/sign-in");
+		}
+		const axiosConfig: AxiosRequestConfig = {
+			method: "get",
+			url: `${appConfig.public.BE_API}/users`,
+			timeout: 20000,
+			headers: {
+				Authorization: "Bearer " + useAuth().userData.value?.token,
+			},
+		};
+
+		axios
+			.request(axiosConfig)
+			.then((response: AxiosResponse<IUser[], any>) => {
+				users.value = response.data;
+				console.log(users.value);
+			})
+			.catch((error) => {
+				// console.log(error);
+				const data = error.response.data;
+				if (
+					data.message.includes("Access denied") ||
+					error.response.status === 401
+				) {
+					// console.log("Access denied");
+					infoAlert("Session expired")
+					useAuth().logout();
+				}
+			});
+	};
 
 	onBeforeMount(() => {
-		// getUserData();
+		getUserData();
+		getUsers();
 	});
 </script>
 <template>

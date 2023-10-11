@@ -1,4 +1,6 @@
-export type IUser = {
+import { Account } from "./Account";
+
+export interface IUser {
 	id: string;
 	name: string;
 	email: string;
@@ -10,4 +12,5 @@ export type IUser = {
 	dob: string;
 	verified: boolean;
 	emailVerified: boolean;
+	account: Account
 };

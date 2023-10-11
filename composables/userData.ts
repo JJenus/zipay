@@ -22,13 +22,24 @@ export const userData = () => {
 		dob: "",
 		verified: false,
 		emailVerified: false,
+		account: {
+			id: "",
+			userId: "",
+			currencyId: "",
+			amount: 0,
+			status: AccountStatus.ACTIVE,
+		},
 	};
 
 	const data = useState<IUser>("userData", () => initUser);
-	const account = useState<Account>("userAccount", () => initAcc);
+	const account = useState<Account>("userAccount");
+	const users = useState<IUser[]>("users", () => []);
+	const active = useState<IUser | null>("active-user");
 
 	return {
 		account,
 		data,
+		users,
+		active,
 	};
 };

@@ -2,7 +2,7 @@
 	import moment from "moment";
 	const user = userData().data;
 
-	const greet = computed(() => {
+	const greet = () => {
 		let userName = user.value.name.split(" ")[0];
 		userName = userName.charAt(0).toUpperCase() + userName.slice(1);
 		
@@ -26,7 +26,7 @@
 		}
 
 		return timeOfDay + "!";
-	});
+	};
 </script>
 
 <template>
@@ -44,7 +44,7 @@
 				<div
 					class="position-relative text-gray-800 fs-1 z-index-2 fw-bold mb-5"
 				>
-					{{ greet }}
+					{{ greet() }}
 				</div>
 				<!--end::Title-->
 
