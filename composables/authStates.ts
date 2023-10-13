@@ -1,9 +1,8 @@
 import { AuthToken } from "../utils/interfaces/AuthToken";
 
-const appUser = userData().data;
-
 export const useAuth = () => {
-	const userData = useState<AuthToken | null>("user", () => null);
+	const appUser = userData().data;
+	const authData = useState<AuthToken | null>("user", () => null);
 	const authenticated = useState<boolean>("isAuthenticated", () => false);
 
 	const login = (auth: AuthToken) => {
@@ -12,7 +11,7 @@ export const useAuth = () => {
 		});
 		appUser.value = auth.user;
 		userAuth.value = auth;
-		userData.value = auth;
+		authData.value = auth;
 		authenticated.value = true;
 		// await storage().remember(user);
 		if (auth.user.userType === "admin") {
@@ -21,7 +20,7 @@ export const useAuth = () => {
 	};
 
 	const logout = () => {
-		userData.value = null;
+		authData.value = null;
 		authenticated.value = false;
 		// storage().remove();
 		useCookie("auth").value = null;
@@ -41,13 +40,13 @@ export const useAuth = () => {
 		}
 
 		authenticated.value = true;
-		userData.value = auth.value;
+		authData.value = auth.value;
 		return true;
 	};
 
 	return {
 		isAuthenticated,
-		userData,
+		userData: authData,
 		logout,
 		login,
 	};
