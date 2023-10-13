@@ -1,18 +1,21 @@
 import { AuthToken } from "../utils/interfaces/AuthToken";
 
+const appUser = userData().data;
+
 export const useAuth = () => {
 	const userData = useState<AuthToken | null>("user", () => null);
 	const authenticated = useState<boolean>("isAuthenticated", () => false);
 
-	const login = (user: AuthToken) => {
+	const login = (auth: AuthToken) => {
 		const userAuth = useCookie<AuthToken>("auth", {
 			maxAge: 60 * 60 * 24,
 		});
-		userAuth.value = user;
-		userData.value = user;
+		appUser.value = auth.user;
+		userAuth.value = auth;
+		userData.value = auth;
 		authenticated.value = true;
 		// await storage().remember(user);
-		if (user.user.userType === "admin") {
+		if (auth.user.userType === "admin") {
 			navigateTo("/admin");
 		} else navigateTo("/app");
 	};
