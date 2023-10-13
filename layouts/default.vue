@@ -25,14 +25,11 @@
 	];
 	const loaded = useCookie("reload", { maxAge: 60 * 60 * 24 });
 	loaded.value = false;
-	function myClick() {
-		// d-none d-lg-flex
-		console.log("click");
-	}
 
-	onMounted(() => {
+	if (process.client) {
 		KTThemeMode.setMode("light");
-	});
+	}
+	onMounted(() => {});
 </script>
 
 <template>

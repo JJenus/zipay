@@ -1,8 +1,12 @@
-<script setup lang="ts">
+<script setup>
 	definePageMeta({
 		layout: "app",
 		middleware: ["auth"],
 	});
+
+	if (process.client) {
+		$crisp.push(["do", "chat:hide"]);
+	}
 </script>
 
 <template>

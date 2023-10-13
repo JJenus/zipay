@@ -1,10 +1,25 @@
-<script setup lang="ts">
+<script setup>
 	import axios from "axios";
 
 	const appConfig = useRuntimeConfig();
 
-	const transactions = ref<any[]>([]);
+	const transactions = ref([]);
 	const userId = useAuth().userData.value?.userId;
+
+	if (process.client) {
+		$crisp.push([
+			"on",
+			"chat:closed",
+			(event) => {
+				// infoAlert("Chat closed");
+				$crisp.push(["do", "chat:hide"]);
+			},
+		]);
+	}
+	const startChat = () => {
+		$crisp.push(["do", "chat:show"]);
+		$crisp.push(["do", "chat:open"]);
+	};
 
 	const fetchTransactions = () => {
 		const axiosConfig = {
@@ -62,17 +77,17 @@
 			id="kt_app_aside_navbar"
 		>
 			<!--begin::Settings-->
-			<div @click="closeDrawer" class="app-navbar-item ms-n3">
+			<div class="app-navbar-item ms-n3">
 				<!--begin::Menu- wrapper-->
-				<NuxtLink
-					to="/app/settings"
-					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
+				<button
+					@click="startChat()"
+					class="btn d-lg-none btn-outline btn-sm ms-2 btn-custom btn-icon-muted btn-active-light btn-active-color-primary "
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"
 					data-kt-menu-placement="bottom-end"
 				>
-					<i class="ki-outline ki-gear fs-2x"></i>
-				</NuxtLink>
+					<i class="ki-solid ki-messages fs-3x"></i> Support
+				</button>
 
 				<!--end::Menu wrapper-->
 			</div>

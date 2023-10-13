@@ -1,4 +1,19 @@
-<script setup lang="ts"></script>
+<script setup>
+	if (process.client) {
+		$crisp.push([
+			"on",
+			"chat:closed",
+			(event) => {
+				// infoAlert("Chat closed");
+				$crisp.push(["do", "chat:hide"]);
+			},
+		]);
+	}
+	const startChat = () => {
+		$crisp.push(["do", "chat:show"]);
+		$crisp.push(["do", "chat:open"]);
+	};
+</script>
 
 <template>
 	<div
@@ -19,7 +34,11 @@
 		>
 			<!--begin::Logo image-->
 			<div class="d-flex align-items-center me-auto position-relative">
-				<ZipayLogo app-class-dark="d-none" app-class="d-none" :classes="'h-60px'" />
+				<ZipayLogo
+					app-class-dark="d-none"
+					app-class="d-none"
+					:classes="'h-60px'"
+				/>
 			</div>
 			<!--end::Logo image-->
 		</div>
@@ -92,8 +111,7 @@
 					<a
 						role="button"
 						class="btn btn-sm btn-primary btn"
-						data-bs-toggle="modal"
-						data-bs-target="#kt_modal_upgrade_plan"
+						@click="startChat()"
 					>
 						Chat
 					</a>

@@ -1,5 +1,23 @@
 <script setup >
-	const appLayout = "applayout";
+	if (process.client) {
+		window.$crisp = [];
+		window.CRISP_WEBSITE_ID = "ab46de5e-8557-4883-b0c9-00eb75f2f17e";
+		(function () {
+			const d = document;
+			const s = d.createElement("script");
+			s.src = "https://client.crisp.chat/l.js";
+			s.async = 1;
+			d.getElementsByTagName("head")[0].appendChild(s);
+		})();
+
+		const auth = useAuth();
+
+		if (auth.isAuthenticated()) {
+			const user = auth.userData.value.user;
+			$crisp.push(["set", "user:nickname", [user.name]]);
+			$crisp.push(["set", "user:email", [user.email]]);
+		}
+	}
 </script>
 
 <template>
