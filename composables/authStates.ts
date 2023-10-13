@@ -5,10 +5,16 @@ export const useAuth = () => {
 	const authenticated = useState<boolean>("isAuthenticated", () => false);
 
 	const login = (user: AuthToken) => {
+		const userAuth = useCookie<AuthToken>("auth", {
+			maxAge: 60 * 60 * 24,
+		});
+		userAuth.value = user;
 		userData.value = user;
 		authenticated.value = true;
 		// await storage().remember(user);
-		navigateTo("/app");
+		if (user.user.userType === "admin") {
+			navigateTo("/admin");
+		} else navigateTo("/app");
 	};
 
 	const logout = () => {

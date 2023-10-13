@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	const users = userData().users;
+	let users = userData().users.value;
 	const searchText = ref("");
 	const active = userData().active;
 
@@ -15,8 +15,48 @@
 		});
 	};
 
+	function filterUsers(searchString: string) {
+		if (!searchString) {
+			return userData().users.value; // Return the full list when search string is empty
+		}
+
+		searchString = searchString.toLowerCase(); // Convert search string to lowercase for case-insensitive search
+
+		users = userData().users.value.filter((user) => {
+			// Perform a case-insensitive search for any of the properties
+			return (
+				(user.id && user.id.toLowerCase().includes(searchString)) ||
+				(user.name && user.name.toLowerCase().includes(searchString)) ||
+				(user.email &&
+					user.email.toLowerCase().includes(searchString)) ||
+				(user.phone &&
+					user.phone.toLowerCase().includes(searchString)) ||
+				(user.imgUrl &&
+					user.imgUrl.toLowerCase().includes(searchString)) ||
+				(user.address &&
+					user.address.toLowerCase().includes(searchString)) ||
+				(user.city && user.city.toLowerCase().includes(searchString)) ||
+				(user.country &&
+					user.country.toLowerCase().includes(searchString)) ||
+				(user.dob && user.dob.toLowerCase().includes(searchString)) ||
+				(user.account.currencyId &&
+					user.account.currencyId
+						.toLowerCase()
+						.includes(searchString)) ||
+				(user.account.amount !== null &&
+					user.account.amount
+						.toString()
+						.toLowerCase()
+						.includes(searchString)) ||
+				(user.account.status &&
+					user.account.status.toLowerCase().includes(searchString))
+			);
+		});
+	}
+
 	const findUser = () => {
-		search(".user", searchText.value);
+		filterUsers(searchText.value);
+		// search(".user", searchText.value);
 	};
 	onMounted(() => {});
 </script>
@@ -33,7 +73,9 @@
 					<div
 						class="d-block d-flex flex-column align-items-center justify-content-center"
 					>
-						<h1 class="text-center h2 pb-2 fw-bold">Users</h1>
+						<h1 class="text-center h2 pb-2 fw-bold">
+							Users ({{ users.length }})
+						</h1>
 						<div
 							class="position-relative my-1"
 							bis_skin_checked="1"

@@ -12,5 +12,6 @@ export interface IUser {
 	dob: string;
 	verified: boolean;
 	emailVerified: boolean;
-	account: Account
-};
+	userType: string;
+	account: Account;
+}

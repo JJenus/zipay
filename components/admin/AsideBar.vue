@@ -65,7 +65,7 @@
 			<div @click="closeDrawer" class="app-navbar-item ms-n3">
 				<!--begin::Menu- wrapper-->
 				<NuxtLink
-					to="/app/settings"
+					to="/admin/settings"
 					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"
@@ -99,7 +99,7 @@
 			<div class="app-navbar-item ms-1 ms-lg-3" @click="closeDrawer">
 				<!--begin::Menu wrapper-->
 				<NuxtLink
-					to="/app/profile/edit"
+					to="/admin/profile/edit"
 					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"

@@ -29,6 +29,7 @@ export const userData = () => {
 			amount: 0,
 			status: AccountStatus.ACTIVE,
 		},
+		userType: ""
 	};
 
 	const data = useState<IUser>("userData", () => initUser);

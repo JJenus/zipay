@@ -98,7 +98,7 @@
 		<!--begin::Action-->
 		<div class="mb-2 d-flex">
 			<a
-				href="#"
+				role="button"
 				class="btn btn-sm btn-danger fw-semibold me-2"
 				style="background-color: #ff5d53"
 				data-bs-toggle="modal"
@@ -106,14 +106,6 @@
 			>
 				Top Up Balance
 			</a>
-
-			<!--begin::Action-->
-			<NuxtLink
-				to="/app/transfer"
-				class="btn btn-sm btn-primary fw-semibold me-2"
-			>
-				Transfer
-			</NuxtLink>
 		</div>
 
 		<!-- data-bs-toggle="modal"

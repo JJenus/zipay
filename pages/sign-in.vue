@@ -5,7 +5,7 @@
 		AxiosResponse,
 	} from "axios";
 	import { AuthToken } from "utils/interfaces/AuthToken";
-	
+
 	definePageMeta({
 		layout: "auth",
 	});
@@ -13,7 +13,7 @@
 	useSeoMeta({
 		title: `Sign in - ${useRuntimeConfig().public.APP}`,
 	});
-	
+
 	useHead({
 		script: [
 			{ src: "/assets/js/custom/authentication/sign-in/general.js" },
@@ -22,6 +22,9 @@
 
 	const appConfig = useRuntimeConfig();
 	const auth = useAuth();
+	if (auth.isAuthenticated()) {
+		auth.login(auth.userData.value!)
+	}
 
 	const submitButton = ref();
 	const isInvalidCredentials = ref();
@@ -56,11 +59,8 @@
 			.then((response: AxiosResponse<AuthToken, any>) => {
 				console.log("status: ", response.data);
 				// successAlert("Signing in...");
-				const userAuth = useCookie<AuthToken>("auth", {
-					maxAge: 60 * 60 * 24,
-				});
-				userAuth.value = response.data;
-				auth.login(userAuth.value);
+
+				auth.login(response.data);
 			})
 			.catch((err: AxiosError<any, any>) => {
 				const errRes = err.response;
