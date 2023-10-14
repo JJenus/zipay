@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import { IUser } from "utils/interfaces/IUser";
 	import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+	import { AuthToken } from "utils/interfaces/AuthToken";
 
 	definePageMeta({
 		layout: "adminlayout",
@@ -26,7 +27,7 @@
 	useSeoMeta({
 		title: `${currentPage} - ${config.APP}`,
 	});
-		
+
 	const getUserData = () => {
 		if (!useAuth().userData) {
 			navigateTo("/sign-in");
@@ -62,7 +63,7 @@
 	};
 
 	const getUsers = () => {
-		if (!useAuth().userData) {
+		if (!useAuth().userData.value?.user) {
 			navigateTo("/sign-in");
 		}
 		const axiosConfig: AxiosRequestConfig = {
@@ -88,13 +89,16 @@
 					error.response.status === 401
 				) {
 					// console.log("Access denied");
-					infoAlert("Session expired")
-					useAuth().logout();
 				}
 			});
 	};
 
 	onBeforeMount(() => {
+		const cookie = useCookie<AuthToken | null | undefined>("auth");
+		if (cookie.value == null || cookie.value == undefined) {
+			infoAlert("Session expired");
+			return useAuth().logout();
+		}
 		getUserData();
 		getUsers();
 	});

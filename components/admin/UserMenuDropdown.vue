@@ -62,7 +62,7 @@
 
 		<!--begin::Menu item-->
 		<div @click="closeDrawer()" class="menu-item px-5">
-			<NuxtLink to="/app/profile/" class="menu-link px-5">
+			<NuxtLink to="/admin/profile/" class="menu-link px-5">
 				My Profile
 			</NuxtLink>
 		</div>
@@ -259,7 +259,7 @@
 
 		<!--begin::Menu item-->
 		<div class="menu-item px-5 my-1">
-			<NuxLink to="/app/settings" class="menu-link px-5">
+			<NuxLink to="/admin/settings" class="menu-link px-5">
 				Account Settings
 			</NuxLink>
 		</div>

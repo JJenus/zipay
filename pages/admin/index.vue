@@ -48,7 +48,7 @@
 				</div>
 				<!--end::Title-->
 
-				<AppBalance class="d-lg-none mb-8" />
+				<AdminBalance class="d-lg-none mb-8" />
 
 				<!--begin::Action-->
 			</div>

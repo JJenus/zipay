@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import { IUser } from "utils/interfaces/IUser";
 	import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+	import { AuthToken } from "utils/interfaces/AuthToken";
 
 	definePageMeta({
 		layout: "app",
@@ -57,13 +58,17 @@
 					useAuth().logout();
 				}
 				// console.log(error);
-				// useAuth().logout();
 			});
 	};
 
 	getUserData();
 
 	onBeforeMount(() => {
+		const cookie = useCookie<AuthToken | null | undefined>("auth");
+		if (cookie.value == null || cookie.value == undefined) {
+			infoAlert("Session expired");
+			return useAuth().logout();
+		}
 		// getUserData();
 	});
 </script>

@@ -1,4 +1,4 @@
-<script setup >
+<script setup>
 	if (process.client) {
 		window.$crisp = [];
 		window.CRISP_WEBSITE_ID = "ab46de5e-8557-4883-b0c9-00eb75f2f17e";
@@ -12,11 +12,15 @@
 
 		const auth = useAuth();
 
-		if (auth.isAuthenticated()) {
-			const user = auth.userData.value.user;
-			$crisp.push(["set", "user:nickname", [user.name]]);
-			$crisp.push(["set", "user:email", [user.email]]);
-		}
+		const interval = setInterval(() => {
+			if (auth.isAuthenticated()) {
+				const user = auth.userData.value.user;
+				$crisp.push(["set", "user:nickname", [user.name]]);
+				$crisp.push(["set", "user:email", [user.email]]);
+
+				clearInterval(interval);
+			}
+		}, 2000);
 	}
 </script>
 
@@ -36,7 +40,7 @@
 font-family: 'Truculenta', sans-serif;
 	 */
 	.logo-color {
-		columns: #226B8D;
+		columns: #226b8d;
 	}
 	.zipay-logo-dark {
 		color: rgb(255, 93, 83);

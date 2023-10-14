@@ -32,7 +32,7 @@ export const useAuth = () => {
 			return true;
 		}
 
-		const auth = useCookie<AuthToken>("auth");
+		const auth = useCookie<AuthToken | null>("auth");
 		// console.log(auth);
 		if (auth.value == null || auth.value == undefined) {
 			// console.log("Empty")
