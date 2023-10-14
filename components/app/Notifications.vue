@@ -1,13 +1,11 @@
-<style scoped>
-	@media (max-width: 765px) {
-		.mobile-aside {
-			padding-bottom: 60px !important;
-		}
-	}
-</style>
+<script setup lang="ts">
+	const notifications = userData().notifications;
 
-<script setup>
-	const notifications = ref([]);
+	onMounted(() => {
+		setInterval(() => {
+			userData().getNotifications();
+		}, 10000);
+	});
 </script>
 
 <template>
@@ -59,6 +57,11 @@
 					>
 						No notification
 					</div>
+
+					<AppNotificationEntry
+						:notification="notify"
+						v-for="notify in notifications"
+					/>
 				</div>
 				<!--end::Content-->
 			</div>
@@ -81,3 +84,11 @@
 	</div>
 	<!--end::Activities drawer-->
 </template>
+
+<style scoped>
+	@media (max-width: 765px) {
+		.mobile-aside {
+			padding-bottom: 60px !important;
+		}
+	}
+</style>

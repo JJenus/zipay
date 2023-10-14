@@ -62,37 +62,6 @@
 			});
 	};
 
-	const getUsers = () => {
-		if (!useAuth().userData.value?.user) {
-			navigateTo("/sign-in");
-		}
-		const axiosConfig: AxiosRequestConfig = {
-			method: "get",
-			url: `${appConfig.public.BE_API}/users`,
-			timeout: 20000,
-			headers: {
-				Authorization: "Bearer " + useAuth().userData.value?.token,
-			},
-		};
-
-		axios
-			.request(axiosConfig)
-			.then((response: AxiosResponse<IUser[], any>) => {
-				users.value = response.data;
-				console.log(users.value);
-			})
-			.catch((error) => {
-				// console.log(error);
-				const data = error.response.data;
-				if (
-					data.message.includes("Access denied") ||
-					error.response.status === 401
-				) {
-					// console.log("Access denied");
-				}
-			});
-	};
-
 	onBeforeMount(() => {
 		const cookie = useCookie<AuthToken | null | undefined>("auth");
 		if (cookie.value == null || cookie.value == undefined) {
@@ -100,7 +69,9 @@
 			return useAuth().logout();
 		}
 		getUserData();
-		getUsers();
+		if (users.value.length === 0) {
+			userData().getUsers();
+		}
 	});
 </script>
 <template>

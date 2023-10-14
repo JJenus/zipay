@@ -1,47 +1,24 @@
 <script setup lang="ts">
-	import axios from "axios";
+	import moment from "moment";
+	import { IUser } from "utils/interfaces/IUser";
 
 	const appConfig = useRuntimeConfig();
+	const newNotification = userData().newNotification;
 
-	const transactions = ref<any[]>([]);
+	const users = userData().users;
 	const userId = useAuth().userData.value?.userId;
+	const range = ref(7);
 
-	const fetchTransactions = () => {
-		const axiosConfig = {
-			method: "get",
-			url: `${appConfig.public.BE_API}/transactions/${userId}`,
-			timeout: 5000,
-			headers: {
-				Authorization: "Bearer " + useAuth().userData.value?.token,
-			},
-		};
-
-		axios
-			.request(axiosConfig)
-			.then((response) => {
-				const data = response.data;
-				transactions.value = data;
-				console.log(data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+	const getPreview = (): IUser[] => {
+		return users.value.filter((user) => {
+			const userDate = moment(user.createdAt);
+			const sevenDaysAgo = moment().subtract(range.value, "days");
+			// }
+			return !userDate.isBefore(sevenDaysAgo);
+		});
 	};
 
-	const getPreview = () => {
-		if (transactions.value.length <= 5) {
-			return transactions.value;
-		}
-		const list = [];
-		for (let i = 0; i < 5; i++) {
-			list.push(transactions.value[i]);
-		}
-		return list;
-	};
-
-	onMounted(() => {
-		fetchTransactions();
-	});
+	onMounted(() => {});
 </script>
 <template>
 	<div
@@ -86,10 +63,22 @@
 			>
 				<!--begin::Drawer toggle-->
 				<div
-					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
+					:class="
+						newNotification
+							? 'btn-active-color-success btn-icon-success'
+							: 'btn-active-color-primary btn-icon-muted'
+					"
+					class="btn btn-icon btn-custom  btn-active-light w-35px h-35px w-md-40px h-md-40px"
 					id="kt_activities_toggle"
 				>
-					<i class="ki-outline ki-notification-bing fs-2x"></i>
+					<i
+						v-if="newNotification"
+						class="ki-outline ki-notification-on fs-2x"
+					></i>
+					<i
+						v-else
+						class="ki-outline ki-notification fs-2x"
+					></i>
 				</div>
 				<!--end::Drawer toggle-->
 			</div>
@@ -195,18 +184,46 @@
 							<div class="separator mb-3 opacity-75"></div>
 							<!--end::Menu separator-->
 
+							<div class="menu-item px-3">
+								<a
+									@click="range = 0"
+									role="button"
+									class="menu-link px-3"
+								>
+									Today
+								</a>
+							</div>
+
 							<!--begin::Menu item-->
 							<div class="menu-item px-3">
-								<a role="button" class="menu-link px-3">
-									Sent
+								<a
+									@click="range = 1"
+									role="button"
+									class="menu-link px-3"
+								>
+									Yesterday
+								</a>
+							</div>
+
+							<div class="menu-item px-3">
+								<a
+									@click="range = 7"
+									role="button"
+									class="menu-link px-3"
+								>
+									Last 7 days
 								</a>
 							</div>
 							<!--end::Menu item-->
 
 							<!--begin::Menu item-->
 							<div class="menu-item px-3">
-								<a role="button" class="menu-link px-3">
-									Received
+								<a
+									@click="range = 30"
+									role="button"
+									class="menu-link px-3"
+								>
+									Last 30 days
 								</a>
 							</div>
 							<!--end::Menu item-->
@@ -218,12 +235,13 @@
 							<!--begin::Menu item-->
 							<div class="menu-item px-3">
 								<div class="menu-content px-3 py-3">
-									<a
+									<NuxtLink
+										to="/admin/users"
 										class="btn btn-primary btn-sm px-4 w-100"
-										href="#"
+										role="button"
 									>
 										View All
-									</a>
+									</NuxtLink>
 								</div>
 							</div>
 							<!--end::Menu item-->
@@ -238,9 +256,15 @@
 
 				<!--begin::Body-->
 				<div class="card-body pt-6">
-					<AdminTransactionEntry
-						v-for="transact in getPreview()"
-						:transaction="transact"
+					<div
+						v-if="getPreview().length === 0"
+						class="text-center fw-bold text-muted"
+					>
+						No users found
+					</div>
+					<AdminUsersNewUser
+						v-for="user in getPreview()"
+						:user="user"
 					/>
 				</div>
 				<!--end::Body-->

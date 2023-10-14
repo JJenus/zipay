@@ -1,7 +1,11 @@
 <script setup lang="ts">
-	let users = userData().users.value;
 	const searchText = ref("");
 	const active = userData().active;
+	const foundUsers = ref(userData().users.value.length);
+
+	if (userData().users.value.length === 0) {
+		userData().getUsers();
+	}
 
 	const search = (area: string, input: string) => {
 		const rjx = new RegExp(input, "i");
@@ -22,9 +26,9 @@
 
 		searchString = searchString.toLowerCase(); // Convert search string to lowercase for case-insensitive search
 
-		users = userData().users.value.filter((user) => {
+		const users = userData().users.value.filter((user) => {
 			// Perform a case-insensitive search for any of the properties
-			return (
+			const a =
 				(user.id && user.id.toLowerCase().includes(searchString)) ||
 				(user.name && user.name.toLowerCase().includes(searchString)) ||
 				(user.email &&
@@ -49,15 +53,18 @@
 						.toLowerCase()
 						.includes(searchString)) ||
 				(user.account.status &&
-					user.account.status.toLowerCase().includes(searchString))
-			);
+					user.account.status.toLowerCase().includes(searchString));
+
+			return a;
 		});
+		foundUsers.value = users.length;
+		return users;
 	}
 
-	const findUser = () => {
-		filterUsers(searchText.value);
-		// search(".user", searchText.value);
-	};
+	// const findUser = () => {
+	// 	filterUsers(searchText.value);
+	// 	// search(".user", searchText.value);
+	// };
 	onMounted(() => {});
 </script>
 
@@ -74,7 +81,7 @@
 						class="d-block d-flex flex-column align-items-center justify-content-center"
 					>
 						<h1 class="text-center h2 pb-2 fw-bold">
-							Users ({{ users.length }})
+							Users ({{ foundUsers }})
 						</h1>
 						<div
 							class="position-relative my-1"
@@ -84,7 +91,6 @@
 								class="ki-outline ki-magnifier fs-2 position-absolute top-50 translate-middle-y ms-4"
 							></i>
 							<input
-								@keyup="findUser()"
 								type="text"
 								data-kt-table-widget-4="search"
 								class="form-control w-150px fs-7 ps-12"
@@ -99,7 +105,7 @@
 			<!--end::Chart widget 36-->
 			<div class="row g-6 mb-6 g-xl-9 mb-xl-9">
 				<div
-					v-for="user in users"
+					v-for="user in filterUsers(searchText)"
 					class="col-md-6"
 					bis_skin_checked="1"
 				>

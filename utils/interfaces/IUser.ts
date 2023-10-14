@@ -14,4 +14,5 @@ export interface IUser {
 	emailVerified: boolean;
 	userType: string;
 	account: Account;
+	createdAt: string;
 }

@@ -1,9 +1,9 @@
 export type Account = {
-	id: string,
-	userId: string,
-	currencyId: string,
-	amount: number,
-	status: AccountStatus,
+	id: string;
+	userId: string;
+	currencyId: string;
+	amount: number | null;
+	status: AccountStatus;
 };
 
 export enum AccountStatus {
@@ -11,4 +11,3 @@ export enum AccountStatus {
 	CLOSED = "closed",
 	FROZEN = "frozen",
 }
-

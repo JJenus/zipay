@@ -1,48 +1,11 @@
 <script setup>
-	import axios from "axios";
 	import currency from "currency.js";
 
-	const appConfig = useRuntimeConfig();
-
-	const balance = ref({
-		id: null,
-		userId: "49d5ce8e-5273-44b9-b449-7a3ce278efb5",
-		currencyId: "USD",
-		amount: null,
-		status: "active",
-		createdAt: "2023-10-04T15:56:16.000Z",
-		updatedAt: "2023-10-04T15:56:16.000Z",
-		deletedAt: null,
-	});
-	const userId = useAuth().userData.value?.userId;
-
-	const fetchBalance = () => {
-		const axiosConfig = {
-			method: "get",
-			url: `${appConfig.public.BE_API}/account/${userId}`,
-			timeout: 15000,
-			headers: {
-				Authorization: "Bearer " + useAuth().userData.value?.token,
-			},
-		};
-
-		axios
-			.request(axiosConfig)
-			.then((response) => {
-				const data = response.data;
-				balance.value = data;
-				// console.log(data);
-			})
-			.catch((error) => {
-				// console.log(error);
-			});
-	};
+	const balance = userData().account;
 
 	const getBalance = () => {
-		let cAmount = 0;
-		if (!balance.value.amount) {
-			cAmount = 0;
-		}
+		let cAmount = balance.value.amount || 0;
+
 		const amount = currency(cAmount, {
 			symbol: "",
 		}).format();
@@ -50,7 +13,9 @@
 	};
 
 	onBeforeMount(() => {
-		fetchBalance();
+		if (!balance.value.amount) {
+			userData().fetchBalance();
+		}
 	});
 </script>
 
@@ -102,7 +67,7 @@
 				class="btn btn-sm btn-danger fw-semibold me-2"
 				style="background-color: #ff5d53"
 				data-bs-toggle="modal"
-				data-bs-target="#kt_modal_upgrade_plan"
+				data-bs-target="#kt_modal_topup_admin"
 			>
 				Top Up Balance
 			</a>

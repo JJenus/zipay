@@ -5,27 +5,24 @@
 
 	definePageMeta({
 		layout: "app",
-		middleware: ["auth"],
+	});
+	useSeoMeta({
+		title: `App - ${useRuntimeConfig().public.APP}`,
 	});
 
 	const loaded = useCookie<boolean>("reload", { maxAge: 60 * 60 * 24 });
 
 	if (process.client) {
 		if (!loaded.value) {
-			window.location.reload();
 			loaded.value = true;
+			window.location.reload();
 		}
 	}
+
 	const appConfig = useRuntimeConfig();
+
 	const userId = useAuth().userData.value?.userId;
 	const data = userData().data;
-
-	const config = useRuntimeConfig().public;
-	const currentPage = "App";
-
-	useSeoMeta({
-		title: `${currentPage} - ${config.APP}`,
-	});
 
 	const getUserData = () => {
 		if (!useAuth().userData) {
@@ -54,7 +51,6 @@
 					res.message.includes("Access denied") ||
 					error.response.status === 401
 				) {
-					infoAlert("Session Expired");
 					useAuth().logout();
 				}
 				// console.log(error);

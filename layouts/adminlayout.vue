@@ -1,8 +1,12 @@
-<script setup lang="ts">
+<script setup>
 	definePageMeta({
 		layout: "app",
 		middleware: ["admin-auth"],
 	});
+
+	if (process.client) {
+		$crisp.push(["do", "chat:hide"]);
+	}
 </script>
 
 <template>
@@ -81,7 +85,7 @@
 			<AdminMobileNavBar />
 		</div>
 		<!--end::App-->
-		<AdminNotifications />
+		<AppNotifications />
 
 		<!-- To be USED AS NOTIFICATION -->
 		<!--begin::Drawers-->
@@ -100,5 +104,6 @@
 		<!--end::Scrolltop-->
 
 		<!--begin::Modals-->
+		<AdminTopUpWithEmail />
 	</div>
 </template>

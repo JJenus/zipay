@@ -2,6 +2,7 @@
 	import axios from "axios";
 
 	const appConfig = useRuntimeConfig();
+	const newNotification = userData().newNotification;
 
 	const transactions = ref([]);
 	const userId = useAuth().userData.value?.userId;
@@ -16,6 +17,7 @@
 			},
 		]);
 	}
+
 	const startChat = () => {
 		$crisp.push(["do", "chat:show"]);
 		$crisp.push(["do", "chat:open"]);
@@ -81,7 +83,7 @@
 				<!--begin::Menu- wrapper-->
 				<button
 					@click="startChat()"
-					class="btn d-lg-none btn-outline btn-sm ms-2 btn-custom btn-icon-muted btn-active-light btn-active-color-primary "
+					class="btn d-lg-none btn-outline btn-sm ms-2 btn-custom btn-icon-muted btn-active-light btn-active-color-primary"
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"
 					data-kt-menu-placement="bottom-end"
@@ -104,7 +106,11 @@
 					class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
 					id="kt_activities_toggle"
 				>
-					<i class="ki-outline ki-notification-bing fs-2x"></i>
+					<i
+						v-if="newNotification"
+						class="ki-outline ki-notification-on text-success fs-2x"
+					></i>
+					<i v-else class="ki-outline ki-notification fs-2x"></i>
 				</div>
 				<!--end::Drawer toggle-->
 			</div>
