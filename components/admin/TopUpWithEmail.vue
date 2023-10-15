@@ -3,6 +3,7 @@
 
 	const user = userData().data;
 	const appConfig = useRuntimeConfig();
+	const submitButton = ref();
 
 	const form = ref({
 		email: "",
@@ -31,6 +32,7 @@
 				Authorization: "Bearer " + useAuth().userData.value?.token,
 			},
 		};
+		submitButton.value.setAttribute("data-kt-indicator", "on");
 
 		axios
 			.request(axiosConfig)
@@ -44,6 +46,9 @@
 			.catch((error) => {
 				errorAlert("Unable to update balance");
 				console.log(error);
+			})
+			.finally(() => {
+				submitButton.value.removeAttribute("data-kt-indicator");
 			});
 	};
 </script>
@@ -177,7 +182,7 @@
 
 							<button
 								type="submit"
-								id="kt_modal_new_card_submit"
+								ref="submitButton"
 								class="btn btn-primary"
 							>
 								<span class="indicator-label"> Submit </span>

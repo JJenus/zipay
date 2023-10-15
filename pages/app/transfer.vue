@@ -1,13 +1,45 @@
 <script setup lang="ts">
 	import Cleave from "cleave.js";
+	import {
+		Transaction,
+		TransactionTypes,
+	} from "../../utils/interfaces/Transaction";
 
 	// Variables
 	const moneyInput = ref();
 	const cleave = ref();
 
+	const account = userData().account;
+
+	const next = ref(false);
+	const active = ref(true);
+
+	const initTrans = ref<Transaction>({
+		senderId: "",
+		receiverId: undefined,
+		amount: 0,
+		type: TransactionTypes.DEBIT,
+		notes: undefined,
+		beneficiary: {
+			id: undefined,
+			userId: "",
+			name: "",
+			destinationAccount: "",
+			bank: "",
+		},
+		id: undefined,
+	});
+
+	const transaction = useState<Transaction>(
+		"transaction-form",
+		() => initTrans.value
+	);
+
 	const form = ref({
 		amount: "",
 	});
+	const submitButton = ref();
+
 	const buttons = [
 		{
 			num: 1,
@@ -44,6 +76,20 @@
 		},
 	];
 	const startDelete = ref(false);
+	const recipientIni = ref({
+		id: "",
+		name: "",
+		email: "",
+	});
+	const recipient = useState<any>(
+		"transfer-recipient",
+		() => recipientIni.value
+	);
+
+	const userFound = useState<string | boolean>(
+		"transfer-recipient-found",
+		() => ""
+	);
 
 	// Functions
 
@@ -82,7 +128,63 @@
 			console.log(form.value.amount);
 		}
 	};
-	const send = () => {};
+
+	const back = () => {
+		submitButton.value.removeAttribute("data-kt-indicator");
+		next.value = false;
+	};
+
+	function areAllValuesSet(beneficiary: any) {
+		for (const key in beneficiary) {
+			if (key !== "id" && key !== "userId" && !beneficiary[key]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	const disableSend = () => {
+		if (active.value && !userFound.value) {
+			console.log("yes")
+			return true;
+		} else if (!active.value)
+			return areAllValuesSet(transaction.value.beneficiary);
+		return false;
+	};
+
+	const send = () => {
+		if (Number(form.value.amount) <= 0) {
+			errorAlert("Amount must be greater than zero!");
+			return;
+		}
+		// if (
+		// 	!account.value.amount ||
+		// 	Number(form.value.amount) > account.value.amount
+		// ) {
+		// 	errorAlert("Insufficient balance!");
+		// }
+		if (!next.value) {
+			next.value = true;
+			console.log(next.value);
+			return;
+		}
+
+		transaction.value.amount = Number(form.value.amount);
+
+		if (active.value) {
+			transaction.value.type = TransactionTypes.SEND;
+			transaction.value.receiverId = recipient.value.id;
+			transaction.value.beneficiary.bank = "Elisa Finance";
+			transaction.value.beneficiary.destinationAccount =
+				recipient.value.email;
+			transaction.value.beneficiary.name = recipient.value.name;
+			transaction.value.beneficiary.userId = recipient.value.id;
+		} else {
+			transaction.value.type = TransactionTypes.DEBIT;
+		}
+
+		submitButton.value.setAttribute("data-kt-indicator", "on");
+	};
 
 	onMounted(() => {
 		// console.log("Trying luck they say")
@@ -103,68 +205,127 @@
 		</div>
 		<!--begin::Card body-->
 		<div class="card-body">
-			<form @submit.prevent="send" class="px-5 px-md-0 px-xl-15">
+			<form @submit.prevent="send()" class="px-5 px-md-0 px-xl-15">
 				<div class="mb-5">
 					<input
+						:disabled="next"
 						ref="moneyInput"
 						@keydown="enterAmount($event)"
 						type="text"
 						placeholder="0"
-						class="form-control money-input fs-2 form-control-lg text-center fw-bold form-control-solid"
+						class="form-control disabled money-input fs-2 form-control-lg text-center fw-bold form-control-solid"
 					/>
 				</div>
 
-				<div class="d-flex flex-row mb-8 justify-content-end w-100">
+				<div v-if="next" class="mb-8 min-h-250px">
+					<div class="d-flex flex-center flex-row mb-5">
+						<button
+							@click="active = true"
+							:class="active ? 'active' : ''"
+							type="button"
+							class="btn w-100 btn-light-primary btn-active-light-info fw-semibold me-2"
+						>
+							<i class="ki-solid ki-dollar fs-3"></i>
+							To Elisa
+						</button>
+						<button
+							@click="active = false"
+							:class="!active ? 'active' : ''"
+							type="button"
+							class="btn w-100 btn-light-primary btn-active-light-info fw-semibold me-2"
+						>
+							<i class="ki-solid ki-bank fs-3"></i>
+							Banks
+						</button>
+					</div>
+
+					<AppTransactionToElisa
+						v-if="active"
+						:amount="form.amount"
+					/>
+
+					<AppTransactionToBank v-else />
+				</div>
+
+				<div v-else>
+					<div class="d-flex flex-row mb-8 justify-content-end w-100">
+						<button
+							type="button"
+							class="btn btn-sm btn-light-primary fw-semibold me-2"
+						>
+							<i class="ki-solid ki-dollar"></i>
+							Request payment
+						</button>
+						<NuxtLink
+							to="/app/scan"
+							class="btn btn-sm btn-light-warning fw-semibold me-2"
+						>
+							<i class="ki-duotone ki-scan-barcode">
+								<i class="path1"></i>
+								<i class="path2"></i>
+								<i class="path3"></i>
+								<i class="path4"></i>
+								<i class="path5"></i>
+								<i class="path6"></i>
+								<i class="path7"></i>
+								<i class="path8"></i>
+							</i>
+							Scan
+						</NuxtLink>
+					</div>
+
+					<div class="row flex-row row-cols-3 justify-content-end">
+						<div
+							v-for="btn in buttons"
+							class="col justify-content-center d-flex mb-4"
+						>
+							<button
+								type="button"
+								@click="addAmount(btn.num)"
+								class="btn btn-active-light-primary p-0 btn-icon fw-bold fs-2"
+							>
+								{{ btn.num }}
+							</button>
+						</div>
+						<div class="col justify-content-center d-flex mb-4">
+							<button
+								type="button"
+								@mouseup="stopDel"
+								@mousedown="startDel"
+								class="btn btn-active-light-danger btn-icon-danger btn-icon fw-bold fs-2"
+							>
+								<i
+									class="ki-solid ki-arrow-left fs-2x fw-bold"
+								></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div :class="next ? 'd-flex flex-row' : ''" class="mt-4">
 					<button
-						class="btn btn-sm btn-light-primary fw-semibold me-2"
+						@click="back()"
+						v-if="next"
+						class="btn btn-light-primary me-3"
 					>
-						<i class="ki-solid ki-dollar"></i>
-						Request payment
+						Back
 					</button>
-					<NuxtLink
-						to="/app/scan"
-						class="btn btn-sm btn-light-warning fw-semibold me-2"
+					<button
+						:disabled="next && disableSend()"
+						ref="submitButton"
+						type="submit"
+						class="btn btn-primary btn-icon fw-bold fs-2 w-100"
 					>
-						<i class="ki-duotone ki-scan-barcode">
-							<i class="path1"></i>
-							<i class="path2"></i>
-							<i class="path3"></i>
-							<i class="path4"></i>
-							<i class="path5"></i>
-							<i class="path6"></i>
-							<i class="path7"></i>
-							<i class="path8"></i>
-						</i>
-						Scan
-					</NuxtLink>
-				</div>
-
-				<div class="row flex-row row-cols-3 justify-content-end">
-					<div
-						v-for="btn in buttons"
-						class="col justify-content-center d-flex mb-4"
-					>
-						<button
-							@click="addAmount(btn.num)"
-							class="btn btn-active-light-primary p-0 btn-icon fw-bold fs-2"
-						>
-							{{ btn.num }}
-						</button>
-					</div>
-					<div class="col justify-content-center d-flex mb-4">
-						<button
-							@mouseup="stopDel"
-							@mousedown="startDel"
-							class="btn btn-active-light-danger btn-icon-danger btn-icon fw-bold fs-2"
-						>
-							<i class="ki-solid ki-arrow-left fs-2x fw-bold"></i>
-						</button>
-					</div>
-				</div>
-
-				<div class="mt-4">
-					<button type="button" class="btn btn-primary btn-icon fw-bold fs-2 w-100">
-						Next
+						<span class="indicator-label">
+							<span v-if="next">Submit</span>
+							<span v-else>Next</span>
+						</span>
+						<span class="indicator-progress">
+							Please wait...
+							<span
+								class="spinner-border spinner-border-sm align-middle ms-2"
+							></span>
+						</span>
 					</button>
 				</div>
 			</form>

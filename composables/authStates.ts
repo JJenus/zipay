@@ -4,11 +4,11 @@ export const useAuth = () => {
 	const appUser = userData().data;
 	const authData = useState<AuthToken | null>("user", () => null);
 	const authenticated = useState<boolean>("isAuthenticated", () => false);
+	const userAuth = useCookie<AuthToken>("auth", {
+		maxAge: 60 * 60 * 24,
+	});
 
 	const login = (auth: AuthToken) => {
-		const userAuth = useCookie<AuthToken>("auth", {
-			maxAge: 60 * 60 * 24,
-		});
 		appUser.value = auth.user;
 		userAuth.value = auth;
 		authData.value = auth;

@@ -40,6 +40,8 @@
 		axios
 			.request(axiosConfig)
 			.then((response: AxiosResponse<IUser, any>) => {
+				response.data.userType = "user";
+
 				data.value = response.data;
 				data.value.imgUrl =
 					data.value.imgUrl || "/assets/media/svg/avatars/blank.svg";
@@ -51,7 +53,7 @@
 					res.message.includes("Access denied") ||
 					error.response.status === 401
 				) {
-					useAuth().logout();
+					// useAuth().logout();
 				}
 				// console.log(error);
 			});

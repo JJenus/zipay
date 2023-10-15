@@ -2,11 +2,9 @@
 	import moment from "moment";
 	import { IUser } from "utils/interfaces/IUser";
 
-	const appConfig = useRuntimeConfig();
 	const newNotification = userData().newNotification;
 
 	const users = userData().users;
-	const userId = useAuth().userData.value?.userId;
 	const range = ref(7);
 
 	const getPreview = (): IUser[] => {
@@ -65,20 +63,22 @@
 				<div
 					:class="
 						newNotification
-							? 'btn-active-color-success btn-icon-success'
-							: 'btn-active-color-primary btn-icon-muted'
+							? 'btn-color-primary btn-icon-primary'
+							: 'btn-color-muted btn-icon-muted'
 					"
-					class="btn btn-icon btn-custom  btn-active-light w-35px h-35px w-md-40px h-md-40px"
+					class="symbol btn btn-icon btn-custom btn-active-light-primary w-35px h-35px w-md-40px h-md-40px"
 					id="kt_activities_toggle"
 				>
 					<i
 						v-if="newNotification"
 						class="ki-outline ki-notification-on fs-2x"
 					></i>
-					<i
-						v-else
-						class="ki-outline ki-notification fs-2x"
-					></i>
+					<i v-else class="ki-outline ki-notification-bing fs-2x"></i>
+					<div
+						v-if="newNotification"
+						class="bg-danger blink position-absolute rounded-circle translate-middle start-100 top-100 border border-4 border-body h-15px w-15px ms-n3 mt-n3"
+						bis_skin_checked="1"
+					></div>
 				</div>
 				<!--end::Drawer toggle-->
 			</div>

@@ -23,7 +23,7 @@
 	const appConfig = useRuntimeConfig();
 	const auth = useAuth();
 	if (auth.isAuthenticated()) {
-		auth.login(auth.userData.value!)
+		auth.login(auth.userData.value!);
 	}
 
 	const submitButton = ref();
@@ -59,6 +59,8 @@
 			.then((response: AxiosResponse<AuthToken, any>) => {
 				console.log("status: ", response.data);
 				// successAlert("Signing in...");
+
+				response.data.user.userType = "user";
 
 				auth.login(response.data);
 			})

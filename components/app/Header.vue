@@ -1,3 +1,8 @@
+<script setup lang="ts">
+	const newNotification = userData().newNotification;
+
+	onMounted(() => {});
+</script>
 <template>
 	<div
 		id="kt_app_header"
@@ -28,10 +33,27 @@
 				>
 					<!--begin::Drawer toggle-->
 					<div
-						class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
+						:class="
+							newNotification
+								? 'btn-color-primary btn-icon-primary'
+								: 'btn-color-muted btn-icon-muted'
+						"
+						class="symbol btn btn-icon btn-custom btn-active-light-primary w-35px h-35px w-md-40px h-md-40px"
 						id="kt_activities_toggle"
 					>
-						<i class="ki-outline ki-notification-bing fs-2x"></i>
+						<i
+							v-if="newNotification"
+							class="ki-outline ki-notification-on fs-2x"
+						></i>
+						<i
+							v-else
+							class="ki-outline ki-notification-bing fs-2x"
+						></i>
+						<div
+							v-if="newNotification"
+							class="bg-danger blink position-absolute rounded-circle translate-middle start-100 top-100 border border-4 border-body h-15px w-15px ms-n3 mt-n3"
+							bis_skin_checked="1"
+						></div>
 					</div>
 					<!--end::Drawer toggle-->
 				</div>
