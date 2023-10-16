@@ -5,6 +5,7 @@
 
 	definePageMeta({
 		layout: "app",
+		middleware: ["auth"],
 	});
 	useSeoMeta({
 		title: `App - ${useRuntimeConfig().public.APP}`,
@@ -14,8 +15,8 @@
 
 	if (process.client) {
 		if (!loaded.value) {
-			loaded.value = true;
 			window.location.reload();
+			loaded.value = true;
 		}
 	}
 
@@ -25,9 +26,11 @@
 	const data = userData().data;
 
 	const getUserData = () => {
-		if (!useAuth().userData) {
-			navigateTo("/sign-in");
+		if (!useAuth().userData.value) {
+			useAuth().logout();
+			infoAlert("Session expired, please login.");
 		}
+
 		const axiosConfig: AxiosRequestConfig = {
 			method: "get",
 			url: `${appConfig.public.BE_API}/users/${userId}`,
@@ -38,28 +41,25 @@
 		};
 
 		axios
-			.request(axiosConfig)
+			.request<IUser>(axiosConfig)
 			.then((response: AxiosResponse<IUser, any>) => {
-				response.data.userType = "user";
-
 				data.value = response.data;
 				data.value.imgUrl =
 					data.value.imgUrl || "/assets/media/svg/avatars/blank.svg";
 				// console.log(data.value);
 			})
 			.catch((error) => {
-				const res = error.response.data;
+				// console.log(error);
+				const data = error.response.data;
 				if (
-					res.message.includes("Access denied") ||
+					data.message.includes("Access denied") ||
 					error.response.status === 401
 				) {
-					// useAuth().logout();
+					console.log("Access denied");
+					useAuth().logout();
 				}
-				// console.log(error);
 			});
 	};
-
-	getUserData();
 
 	onBeforeMount(() => {
 		const cookie = useCookie<AuthToken | null | undefined>("auth");
@@ -67,7 +67,7 @@
 			infoAlert("Session expired");
 			return useAuth().logout();
 		}
-		// getUserData();
+		getUserData();
 	});
 </script>
 <template>

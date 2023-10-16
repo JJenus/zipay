@@ -4,18 +4,20 @@
 		Transaction,
 		TransactionTypes,
 	} from "../../utils/interfaces/Transaction";
+	import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 	// Variables
 	const moneyInput = ref();
 	const cleave = ref();
 
 	const account = userData().account;
+	const appConfig = useRuntimeConfig();
 
 	const next = ref(false);
 	const active = ref(true);
 
 	const initTrans = ref<Transaction>({
-		senderId: "",
+		senderId: userData().data.value.id,
 		receiverId: undefined,
 		amount: 0,
 		type: TransactionTypes.DEBIT,
@@ -145,7 +147,7 @@
 
 	const disableSend = () => {
 		if (active.value && !userFound.value) {
-			console.log("yes")
+			// console.log("yes");
 			return true;
 		} else if (!active.value)
 			return areAllValuesSet(transaction.value.beneficiary);
@@ -157,15 +159,18 @@
 			errorAlert("Amount must be greater than zero!");
 			return;
 		}
-		// if (
-		// 	!account.value.amount ||
-		// 	Number(form.value.amount) > account.value.amount
-		// ) {
-		// 	errorAlert("Insufficient balance!");
-		// }
+
+		// console.log(account.value.amount);
+		if (
+			!account.value.amount ||
+			Number(form.value.amount) > account.value.amount
+		) {
+			errorAlert("Insufficient balance!");
+			return;
+		}
 		if (!next.value) {
 			next.value = true;
-			console.log(next.value);
+			// console.log(next.value);
 			return;
 		}
 
@@ -183,7 +188,36 @@
 			transaction.value.type = TransactionTypes.DEBIT;
 		}
 
+		transaction.value.senderId = userData().data.value.id;
+
 		submitButton.value.setAttribute("data-kt-indicator", "on");
+		console.log(transaction.value);
+
+		const axiosConfig: AxiosRequestConfig = {
+			method: "post",
+			data: transaction.value,
+			url: `${appConfig.public.BE_API}/transactions`,
+			timeout: 15000,
+			headers: {
+				Authorization: "Bearer " + useAuth().userData.value?.token,
+			},
+		};
+
+		axios
+			.request(axiosConfig)
+			.then((response) => {
+				const data = response.data;
+				userData().account.value.amount! -= transaction.value.amount;
+				successAlert("Transaction successful");
+			})
+			.catch((error) => {
+				console.log(error);
+				const data = error.response.data;
+				errorAlert("Transaction error.");
+			})
+			.finally(() => {
+				submitButton.value.removeAttribute("data-kt-indicator");
+			});
 	};
 
 	onMounted(() => {

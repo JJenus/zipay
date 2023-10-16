@@ -1,7 +1,7 @@
 import { AuthToken } from "../utils/interfaces/AuthToken";
 
 export const useAuth = () => {
-	const appUser = userData().data;
+	const appUser = userData();
 	const authData = useState<AuthToken | null>("user", () => null);
 	const authenticated = useState<boolean>("isAuthenticated", () => false);
 	const userAuth = useCookie<AuthToken>("auth", {
@@ -9,11 +9,17 @@ export const useAuth = () => {
 	});
 
 	const login = (auth: AuthToken) => {
-		appUser.value = auth.user;
+		//store cookie
 		userAuth.value = auth;
+
+		//set essential values
+		appUser.data.value = auth.user;
+		appUser.account.value = auth.user.account;
+
 		authData.value = auth;
 		authenticated.value = true;
-		// await storage().remember(user);
+
+		// redirect to appropriate account
 		if (auth.user.userType === "admin") {
 			navigateTo("/admin");
 		} else navigateTo("/app");

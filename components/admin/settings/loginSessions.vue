@@ -68,7 +68,9 @@
 					<!--end::Select-->
 				</div>
 
-				<a href="#" class="btn btn-sm btn-primary my-1"> View All </a>
+				<a role="button" class="btn btn-sm btn-primary my-1">
+					View All
+				</a>
 			</div>
 			<!--end::Toolbar-->
 		</div>
@@ -96,7 +98,7 @@
 
 					<!--begin::Tbody-->
 					<tbody class="fw-6 fw-semibold text-gray-600">
-						<tr>
+						<tr class="d-none">
 							<td>
 								<a
 									href="#"
@@ -117,94 +119,6 @@
 							<td>236.125.56.78</td>
 
 							<td>2 mins ago</td>
-						</tr>
-						<tr>
-							<td>
-								<a
-									href="#"
-									class="text-hover-primary text-gray-600"
-									>United Kingdom(10)</a
-								>
-							</td>
-
-							<td>
-								<span
-									class="badge badge-light-success fs-7 fw-bold"
-									>OK</span
-								>
-							</td>
-
-							<td>Safari - Mac OS</td>
-
-							<td>236.125.56.78</td>
-
-							<td>10 mins ago</td>
-						</tr>
-						<tr>
-							<td>
-								<a
-									href="#"
-									class="text-hover-primary text-gray-600"
-									>Norway(-)</a
-								>
-							</td>
-
-							<td>
-								<span
-									class="badge badge-light-danger fs-7 fw-bold"
-									>ERR</span
-								>
-							</td>
-
-							<td>Firefox - Windows</td>
-
-							<td>236.125.56.10</td>
-
-							<td>20 mins ago</td>
-						</tr>
-						<tr>
-							<td>
-								<a
-									href="#"
-									class="text-hover-primary text-gray-600"
-									>Japan(112)</a
-								>
-							</td>
-
-							<td>
-								<span
-									class="badge badge-light-success fs-7 fw-bold"
-									>OK</span
-								>
-							</td>
-
-							<td>iOS - iPhone Pro</td>
-
-							<td>236.125.56.54</td>
-
-							<td>30 mins ago</td>
-						</tr>
-						<tr>
-							<td>
-								<a
-									href="#"
-									class="text-hover-primary text-gray-600"
-									>Italy(5)</a
-								>
-							</td>
-
-							<td>
-								<span
-									class="badge badge-light-warning fs-7 fw-bold"
-									>WRN</span
-								>
-							</td>
-
-							<td>Samsung Noted 5- Android</td>
-
-							<td>236.100.56.50</td>
-
-							<td>40 mins ago</td>
 						</tr>
 					</tbody>
 					<!--end::Tbody-->

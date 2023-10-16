@@ -15,6 +15,13 @@
 
 	const show = ref(false);
 
+	const getType = () => {
+		if (props.transaction.receiverId === userData().data.value.id) {
+			return "Received";
+		}
+		return "Sent";
+	};
+
 	const statusColor = (val: string) => {
 		if (props.transaction.status === "pending") {
 			return val + "-warning";
@@ -36,7 +43,7 @@
 		const now = moment();
 		const inputTime = moment(props.transaction.createdAt);
 
-		console.log("Time diff: ", now.diff(inputTime, "hours"))
+		console.log("Time diff: ", now.diff(inputTime, "hours"));
 
 		if (now.diff(inputTime, "hours") <= 1) {
 			return inputTime.fromNow();
@@ -74,7 +81,7 @@
 				>
 
 				<span class="text-gray-400 fw-semibold d-block fs-n6">
-					<span class="text-primary me-2">{{ transaction.type }}</span>
+					<span class="text-primary me-2">{{ getType() }}</span>
 					{{ time() }}
 				</span>
 			</div>
@@ -86,9 +93,9 @@
 					>${{ transaction.amount }}</span
 				>
 				<!--end::Info-->
-				<span class="text-gray-400">{{
-					transaction.beneficiary.bank
-				}}</span>
+				<div class="text-gray-400 text-truncate w-80px">
+					{{ transaction.beneficiary.bank }}
+				</div>
 			</div>
 			<div v-if="showDetails" class="ms-2">
 				<i

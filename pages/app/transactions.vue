@@ -1,10 +1,14 @@
 <script setup lang="ts">
 	import axios from "axios";
+import currency from "currency.js";
 
 	const appConfig = useRuntimeConfig();
 
 	const transactions = ref<any[]>([]);
 	const userId = useAuth().userData.value?.userId;
+	const received = ref(0);
+	const sent = ref(0);
+
 
 	const fetchTransactions = () => {
 		const axiosConfig = {
@@ -19,8 +23,19 @@
 		axios
 			.request(axiosConfig)
 			.then((response) => {
-				const data = response.data;
+				const data = response.data.sort(
+					(a: any, b: any) =>
+						new Date(b.createdAt).getTime() -
+						new Date(a.createdAt).getTime()
+				);
 				transactions.value = data;
+				transactions.value.forEach((e)=>{
+					if(e.receiverId === userId){
+						received.value += e.amount;
+					}else{
+						sent.value += e.amount;
+					}
+				})
 				console.log(data);
 			})
 			.catch((error) => {
@@ -28,15 +43,13 @@
 			});
 	};
 
-	const getPreview = () => {
-		// if (props.showDetails) {
-		return transactions.value;
-		// }
-		// const list = [];
-		// for(let i = 0; i< 5; i++){
-		// 	list.push(transactions.value[i])
-		// }
-		// return list;
+	const getAmount = (cAmount: number) => {
+		 cAmount = cAmount || 0;
+
+		const amount = currency(cAmount, {
+			symbol: "",
+		}).format();
+		return amount;
 	};
 
 	onMounted(() => {
@@ -80,7 +93,7 @@
 
 						<!--begin::Amount-->
 						<span class="page-title fs-2 fw-bold me-2 lh-1 ls-n2">{{
-							"0.00"
+							getAmount(received)
 						}}</span>
 						<!--end::Amount-->
 					</div>
@@ -113,7 +126,7 @@
 
 						<!--begin::Amount-->
 						<span class="page-title fs-2 fw-bold me-2 lh-1 ls-n2">{{
-							"0.00"
+							getAmount(sent)
 						}}</span>
 						<!--end::Amount-->
 					</div>

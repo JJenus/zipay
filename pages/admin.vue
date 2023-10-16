@@ -16,6 +16,7 @@
 			loaded.value = true;
 		}
 	}
+	
 	const appConfig = useRuntimeConfig();
 	const userId = useAuth().userData.value?.userId;
 	const data = userData().data;
@@ -29,9 +30,11 @@
 	});
 
 	const getUserData = () => {
-		if (!useAuth().userData) {
-			navigateTo("/sign-in");
+		if (!useAuth().userData.value) {
+			useAuth().logout();
+			infoAlert("Session expired, please login.");
 		}
+		
 		const axiosConfig: AxiosRequestConfig = {
 			method: "get",
 			url: `${appConfig.public.BE_API}/users/${userId}`,
@@ -57,8 +60,8 @@
 					error.response.status === 401
 				) {
 					console.log("Access denied");
+					useAuth().logout();
 				}
-				// useAuth().logout();
 			});
 	};
 

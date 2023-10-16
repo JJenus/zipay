@@ -1,13 +1,3 @@
-
-import { formToJSON } from 'axios';
-
-import { log } from 'console';
-
-import { title } from 'process';
-
-import { formToJSON } from 'axios';
-import { title } from 'process'; import { isPropsEqual } from
-'public/assets/plugins/custom/fullcalendar/fullcalendar.bundle';
 <script setup lang="ts">
 	import { IUser } from "utils/interfaces/IUser";
 	import axios, {
@@ -31,7 +21,7 @@ import { title } from 'process'; import { isPropsEqual } from
 	const notify = () => {
 		const user = props.user;
 		// console.log(user);
-        console.log(form.value)
+		console.log(form.value);
 		if (!form.value.title || !form.value.message) {
 			errorAlert("Fill form correctly");
 			return;
@@ -97,7 +87,7 @@ import { title } from 'process'; import { isPropsEqual } from
 			<form
 				@submit.prevent="notify()"
 				class="form fv-plugins-bootstrap5 fv-plugins-framework"
-				novalidate="novalidate"
+				novalidate
 			>
 				<!--begin::Card body-->
 				<div class="card-body border-top p-9" bis_skin_checked="1">
@@ -121,7 +111,7 @@ import { title } from 'process'; import { isPropsEqual } from
 								class="form-control form-control-lg form-control-solid"
 								placeholder="Title"
 								required
-                                v-model="form.title"
+								v-model="form.title"
 							/>
 							<div
 								class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"
@@ -162,7 +152,7 @@ import { title } from 'process'; import { isPropsEqual } from
 								rows="4"
 								placeholder="Type a message"
 								required
-                                v-model="form.message"
+								v-model="form.message"
 							>
 							</textarea>
 							<div

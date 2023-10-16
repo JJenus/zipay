@@ -2,9 +2,10 @@
 	const notifications = userData().notifications;
 
 	onMounted(() => {
+		userData().getNotifications();
 		setInterval(() => {
 			userData().getNotifications();
-		}, 10000);
+		}, 20000);
 	});
 </script>
 

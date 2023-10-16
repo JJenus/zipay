@@ -60,8 +60,6 @@
 				console.log("status: ", response.data);
 				// successAlert("Signing in...");
 
-				response.data.user.userType = "user";
-
 				auth.login(response.data);
 			})
 			.catch((err: AxiosError<any, any>) => {

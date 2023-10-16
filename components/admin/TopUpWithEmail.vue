@@ -1,7 +1,6 @@
 <script setup lang="ts">
 	import axios from "axios";
 
-	const user = userData().data;
 	const appConfig = useRuntimeConfig();
 	const submitButton = ref();
 

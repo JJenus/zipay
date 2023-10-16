@@ -174,7 +174,7 @@
 				<!--end::Details-->
 			</div>
 		</div>
-		<AdminUserNotify v-if="notify" :user="user" />
-		<AdminUserProfile v-else :user="user" />
+		<AdminUserNotify v-if="notify" :user="user!" />
+		<AdminUserProfile v-else :user="user!" />
 	</div>
 </template>

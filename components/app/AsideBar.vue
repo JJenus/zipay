@@ -27,7 +27,7 @@
 		const axiosConfig = {
 			method: "get",
 			url: `${appConfig.public.BE_API}/transactions/${userId}`,
-			timeout: 5000,
+			timeout: 15000,
 			headers: {
 				Authorization: "Bearer " + useAuth().userData.value?.token,
 			},
@@ -36,7 +36,11 @@
 		axios
 			.request(axiosConfig)
 			.then((response) => {
-				const data = response.data;
+				const data = response.data.sort(
+					(a, b) =>
+						new Date(b.createdAt).getTime() -
+						new Date(a.createdAt).getTime()
+				);
 				transactions.value = data;
 				console.log(data);
 			})

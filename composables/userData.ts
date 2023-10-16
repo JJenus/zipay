@@ -121,8 +121,12 @@ export const userData = () => {
 		axios
 			.request(axiosConfig)
 			.then((response: AxiosResponse<INotification[], any>) => {
-				const data = response.data;
-				notifications.value = data;
+				notifications.value = response.data
+				.sort(
+					(a, b) =>
+						new Date(b.createdAt).getTime() -
+						new Date(a.createdAt).getTime()
+				);;
 
 				notifications.value.forEach((notice) => {
 					if (notice.status === NotificationStatus.UNREAD) {
