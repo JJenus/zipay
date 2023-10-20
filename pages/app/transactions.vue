@@ -1,14 +1,27 @@
 <script setup lang="ts">
 	import axios from "axios";
-import currency from "currency.js";
+	import currency from "currency.js";
 
 	const appConfig = useRuntimeConfig();
 
-	const transactions = ref<any[]>([]);
+	const transactions = userData().transactions;
 	const userId = useAuth().userData.value?.userId;
 	const received = ref(0);
 	const sent = ref(0);
 
+	const calc = () => {
+		received.value = 0;
+		sent.value = 0;
+		transactions.value.forEach((e) => {
+			if (e.receiverId === userId) {
+				received.value += e.amount;
+			} else {
+				sent.value += e.amount;
+			}
+		});
+	};
+
+	calc();
 
 	const fetchTransactions = () => {
 		const axiosConfig = {
@@ -29,13 +42,7 @@ import currency from "currency.js";
 						new Date(a.createdAt).getTime()
 				);
 				transactions.value = data;
-				transactions.value.forEach((e)=>{
-					if(e.receiverId === userId){
-						received.value += e.amount;
-					}else{
-						sent.value += e.amount;
-					}
-				})
+				calc();
 				console.log(data);
 			})
 			.catch((error) => {
@@ -44,7 +51,7 @@ import currency from "currency.js";
 	};
 
 	const getAmount = (cAmount: number) => {
-		 cAmount = cAmount || 0;
+		cAmount = cAmount || 0;
 
 		const amount = currency(cAmount, {
 			symbol: "",

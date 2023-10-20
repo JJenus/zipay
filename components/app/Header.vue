@@ -33,6 +33,7 @@
 				>
 					<!--begin::Drawer toggle-->
 					<div
+						@click="userData().showNotifications()"
 						:class="
 							newNotification
 								? 'btn-color-primary btn-icon-primary'

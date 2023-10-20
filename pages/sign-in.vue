@@ -22,9 +22,7 @@
 
 	const appConfig = useRuntimeConfig();
 	const auth = useAuth();
-	if (auth.isAuthenticated()) {
-		auth.login(auth.userData.value!);
-	}
+	const forgot = useState<boolean>("forgot", () => false);
 
 	const submitButton = ref();
 	const isInvalidCredentials = ref();
@@ -82,7 +80,7 @@
 
 	onMounted(() => {
 		if (auth.isAuthenticated()) {
-			navigateTo("/app");
+			auth.login(auth.userData.value!);
 		}
 	});
 </script>
@@ -126,7 +124,10 @@
 			<!--begin::Aside-->
 
 			<!--begin::Body-->
-			<div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10">
+			<div
+				v-if="!forgot"
+				class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10"
+			>
 				<!--begin::Form-->
 				<div class="d-flex flex-center flex-column flex-lg-row-fluid">
 					<!--begin::Wrapper-->
@@ -199,7 +200,11 @@
 									<div></div>
 
 									<!--begin::Link-->
-									<a role="button" class="link-primary">
+									<a
+										@click="forgot = true"
+										role="button"
+										class="link-primary"
+									>
 										Forgot Password ?
 									</a>
 									<!--end::Link-->
@@ -258,6 +263,7 @@
 
 				<!--end::Footer-->
 			</div>
+			<ForgotPassword v-else />
 			<!--end::Body-->
 		</div>
 		<!--end::Authentication - Sign-in-->

@@ -41,6 +41,7 @@
 				>
 					<!--begin::Drawer toggle-->
 					<div
+						@click="userData().showNotifications()"
 						:class="
 							newNotification
 								? 'btn-color-primary btn-icon-primary'
@@ -53,7 +54,10 @@
 							v-if="newNotification"
 							class="ki-outline ki-notification-on fs-2x"
 						></i>
-						<i v-else class="ki-outline ki-notification-bing fs-2x"></i>
+						<i
+							v-else
+							class="ki-outline ki-notification-bing fs-2x"
+						></i>
 						<div
 							v-if="newNotification"
 							class="bg-danger blink position-absolute rounded-circle translate-middle start-100 top-100 border border-4 border-body h-15px w-15px ms-n3 mt-n3"

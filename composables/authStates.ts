@@ -47,6 +47,10 @@ export const useAuth = () => {
 
 		authenticated.value = true;
 		authData.value = auth.value;
+
+		appUser.data.value = auth.value.user;
+		appUser.account.value = auth.value.user.account;
+
 		return true;
 	};
 

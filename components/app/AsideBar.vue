@@ -87,12 +87,12 @@
 				<!--begin::Menu- wrapper-->
 				<button
 					@click="startChat()"
-					class="btn d-lg-none btn-outline btn-sm ms-2 btn-custom btn-icon-muted btn-active-light btn-active-color-primary"
+					class="btn dv-lg-none btn-outline ms-2 btn-custom btn-icon-muted btn-active-light btn-active-color-primary"
 					data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
 					data-kt-menu-attach="parent"
 					data-kt-menu-placement="bottom-end"
 				>
-					<i class="ki-solid ki-messages fs-3x"></i> Support
+					<i class="ki-solid ki-messages fs-2x"></i> Support
 				</button>
 
 				<!--end::Menu wrapper-->
@@ -103,12 +103,13 @@
 
 			<!--begin::Notifications-->
 			<div
+				@click="userData().showNotifications()"
 				:class="
 					newNotification
 						? 'btn-color-primary btn-icon-primary'
 						: 'btn-color-muted btn-icon-muted'
 				"
-				class="symbol btn btn-icon btn-custom btn-active-light-primary w-35px h-35px w-md-40px h-md-40px"
+				class="symbol btn btn-icon btn-custom ms-lg-auto btn-active-light-primary w-35px h-35px w-md-40px h-md-40px"
 				id="kt_activities_toggle"
 			>
 				<i

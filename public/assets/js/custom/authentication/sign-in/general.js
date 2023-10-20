@@ -92,7 +92,7 @@ var KTSigninGeneral = (function () {
 		init: function () {
 			form = document.querySelector("#kt_sign_in_form");
 			submitButton = document.querySelector("#kt_sign_in_submit");
-
+ 
 			handleValidation();
 
 			handleSubmitAjax(); // use for ajax submit

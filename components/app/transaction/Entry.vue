@@ -1,5 +1,7 @@
 <script setup lang="ts">
+	import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 	import moment from "moment";
+	import { IUser } from "utils/interfaces/IUser";
 
 	const props = defineProps({
 		showDetails: {
@@ -12,13 +14,56 @@
 			required: true,
 		},
 	});
+	const user = ref<any>({
+		name: "",
+	});
+
+	const appConfig = useRuntimeConfig();
+
+	const getUserData = () => {
+		if (!useAuth().userData.value) {
+			useAuth().logout();
+			infoAlert("Session expired, please login.");
+		}
+
+		const axiosConfig: AxiosRequestConfig = {
+			method: "get",
+			url: `${appConfig.public.BE_API}/users/${props.transaction.receiverId}`,
+			timeout: 15000,
+			headers: {
+				Authorization: "Bearer " + useAuth().userData.value?.token,
+			},
+		};
+
+		axios
+			.request<IUser>(axiosConfig)
+			.then((response: AxiosResponse<IUser, any>) => {
+				user.value = response.data;
+
+				// console.log(data.value);
+			})
+			.catch((error) => {
+				// console.log(error);
+				const data = error.response.data;
+				if (
+					data.message.includes("Access denied") ||
+					error.response.status === 401
+				) {
+					console.log("Access denied");
+					useAuth().logout();
+				}
+			});
+	};
 
 	const show = ref(false);
 
 	const getType = () => {
 		if (props.transaction.receiverId === userData().data.value.id) {
+			getUserData();
 			return "Received";
 		}
+		user.value.name = props.transaction.beneficiary.name;
+
 		return "Sent";
 	};
 
@@ -77,7 +122,7 @@
 					role="button"
 					class="text-hover-primary text-gray-800 fs-5 fw-bolder"
 					style="color: #28346c"
-					>{{ transaction.beneficiary.name }}</a
+					>{{ user.name }}</a
 				>
 
 				<span class="text-gray-400 fw-semibold d-block fs-n6">
@@ -119,7 +164,7 @@
 					<tr>
 						<td class="fw-b6old">Bank</td>
 						<td class="text-end">
-							{{ transaction.beneficiary.bank }}
+							{{ user.name }}
 						</td>
 					</tr>
 					<tr>

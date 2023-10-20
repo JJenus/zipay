@@ -3,8 +3,11 @@
 
 	onMounted(() => {
 		userData().getNotifications();
-		setInterval(() => {
-			userData().getNotifications();
+		const nInterval = setInterval(() => {
+			if (useAuth().isAuthenticated()) userData().getNotifications();
+			else {
+				clearInterval(nInterval);
+			}
 		}, 20000);
 	});
 </script>

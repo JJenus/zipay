@@ -7,7 +7,9 @@
 
 	const props = defineProps<{ notification: INotification }>();
 	const nDate = () => {
-		return moment(props.notification.createdAt).format("DD/MM/YYYY hh:mm A");
+		return moment(props.notification.createdAt).format(
+			"DD/MM/YYYY hh:mm A"
+		);
 	};
 </script>
 
@@ -27,7 +29,12 @@
 					class="widget-title fw-bold fs-4 d-flex align-items-center"
 				>
 					<i
-						class="ki-outline ki-notification-bing fs-1 text-success me-2"
+						:class="
+							notification.status === NotificationStatus.UNREAD
+								? 'text-success'
+								: 'text-muted'
+						"
+						class="ki-outline ki-notification-status fs-1 me-2"
 					>
 						<!-- ki-check-circle (For successful transactions) -->
 						<!-- ki-cross-circle (For failed transactions) -->
