@@ -227,16 +227,16 @@
 								<!--begin::Item-->
 								<div class="d-flex flex-stack mb-5">
 									<span class="text-gray-400 fs-4 fw-bold"
-										>New York</span
+										>WhatsApp</span
 									>
 
-									<span class="text-gray-700 fs-4 fw-bold"
-										>(603) 555-0123</span
-									>
+									<span class="text-gray-700 fs-4 fw-bold">
+										+1 (228) 888-8515
+									</span>
 								</div>
 								<!--end::Item-->
 								<!--begin::Item-->
-								<div class="d-flex flex-stack mb-5">
+								<div class="d-flex flex-stack mb-5 d-none">
 									<span class="text-gray-400 fs-4 fw-bold"
 										>Amsterdam</span
 									>
@@ -246,16 +246,7 @@
 									>
 								</div>
 								<!--end::Item-->
-								<!--begin::Item-->
-								<div class="d-flex flex-stack">
-									<span class="text-gray-400 fs-4 fw-bold"
-										>Tokyo</span
-									>
 
-									<span class="text-gray-700 fs-4 fw-bold"
-										>(405) 555-0128</span
-									>
-								</div>
 								<!--end::Item-->
 							</div>
 							<!--end::Items-->
@@ -289,29 +280,15 @@
 							<!--begin::Items-->
 							<div class="mb-4">
 								<!--begin::Item-->
-								<div class="d-flex flex-stack mb-5">
-									<span class="text-gray-400 fs-4 fw-bold"
-										>Sales Office</span
-									>
-
-									<a
-										href="#"
-										class="text-gray-700 text-hover-primary fs-4 fw-bold"
-										>sales@good.com</a
-									>
-								</div>
-								<!--end::Item-->
-
-								<!--begin::Item-->
 								<div class="d-flex flex-stack">
 									<span class="text-gray-400 fs-4 fw-bold"
 										>Support</span
 									>
 
 									<a
-										href="#"
+										href="mailto:support@elisafinance.com"
 										class="text-gray-700 text-hover-primary fs-4 fw-bold"
-										>help@good.com</a
+										>support@elisafinance.com</a
 									>
 								</div>
 								<!--end::Item-->

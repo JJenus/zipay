@@ -39,6 +39,11 @@
 			<!--end::Copyright-->
 			<div class="col-md-5">
 				<h2 class="fs-2qx text-danger mb-2">Stay informed</h2>
+				<p>
+					Reach us on WhatsApp 
+					<br>
+					+1 (228) 888-8515
+				</p>
 				<p class="mb-5">
 					Don’t miss to subscribe to our new feeds, kindly fill the
 					form below.

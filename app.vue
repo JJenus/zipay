@@ -1,12 +1,12 @@
 <script setup>
 	if (process.client) {
 		window.$crisp = [];
-		window.CRISP_WEBSITE_ID = "ab46de5e-8557-4883-b0c9-00eb75f2f17e";
+		// window.CRISP_WEBSITE_ID = "ab46de5e-8557-4883-b0c9-00eb75f2f17e";
 		(function () {
 			const d = document;
 			const s = d.createElement("script");
-			s.src = "https://client.crisp.chat/l.js";
-			s.async = 1;
+			s.src = "//code.tidio.co/4cbfxicxozzxvxulxoiqsqvv4h1tjbiz.js";
+			s.async = true;
 			d.getElementsByTagName("head")[0].appendChild(s);
 		})();
 
@@ -15,10 +15,17 @@
 		const interval = setInterval(() => {
 			if (auth.isAuthenticated()) {
 				const user = auth.userData.value.user;
-				$crisp.push(["set", "user:nickname", [user.name]]);
-				$crisp.push(["set", "user:email", [user.email]]);
+				// $crisp.push(["set", "user:nickname", [user.name]]);
+				// $crisp.push(["set", "user:email", [user.email]]);
 
-				clearInterval(interval);
+				if (window.tidioChatApi) {
+					window.tidioChatApi.setVisitorData({
+						name: user.name,
+						email: user.email,
+					});
+
+					clearInterval(interval);
+				}
 			}
 		}, 2000);
 	}

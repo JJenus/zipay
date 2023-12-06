@@ -8,19 +8,28 @@
 	const userId = useAuth().userData.value?.userId;
 
 	if (process.client) {
-		$crisp.push([
-			"on",
-			"chat:closed",
-			(event) => {
-				// infoAlert("Chat closed");
-				$crisp.push(["do", "chat:hide"]);
-			},
-		]);
+		// $crisp.push([
+		// 	"on",
+		// 	"chat:closed",
+		// 	(event) => {
+		// 		// infoAlert("Chat closed");
+		// 		$crisp.push(["do", "chat:hide"]);
+		// 	},
+		// ]);
+
+		const interval = setInterval(() => {
+			if (window.tidioChatApi) {
+				window.tidioChatApi.on("close", () => {
+					window.tidioChatApi.hide();
+				});
+				clearInterval(interval);
+			}
+		}, 800);
 	}
 
 	const startChat = () => {
-		$crisp.push(["do", "chat:show"]);
-		$crisp.push(["do", "chat:open"]);
+		tidioChatApi.show();
+		tidioChatApi.open();
 	};
 
 	const fetchTransactions = () => {
