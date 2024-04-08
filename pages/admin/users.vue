@@ -99,7 +99,7 @@
 							/>
 						</div>
 					</div>
-				</div>
+				</div> 
 				<!--end::Card body-->
 			</div>
 			<!--end::Chart widget 36-->
