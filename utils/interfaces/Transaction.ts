@@ -1,6 +1,7 @@
 import { Beneficiary } from "./Beneficiary";
 
 export interface Transaction  {
+value: Transaction | Ref<Transaction>;
 	id: string | null | undefined,
 	senderId: string,
 	receiverId: string | undefined,
@@ -8,6 +9,7 @@ export interface Transaction  {
 	type: TransactionTypes,
 	notes: string | undefined,
 	beneficiary: Beneficiary,
+	transactionId: string | null | undefined
 }
 
 export enum TransactionTypes {

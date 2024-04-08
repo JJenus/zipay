@@ -14,6 +14,7 @@
 			required: true,
 		},
 	});
+	
 	const user = ref<any>({
 		name: "",
 	});
@@ -162,19 +163,19 @@
 			<table class="table fs-6">
 				<tbody>
 					<tr>
-						<td class="fw-b6old">Bank</td>
+						<td class="fw-semibold">Bank</td>
 						<td class="text-end">
 							{{ user.name }}
 						</td>
 					</tr>
 					<tr>
-						<td class="fw-b6old">Name</td>
+						<td class="fw-semibold">Name</td>
 						<td class="text-end">
 							{{ transaction.beneficiary.name }}
 						</td>
 					</tr>
 					<tr>
-						<td class="fw-bol6d">Account</td>
+						<td class="fw-semibold">Account</td>
 						<td class="text-end">
 							{{ transaction.beneficiary.destinationAccount }}
 						</td>
@@ -192,11 +193,22 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="fw-bol6d">Time</td>
+						<td class="fw-semibold">transactionId</td>
+						<td class="text-end">{{ transaction.transactionId }}</td>
+					</tr>
+					<tr>
+						<td class="fw-semibold">Time</td>
 						<td class="text-end">{{ time() }}</td>
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div class="my-3">
+			<a
+				:href="`/track/transaction?id=${transaction.transactionId}`"
+				class="btn btn-outline btn-bg-light-info btn-color-info btn-active-light-success w-100"
+				>Track process</a
+			>
 		</div>
 	</div>
 </template>

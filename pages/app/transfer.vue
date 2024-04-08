@@ -16,7 +16,7 @@
 	const next = ref(false);
 	const active = ref(true);
 
-	const initTrans = ref<Transaction>({
+	const initTrans = ref<Transaction | any>({
 		senderId: userData().data.value.id,
 		receiverId: undefined,
 		amount: 0,
@@ -30,6 +30,7 @@
 			bank: "",
 		},
 		id: undefined,
+		transactionId: undefined,
 	});
 
 	const transaction = useState<Transaction>(
@@ -212,7 +213,6 @@
 			})
 			.catch((error) => {
 				console.log(error);
-				const data = error.response.data;
 				errorAlert("Transaction error.");
 			})
 			.finally(() => {
