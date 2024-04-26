@@ -5,7 +5,7 @@
 	});
 
 	if (process.client) {
-		$crisp.push(["do", "chat:hide"]);
+		useLiveChat().closeChat();
 	}
 </script>
 

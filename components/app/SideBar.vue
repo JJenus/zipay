@@ -1,17 +1,7 @@
 <script setup>
-	if (process.client) {
-		$crisp.push([
-			"on",
-			"chat:closed",
-			(event) => {
-				// infoAlert("Chat closed");
-				$crisp.push(["do", "chat:hide"]);
-			},
-		]);
-	}
 	const startChat = () => {
-		$crisp.push(["do", "chat:show"]);
-		$crisp.push(["do", "chat:open"]);
+		const chat = useLiveChat();
+		chat.openChat();
 	};
 </script>
 

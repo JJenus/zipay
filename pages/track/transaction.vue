@@ -84,13 +84,13 @@
 </script>
 
 <template>
-	<div class="d-flex flex-column flex-column-fluid">
+	<div class="kd-flex flex-column flex-column-fluid">
 		<!--begin::Content-->
 		<div id="kt_app_content" class="app-content flex-column-fluid">
 			<!--begin::Content container-->
 			<div
 				id="kt_app_content_container"
-				class="app-container container-fluid d-flex flex-column align-items-center justify-content-center min-h-500px"
+				class="app-container container-fluid d-flex flex-column align-items-center justify-content-center min-h-500px pt-10 pt-md-15 pt-lg-5"
 			>
 				<div v-if="!showReceipt">
 					<h1 class="mb-8">Track Transaction Progress</h1>
@@ -268,6 +268,7 @@
 					<!-- Other data -->
 					<div class="card bg-gray-100 mb-4">
 						<div class="card-body pb-4 fw-bold">
+						
 							<p>
 								{{ transaction.notes }}
 							</p>

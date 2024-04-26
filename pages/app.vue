@@ -21,7 +21,6 @@
 	}
 
 	const appConfig = useRuntimeConfig();
-
 	const userId = useAuth().userData.value?.userId;
 	const data = userData().data;
 
