@@ -1,7 +1,6 @@
 import { AuthToken } from "../utils/interfaces/AuthToken";
 
 export const useAuth = () => {
-	const appUser = userData();
 	const authData = useState<AuthToken | null>("user", () => null);
 	const authenticated = useState<boolean>("isAuthenticated", () => false);
 	const userAuth = useCookie<AuthToken>("auth", {
@@ -13,8 +12,8 @@ export const useAuth = () => {
 		userAuth.value = auth;
 
 		//set essential values
-		appUser.data.value = auth.user;
-		appUser.account.value = auth.user.account;
+		userData().data.value = auth.user;
+		userData().account.value = auth.user.account;
 
 		authData.value = auth;
 		authenticated.value = true;
@@ -48,14 +47,15 @@ export const useAuth = () => {
 		authenticated.value = true;
 		authData.value = auth.value;
 
-		appUser.data.value = auth.value.user;
-		appUser.account.value = auth.value.user.account;
+		userData().data.value = auth.value.user;
+		userData().account.value = auth.value.user.account;
 
 		return true;
 	};
 
 	return {
 		isAuthenticated,
+		authenticated,
 		userData: authData,
 		logout,
 		login,

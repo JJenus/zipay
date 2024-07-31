@@ -1,7 +1,7 @@
 <script setup>
 	import currency from "currency.js";
 
-	const balance = userData().account
+	const balance = userData().account;
 
 	const getBalance = () => {
 		let cAmount = balance.value.amount || 0;
@@ -10,12 +10,6 @@
 		}).format();
 		return amount;
 	};
-
-	onBeforeMount(() => {
-		if (!balance.value.amount) {
-			userData().fetchBalance();
-		}
-	});
 </script>
 
 <template>

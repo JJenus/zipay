@@ -11,6 +11,9 @@
 		title: `App - ${useRuntimeConfig().public.APP}`,
 	});
 
+	const useUserData = userData();
+	const auth = useAuth();
+
 	const loaded = useCookie<boolean>("reload", { maxAge: 60 * 60 * 24 });
 
 	if (process.client) {
@@ -22,7 +25,7 @@
 
 	const appConfig = useRuntimeConfig();
 	const userId = useAuth().userData.value?.userId;
-	const data = userData().data;
+	const data = useUserData.data;
 
 	const getUserData = () => {
 		if (!useAuth().userData.value) {
@@ -59,6 +62,18 @@
 				}
 			});
 	};
+
+	onMounted(() => {
+		const nInterval = setInterval(() => {
+			if (auth.authenticated && process.client) {
+				useUserData.fetchBalance();
+				useUserData.getNotifications();
+				useUserData.fetchUserTransactions();
+			} else {
+				clearInterval(nInterval);
+			}
+		}, 20000);
+	});
 
 	onBeforeMount(() => {
 		const cookie = useCookie<AuthToken | null | undefined>("auth");

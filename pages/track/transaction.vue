@@ -268,7 +268,6 @@
 					<!-- Other data -->
 					<div class="card bg-gray-100 mb-4">
 						<div class="card-body pb-4 fw-bold">
-						
 							<p>
 								{{ transaction.notes }}
 							</p>
@@ -277,52 +276,60 @@
 
 					<div class="card w-100 w-lg-500px">
 						<div class="card-body pb-4 fw-bold">
-							<table class="table table-borderless">
-								<tbody>
-									<tr>
-										<td class="fw-bold text-muted">
-											Recipient Name
-										</td>
-										<td class="fw-bold text-end">
-											{{ transaction.beneficiary.name }}
-										</td>
-									</tr>
-									<tr>
-										<td class="fw-bold text-muted">Bank</td>
-										<td class="fw-bold text-end">
-											{{ transaction.beneficiary.bank }}
-										</td>
-									</tr>
-									<tr>
-										<td class="fw-bold text-muted">
-											Account ID
-										</td>
-										<td class="fw-bold text-end">
-											{{
-												transaction.beneficiary
-													.destinationAccount
-											}}
-										</td>
-									</tr>
-									<tr>
-										<td class="fw-bold text-muted">
-											Transaction ID
-										</td>
-										<td class="fw-bold text-end">
-											{{ transaction.transactionId }}
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2" class="text-center">
-											{{
-												moment(
-													transaction.createdAt
-												).format("lll")
-											}}
-										</td>
-									</tr>
-								</tbody>
-							</table>
+							<div class="table-responsive">
+								<table class="table table-borderless">
+									<tbody>
+										<tr>
+											<td class="fw-bold text-muted">
+												Recipient Name
+											</td>
+											<td class="fw-bold text-end">
+												{{
+													transaction.beneficiary.name
+												}}
+											</td>
+										</tr>
+										<tr>
+											<td class="fw-bold text-muted">
+												Bank
+											</td>
+											<td class="fw-bold text-end">
+												{{
+													transaction.beneficiary.bank
+												}}
+											</td>
+										</tr>
+										<tr>
+											<td class="fw-bold text-muted">
+												Account ID
+											</td>
+											<td class="fw-bold text-end">
+												{{
+													transaction.beneficiary
+														.destinationAccount
+												}}
+											</td>
+										</tr>
+										<tr>
+											<td class="fw-bold text-muted">
+												Transaction ID
+											</td>
+											<td class="fw-bold text-end">
+												{{ transaction.transactionId }}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2" class="text-center">
+												{{
+													moment(
+														transaction.createdAt
+													).format("lll")
+												}}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -2,19 +2,6 @@
 	definePageMeta({
 		middleware: ["auth"],
 	});
-
-	if (process.client) {
-		// $crisp.push(["do", "chat:hide"]);
-
-		const interval = setInterval(() => {
-			if (window.tidioChatApi) {
-				if (window.tidioChatApi) {
-					tidioChatApi.hide();
-				}
-				clearInterval(interval);
-			}
-		}, 1000);
-	}
 </script>
 
 <template>

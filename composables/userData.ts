@@ -37,6 +37,7 @@ export const userData = () => {
 		userType: "",
 		createdAt: "",
 	};
+	const user = useAuth().userData;
 
 	const transactions = useState<any[]>("user-transactions", () => []);
 	const notifications = useState<INotification[]>("notifications", () => []);
@@ -98,8 +99,9 @@ export const userData = () => {
 		axios
 			.request(axiosConfig)
 			.then((response) => {
-				const data = response.data;
-				account.value = data;
+				account.value = response.data;
+				data.value.account = account.value;
+				user.value!.user.account = account.value;
 				// console.log(data);
 			})
 			.catch((error) => {
@@ -175,6 +177,36 @@ export const userData = () => {
 			});
 	};
 
+	const fetchUserTransactions = () => {
+		const axiosConfig = {
+			method: "get",
+			url: `${useRuntimeConfig().public.BE_API}/transactions/${
+				user.value?.userId
+			}`,
+			timeout: 15000,
+			headers: {
+				Authorization: "Bearer " + useAuth().userData.value?.token,
+			},
+		};
+
+		axios
+			.request(axiosConfig)
+			.then((response) => {
+				const data = response.data.sort(
+					(a: any, b: any) =>
+						new Date(b.createdAt).getTime() -
+						new Date(a.createdAt).getTime()
+				);
+
+				if (transactions.value.length !== data.length) {
+					transactions.value = data;
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	return {
 		account,
 		data,
@@ -187,5 +219,6 @@ export const userData = () => {
 		fetchBalance,
 		getNotifications,
 		showNotifications,
+		fetchUserTransactions,
 	};
 };
